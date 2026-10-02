@@ -1,0 +1,20 @@
+{"frames": [
+
+{
+	"filename": "buyChip_auto.png",
+	"frame": {"x":2,"y":2,"w":164,"h":20},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":164,"h":20},
+	"sourceSize": {"w":166,"h":22}
+}],
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":168,"h":24},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:5f4ff56eb3d3c055da166d4f9388b332$"
+}
+}

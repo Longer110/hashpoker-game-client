@@ -1,0 +1,538 @@
+syntax = "proto2";
+
+//命令ID
+//注意: 命名规则为协议名称加后缀 '_CMD' ;本游戏服代码中,以这一规则来寻找协议命令的。
+//命名为啥加个DeZhou前缀，因为与其他游戏命名冲突
+
+//牌值定义:
+//  0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1a,0x1b,0x1c,0x1d,	--方块 A~K
+//	0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,0x2a,0x2b,0x2c,0x2d,	--梅花 A~K
+//	0x31,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39,0x3a,0x3b,0x3c,0x3d,	--红桃 A~K
+//	0x41,0x42,0x43,0x44,0x45,0x46,0x47,0x48,0x49,0x4a,0x4b,0x4c,0x4d,   --黑桃 A~K
+
+//牌型定义
+// 0没牌或不可见 1高牌 2对子 3两对 4三条 5顺子 6同花 7葫芦 8四条(金刚) 9同花顺 10皇家同花顺
+
+//顺时针方向定义:座位号1->6->9
+//前端下注、跟注、加注 xx动作定义 :飞xx筹码(累加)到玩家下注区,同时从玩家余额中减掉同等xx筹码,接着累加同等xx筹码到底池总额.
+//结算 :前端把从底池赢得的金币累加回余额
+
+message DeZhou_Proto {			    
+	required int32 Main_CMD =1 		[default = 229];					//主命令 (不可改)--
+	required int32 DeZhouLogOnReq_CMD =2 [default = 2]; 				//登陆请求 (进入游戏，需要先登陆)
+	required int32 DeZhouLogOnRsp_CMD =3 [default = 3];					//登陆回复
+	required int32 DeZhouUserSitDownNotify_CMD =4 [default = 4]; 		//有玩家坐下通知
+	required int32 DeZhouUserStanpUpNotify_CMD =5 [default = 5]; 		//有玩家从座位上站起通知
+	required int32 DeZhouStartNotify_CMD =6 [default = 6];       		//游戏开始通知
+	required int32 DeZhouOperationNotify_CMD =7 [default = 7];   		//操作权获得通知 (倒计时使用场景信息中的 "操作最大时间")
+	required int32 DeZhouOpReq_CMD =8 [default = 8];					//操作请求
+	required int32 DeZhouOpNotify_CMD =9 [default = 9];          		//有玩家操作通知
+	required int32 DeZhouDealNotify_CMD =10 [default = 10];        		//公共牌新增通知 
+	required int32 DeZhouSettleNotify_CMD =11 [default = 11];     		//结算通知
+	required int32 DeZhouBackToLobbyReq_CMD =12 [default = 12];			//返回大厅请求
+	
+	required int32 DeZhouPreOpReq_CMD =13 [default = 13]; 			    //预操作请求
+	required int32 DeZhouPreOpRsp_CMD =14 [default = 14];			    //预操作回复
+	
+	required int32 DeZhouStanpUpReq_CMD	=15	[default = 15];				//站起请求
+	required int32 DeZhouSitDownReq_CMD =16	[default = 16];				//坐下请求
+	
+	required int32 DeZhouTakeInRangeReq_CMD=17  [default = 17];		//筹码买入范围查看请求
+	required int32 DeZhouTakeInRangeRsp_CMD=18	[default = 18];		//筹码买入范围查看回复
+	required int32 DeZhoTakeInReq_CMD	=19	[default = 19];			//筹码买入请求
+	required int32 DeZhoTakeInRsp_CMD   =20    [default = 20];		//筹码买入回复
+	
+	required int32 DeZhouFailNotify_CMD =21		[default = 21];		//异常提示通知
+	
+	required int32 DeZhouTableResetNotify_CMD=22 [default = 22];	//桌子重置通知(发生在结算一断时间后)
+	required int32 DeZhouCancelAutoReq_CMD=23    [default = 23];	//取消托管请求
+	required int32 DeZhouCancelAutoNotify_CMD=24 [default = 24];	//有玩家取消托管通知
+	
+	required int32 DeZhouGmReq_CMD =25			 [default = 25];	//Gm命令请求
+	required int32 DeZhouShowCardNotify_CMD =26		[default = 26];	//有玩家亮牌通知
+	
+	required int32 DeZhouRecordReq_CMD =27			[default = 27]; //最近牌局记录查询 请求
+	required int32 DeZhouRecordRsp_CMD =28			[default = 28];	//最近牌局记录查询 回复
+	required int32 DeZhouRecordDetailReq_CMD =29	[default = 29]; //牌局记录详情查询 请求
+	required int32 DeZhouRecordDetailRsp_CMD =30	[default = 30]; //牌局记录详情查询 回复
+	
+	required int32 DeZhouCofingReq_CMD =31			[default = 31]; ////房间设置 请求
+	required int32 DeZhouConfigNotify_CMD =32		[default = 32]; //房间设置成功 通知 
+	
+	required int32 DeZhouKickUserReq_CMD =33		[default = 33]; //踢人请求 (给主播踢人用)
+	
+	required int32 DeZhouGoldNotify_CMD =34			[default = 34]; //金币变化通知
+	required int32 DeZhouOnLineCntNotify_CMD =35    [default = 35]; //在线用户数变化通知
+	
+	required int32 DeZhouChatReq_CMD =36			[default = 36]; //表情聊天请求
+	required int32 DeZhouChatNotify_CMD =37			[default = 37]; //表情聊天通知
+	required int32 DeZhouToStartNotify_CMD=38		[default = 38]; //开局倒计时通知
+	
+	required int32 DeZhouKickUserRsp_CMD =39		[default = 39]; //踢人回复
+	
+	required int32 DeZhouPauseReq_CMD =40			[default = 40]; //暂停设置 请求
+	required int32 DeZhouPauseRsp_CMD =41			[default = 41]; //暂停设置 返回
+	required int32 DeZhouBackToLobbyRsp_CMD =42 	[default = 42];	//返回大厅回复
+	
+	required int32 DeZhouBalanceNotify_CMD=43		[default = 43];	//有玩家筹码余额发生变化通知 (主播更改配置后可能发生)
+}
+
+//DZ 登陆请求 (进入游戏，需要先登陆)
+message DeZhouLogOnReq
+{
+	required int32 nUserId =1;
+	required string sTableId =2 [default = ""];	//桌子ID  (当使用有效nRoomId登陆时，该字段无效,填空串"")
+	optional bool isKeepStand=3;   				//是否保持站立状态 true:是 其它:否
+	optional int32 nRoomId=4 [default = -1];	// 0:试玩场 1:新手场 2:初级场 3:中级场 4:高级场 其它:无效 
+	optional int32 nIsChangeTable=5;			//是否为切换牌桌 1:是 其它:否 (1时，nRoomId字段也要填上)
+}
+//DZ 登陆回复
+message DeZhouLogOnRsp
+{
+	required int32 nRlt=1;				//0:成功 17:桌子不存在 16:其它游戏中有未完成牌局 15:当天试玩场次数已用尽 其它:错误码
+	optional string strErr=2;			//错误描述 错误时有
+	optional DeZhouScence tScence=3;	//场景信息 
+	optional string sTableId =4  [default = ""];		//自由匹配桌子ID: 登录从服请求游戏服开桌,用户进入牌桌
+}
+
+//盲注配置
+message DeZhouConfigItem
+{
+	required int32 nConfigId=1;			//配置id
+	required double nSmallBlind=2;		//小盲
+	required double nBigBlind=3;		//大盲
+	required double nTakeInMin=4;		//最低带入
+	required double nTakeInMax=5;		//最高带入
+}
+
+//桌子可选配置
+message DeZhouConfigOption
+{
+	repeated DeZhouConfigItem arrConfig=1;	//可选的盲注配置
+	repeated int32 arrCapacity=2;			//可选的人数配置
+	optional int32 nConfigIdDefault=3;		//默认配置
+	optional int32 nCapacityDefault=4;		//默认人数
+	optional int32 nIntervalLevDefault=5;	//默认牌局间隔 1:短暂 2:适中 3:漫长
+}
+
+//房间设置 请求
+message DeZhouCofingReq
+{
+	required int32 nConfigId=1;		 //配置id
+	required int32 nCapacity =2;	 //人数配置
+	optional int32 nIntervalLev=3;  //牌局间隔 1:短暂 2:适中 3:漫长
+}
+//房间设置成功 通知 
+message DeZhouConfigNotify
+{
+	required DeZhouConfigItem tConfigItem=1;	//盲注配置
+	required int32 nCapacity =2;				//人数配置
+}
+
+//场景信息
+message DeZhouScence
+{
+	required double nSmallBlind=1;				//小盲注数额
+	required double nBigBlind=2;				//大盲注数额(通常等于:小盲注x2)
+	required int32 nCapacity=3;					//桌子座位数(6或9)
+	required int32 nOperateTime=4;				//操作最大时间,单位:秒 (通常为10)
+	
+	required double nPotSum =5;					//底池总额(已押筹码总额)
+	repeated double arrPot =6;					//已收归的各底池数额(池数量:>=0)
+	repeated int32 arrCommunityCards=7;			//公共牌(最多5个牌)
+	repeated DeZhouUser arrUsers=8;				//座位上的玩家
+	
+	required int32 nStage =9;					//当前游戏状态 0:未开始(等待游戏开始) 1:游戏中 2:结算阶段
+	optional DeZhouOperation tOperation=10;		//当前自己可操作信息(自己为思考状态时有)
+	optional DeZhouPreOpOption tPreOpOption=11; //自己当前可预操作选项
+	
+	optional bool isConfigNotSet =12;					 //本桌子是否需要配置后才能开始 true:是 其它:否
+	optional DeZhouConfigOption tDeZhouConfigOption=13;  //桌子可选配置(主播有)
+	
+	optional int32 nLiveUserId =14;						 //主播Id
+	optional double nGold =15;							 //当前可用币数
+	
+	optional int32 nMSeconds =16;						 // >0:开局倒计时剩余时间(毫秒) -1:无限等待状态(因为主播设置了暂停) 其它:无意义
+	optional bool isPause =17;							 //当前桌子暂停状态(主播有用) true:已设置为暂停 其它:非暂停
+	optional int32 nRoomId=18 [default = -1];			// 0:试玩场 1:新手场 2:初级场 3:中级场 4:高级场 其它:无效
+	optional int32 nClubId=19;							//>0:俱乐部id
+	optional string sTableName=20;						//桌子名称
+	optional int32 nCurrency=21;						//本桌子使用的币种 1:金币 >1:俱乐部币
+	
+	optional int32 nTableType=22;				//桌子类型 10:比赛桌子 ,其它:无效
+	optional bool isAuthor=23;					//是否为管理员(管理员可控制比赛桌状态,请离用户,关闭桌子)
+	optional int32 nMStatus=24;					//比赛桌状态,0:未开始 1:暂停 2:正常 (管理员可使用原暂停协议,控制该状态切换, 0->2<->1)
+}
+
+//玩家信息
+message DeZhouUser
+{
+	required int32 nUserId=1;			 //玩家ID
+	required int32 nSitId=2;			 //座位号
+	required string sFaceId=3;			 //头像url
+	required string sName=4;			 //昵称
+	required int32 nSex=5;	    		 //性别 0:男 1:女
+	required double nBalance=6;			 //余额
+	required bool isBanker=7;			 //是否为庄; true:是 ,false:否
+	repeated int32 arrHoleCards=8;		 //底牌(值为0的牌，显示牌背,表示还没亮牌)
+	required int32 nCardType=9;			 //牌型(见本文件头部"牌型定义")
+	required double nBet =10;			 //玩家当轮当前下注数目(0时不要显示)
+	required int32 nStatus=11;		 	 //当前玩家状态, 0:等待操作权中 1:思考中 2:跟注 3:看牌 4:加注 5:AllIn 6:弃牌 7:旁观 
+	optional int32 nOpTimeRemain=12;	 //剩余可操作(思考)时间 (思考中时有效,其它情况时为0)
+	optional bool isAuto=13;			 //是否托管中
+	optional string sShopAcc = 14;		//第三方用户ID
+	optional bool isAndroid = 15;		//第三方用户ID
+}
+
+//可预操作的选项
+message DeZhouPreOpOption
+{
+	message Option{
+		required double nOpId =1; // -20:弃或过  -21:过牌 -22:跟任何注 >0:跟xx -23:结束后亮牌 -24:亮牌
+		required bool isOn =2;	 //当前预操作按钮选中状态 true:选中 false:未选中
+	}
+	repeated Option arrOption=1;	
+}
+
+//操作权信息 (弃牌 跟注xx AllIn 看牌 加注)
+message DeZhouOperation
+{
+	message RaiseChoice{
+		required double nMin=1;			//加注最小值
+		required double nMax=2;			//加注最大值
+		repeated int32 arrQuickRaise=3; //可快速操作的选项 -10:(1/2底池)  -11:(2/3底池) -12:(1个底池)  -13:(2个大盲) -14:(3个大盲)  -15:(4个大盲)  -1:(AllIn)
+	}
+	required int32 nOpA =1;	 			  //按钮1显示,只有一种状态   -5:弃牌
+	required double nOpB =2;	 		  //按钮2显示,有三种可能状态 -1:AllIn, -2:看牌, >0:跟注xx
+	required int32 nOpC =3;	 			  //按钮3显示,有三种可能状态 -1:AllIn, -3:加注 -4:加注(置灰)
+	optional RaiseChoice tRaiseChoice =4; //可加注范围 (可加注时有效)
+}
+
+//站起请求
+message DeZhouStanpUpReq
+{
+	optional int32 nNoUse=1;				//没用字段
+}
+
+//有玩家从座位上站起通知
+message DeZhouUserStanpUpNotify
+{
+	required int32 nSitId=1;				//站起玩家的座位号
+}
+
+//坐下请求
+message DeZhouSitDownReq
+{
+	optional int32 nPos=1;				//>0:坐下的座位号. 0:随机坐下
+}
+
+//有玩家坐下通知
+message DeZhouUserSitDownNotify
+{
+	required DeZhouUser tUser =1;			//新坐下的玩家
+}
+
+
+//游戏开始通知
+message DeZhouStartNotify
+{
+	message UserBet{
+		required int32 nPos=1;
+		required double nBet=2;
+	}
+	message UserPartIn{
+		required int32 nPos=1;
+		required double nTakeIn =2;			//玩家余额
+		optional double nBet=3;				//玩家下注(大小盲)
+	}
+	repeated int32 arrPosPartIn=1;				//参与本局游戏的玩家座位号(每人发两个底牌,只能自己看到自己的底牌是啥) (发牌顺序按数组顺序) "可选择废弃 改用第8字段"
+	required int32 nBankerPos=2;				//庄家座位号(头像显示标识:'D')
+	repeated UserBet arrUsersBet=3;				//(大小盲)玩家下注	"可选择废弃 改用第8字段"
+	repeated int32 arrHoleCards=4;				//自己的底牌(2张)
+	required int32 nCardType =5;				//自己当前牌型(见本文件头部"牌型定义")
+	optional DeZhouPreOpOption tPreOpOption=6; 	//自己当前可预操作选项
+	required double nTakeIn =7;					//初始筹码带入
+	repeated UserPartIn arrUserPartIn=8;		//参与本局游戏的玩家信息(发牌顺序按数组顺序)
+	optional double nChipBuy =9;				//新增筹码数量 
+}
+
+//操作权获得通知 (倒计时使用场景信息中的 "操作最大时间")
+message DeZhouOperationNotify
+{
+	required int32 nPos =1;					//获得操作权的座位号
+	optional DeZhouOperation tOperation=2;  //操作权 (该玩家为自己时存在且有效)
+	optional DeZhouUser tUser =3;			//操作玩家信息
+}
+
+//操作请求
+message DeZhouOpReq
+{
+	required int32 nOpButton=1;		//1:"按钮1" 2:"按钮2" 3:"按钮3"
+	optional double nRaise=2;		//nOpButton为3且有加注权时有效. >0:表示具体的加注值, <0:可快速操作的选项(见操作权信息定义)
+}
+
+//有玩家操作通知
+message DeZhouOpNotify
+{
+	required int32 nPos =1;						//座位号
+	required int32 nOp=2;						//-5:弃牌,  -1:AllIn, -2:看牌, -6:跟注, -3:加注
+	optional double nBet=3; 						//跟注或加注或 AllIn时有效，表示具体的跟注\加注数值(>0)
+	optional DeZhouPreOpOption tPreOpOption=4; //自己当前可预操作选项
+	optional bool isAuto=5;						//操作的玩家是否进入了托管状态(托管时，操作时间会缩短) true:是 
+}
+
+//取消托管 请求
+message DeZhouCancelAutoReq
+{
+	required int32 nNoUse=1;					//没用字段
+}
+//有玩家取消托管 通知
+message DeZhouCancelAutoNotify
+{
+	required int32 nPos=1;					//座位号
+}
+
+//预操作请求
+message DeZhouPreOpReq
+{
+	required int32 nOpId =1;		//-20:弃或过  -21:过牌 -22:跟任何注 >0:跟xx -23:结束后亮牌 -24:亮牌
+	required bool isOn =2;			//true:请求选中 false:取消选中
+}
+//预操作回复
+message DeZhouPreOpRsp
+{
+	required int32 nRlt =1;			//0:成功 其它:错误码
+	optional double nOpId =2;		//(成功时有效)请求的操作
+	optional bool isOn =3;			//(成功时有效)操作状态 true:选中成功 false:取消成功
+	optional string sErr=4;			//(失败时有)失败提示
+}
+
+//公共牌新增通知 (该通知表示一轮的结束,先收归玩家下注筹码,再亮玩家底牌,接着发公共牌)
+message DeZhouDealNotify
+{
+	//玩家底牌
+	message UserHoleCard{
+		required int32 nPos=1;			//座位号
+		repeated int32 arrHoleCards=2;	//底牌(2张)
+		required int32 nCardType=3;		//牌型 (本次新增公共牌前 的牌型)
+		repeated int32 arrCardType=4;	//三个元素: 分别为与前3、前4、前5个公共牌组合成的牌型
+	}
+	required double nPotSum =1;					//底池总额(已押筹码总额)
+	repeated double arrPot =2;					//收归的各底池数额(池数量:>0),数组索引代表池ID,索引从1开始
+	repeated UserHoleCard arrUsersHoleCard=3;	//各玩家的底牌(某些情况下非空数组);
+	repeated int32 arrCards=4;					//新增的公共牌
+	required int32 nCardType=5;					//新增公共牌后，自己的牌型(见本文件头部"牌型定义")
+	optional DeZhouPreOpOption tPreOpOption=6; 	//自己当前可预操作选项
+}
+
+//结算信息
+message DeZhouSettleNotify
+{
+	message GetItem{	
+		required double nGold=1;			//获得的金币
+		required int32 nPotIdFrom=2;		//金币来源(池ID)
+	}
+	message UserGetFromPot{
+		required int32 nPos=1;				//座位号
+		repeated int32 arrHoleCards=2;		//底牌(该玩家可能在公共牌阶段已亮过牌,前端看重复亮牌会不会有问题)
+		repeated int32 arrCombinedCards=3;	//能组成最大牌型的5个牌
+		required int32 nCardType=4;			//牌型(见本文件头部"牌型定义")
+		repeated GetItem arrGoldGet=5;		//从各个池处中获得的金币
+		required bool isWin =6;				//true时高亮牌型.
+		optional double nProfit=7;			//盈利.>0时显示"胜利"
+		optional int32 nCmpValue=8;			//牌型相同时,由该字段决定大小
+		optional bool isShowCardWhenEnd=9;	//是否亮牌,true:是 其它:否
+		optional double nCurGold=10;		//玩家当前筹码值(结算后)
+	}
+	repeated UserGetFromPot arrUsersWin=1;		//所有玩家牌型与输赢情况(弃牌玩家除外)
+	optional DeZhouPreOpOption tPreOpOption=2; 	//自己当前可预操作选项 (用于让弃牌玩家弹"亮牌" 操作)
+	repeated double arrPot =3;					//收归的各底池数额(池数量:>0),数组索引代表池ID,索引从1开始
+}
+
+//有玩家亮牌通知 (结算阶段且弃牌玩家才会亮牌)
+message DeZhouShowCardNotify
+{
+	required int32 nPos=1;				//亮牌玩家座位号
+}
+
+
+//筹码买入范围查看请求
+message DeZhouTakeInRangeReq
+{
+	required int32 nNoUse=1;			//没用字段
+}
+//筹码买入范围查看回复
+message DeZhouTakeInRangeRsp
+{
+	required double nGold =1;		//当前身上金币
+	required double nMin=2;			//最小买入
+	required double nMax =3;			//最大买入
+	optional int32 nIsAuto=4;		//是否每局自动买入 1:是 其它:否
+}
+//筹码买入请求
+message DeZhoTakeInReq
+{
+	required double nTakeIn=1;			//买入数量
+	optional int32 nIsAuto=2;			//是否每局自动买入 1:是 其它:否
+}
+//筹码买入回复
+message DeZhoTakeInRsp
+{
+	required int32 nRlt=1;				//0:成功(下局开始时生效) 1:金币不足 其它:其它错误码
+}
+
+//返回大厅请求
+message DeZhouBackToLobbyReq
+{
+	optional int32 nNoUse=1;
+	required string sTableId =2    [default = ""];	//桌子ID   
+}
+
+//返回大厅回复
+message DeZhouBackToLobbyRsp
+{
+	required int32 nRlt=1;						//0:成功   其它:错误码  
+}
+
+//桌子重置
+message DeZhouTableResetNotify
+{
+	optional int32 nNoUse=1;	//没用字段
+	optional double nSmallBlind=2;				//小盲注数额,比赛时有升盲,所以会变(>0时有效)
+	optional double nBigBlind=3;				//大盲注数额,比赛时有升盲,所以会变(>0时有效)
+}
+
+//开局倒计时通知
+message DeZhouToStartNotify
+{
+	required int32 nMSeconds =1;  // >0:倒计时时间(毫秒), 0:取消倒计时, -1:进入无限等待状态(因为主播设置了暂停)
+}
+
+
+//异常提示通知
+message DeZhouFailNotify
+{
+	required int32 nCode=1;					//错误码,见错码定义
+	optional string sErr=2;					//错误提示
+	optional DeZhouTakeInRangeRsp tRsp=3;	//最小最大带入(金币不足时有)
+}
+
+//DeZhouFailNotify 错误码定义
+//11:金币不足(登陆游戏成功, 但坐下失败时) 0
+//12:金币不足('坐下'请求失败时) 0
+//13:金币不足(被请离座位后) 
+
+//14:座位不足('坐下'请求失败时) 0
+//15:重复坐下(已在座位上,'坐下'请求失败时) 0 
+//16:重复站起(当前不在座位上,'站起'请求失败) 0
+
+//17:超时站起 (因超时被踢出座位后)
+//18:桌子解散 
+
+//19:主播未配置房间(坐下失败)
+//20:被强制站起 (被管理员或主播)
+
+//31:已超过参赛时间，无法入座			(比赛桌特有)
+//32:被请离座位后，一定时间内不能再入座
+
+
+//Gm命令 请求
+message DeZhouGmReq
+{
+	required string sStr=1;		//Gm命令
+}
+
+
+//最近牌局记录查询 请求
+message DeZhouRecordReq{
+	required int32 nQueryCnt=1 [default = 10];	//查询记录的返回条数(最多50)
+	required int32 nMinId=2 [default = 0];		//(分页查询时,需要填上一次结果的最后一条记录id,即是最小的id)
+}
+
+//最近牌局记录查询 返回
+message DeZhouRecordRsp{
+	message Item{
+		required string sSeriesNumber=1;	//牌局编号
+		required string sTime=2;			//时间
+		required double  nBet=3;				//下注
+		required double nWin=4;				//派彩
+		required int32 Id=5;				//记录id. (最大的就是最近的记录)
+	}
+	repeated Item arrItem=1;				//已排序记录
+	required int32 nMinId=2;				//最后一条记录id,用于查询下一页,如果需要
+}
+
+
+//牌局记录详情查询 请求
+message DeZhouRecordDetailReq{
+	required string sSeriesNumber=1;	//牌局编号
+}
+//牌局记录详情查询 返回
+message DeZhouRecordDetailRsp{
+	message Item{
+		required string sName=1;		//玩家昵称
+		repeated int32 arrHoleCards=2;	//底牌
+		required double  nBet=3;			//下注
+		required double nWin=4;			//派彩
+		required int32 nUserId=5;		//玩家ID
+	}
+	required string sSeriesNumber=1;	//牌局编号
+	repeated int32 arrCommunityCards=2; //公共牌
+	repeated Item arrItem=3;			//牌局各玩家记录
+}
+
+//踢人请求 (给主播或管理员踢人用)
+message DeZhouKickUserReq{
+	required int32 nPos=1;			//强制站起的对象(座位号)
+}
+//踢人回复
+message DeZhouKickUserRsp{
+	required int32 nRlt=1;			//0:踢出成功 1:本局结束后踢出 其它:失败
+}
+
+//暂停状态设置 请求 (仅主播或管理员能用)
+message DeZhouPauseReq{
+	required bool isPause =1;		//true:设置为暂停 false:设置为非暂停
+}
+//暂停状态设置 返回
+message DeZhouPauseRsp{
+	required bool isPause=1;		//当前桌子暂停状态
+	optional int32 nMStatus=2;		//比赛桌状态,0:未开始 1:暂停 2:正常 
+}
+
+
+//金币变化通知
+message DeZhouGoldNotify{
+	required double nGold=1;		//当前可用金币数
+}
+
+//表情聊天请求
+message DeZhouChatReq{
+	required int32 nChatId =1;		//表情id
+	optional int32 nTarget =2;	   //聊天对象(对谁聊天,可不填)
+}
+//表情聊天通知
+message DeZhouChatNotify{
+	required int32 nSpeaker =1;		//聊天发起者座位号
+	required int32 nChatId =2;		//表情id
+	optional int32 nTarget =3;	    //聊天对象(对谁聊天)
+}
+
+//有玩家筹码余额发生变化通知 (主播更改配置后可能发生)
+message DeZhouBalanceNotify{
+	required int32 nPos=1;			//座位号
+	required double nBalance=2;		//对应玩家的当前筹码余额
+	optional double nTakeOut=3;	    //带出筹码
+}
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+

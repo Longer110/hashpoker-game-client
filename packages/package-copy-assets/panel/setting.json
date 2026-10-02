@@ -1,0 +1,7 @@
+{
+    "isMainBundle": true,
+    "isAutoCopy": true,
+    "strPathTarget": "../build-sets/web-mobile",
+    "name": "project-app-club",
+    "curBuildTarget": "build-app"
+}

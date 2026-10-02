@@ -1,0 +1,68 @@
+{"frames": [
+
+{
+	"filename": "pond1.png",
+	"frame": {"x":0,"y":0,"w":96,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":96},
+	"sourceSize": {"w":96,"h":96}
+},
+{
+	"filename": "pond2.png",
+	"frame": {"x":106,"y":0,"w":96,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":96},
+	"sourceSize": {"w":96,"h":96}
+},
+{
+	"filename": "pond3.png",
+	"frame": {"x":212,"y":0,"w":96,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":96},
+	"sourceSize": {"w":96,"h":96}
+},
+{
+	"filename": "pond4.png",
+	"frame": {"x":0,"y":106,"w":96,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":96},
+	"sourceSize": {"w":96,"h":96}
+},
+{
+	"filename": "pond12.png",
+	"frame": {"x":106,"y":106,"w":96,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":96},
+	"sourceSize": {"w":96,"h":96}
+},
+{
+	"filename": "pond23.png",
+	"frame": {"x":212,"y":106,"w":96,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":96},
+	"sourceSize": {"w":96,"h":96}
+},
+{
+	"filename": "sure.png",
+	"frame": {"x":0,"y":212,"w":73,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":73,"h":32},
+	"sourceSize": {"w":73,"h":32}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":308,"h":308},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:586b9056baa87dd3d28b49177a9a5462:f3ccafa28637db031b4ef68b163bd62d:0d09193906abb077207e7c2205ba0dc9$"
+}
+}

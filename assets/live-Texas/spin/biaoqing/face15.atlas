@@ -1,0 +1,55 @@
+
+face15.png
+size: 238,150
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face15_a
+  rotate: true
+  xy: 195, 47
+  size: 101, 41
+  orig: 101, 41
+  offset: 0, 0
+  index: -1
+face15_b
+  rotate: true
+  xy: 145, 29
+  size: 119, 48
+  orig: 119, 48
+  offset: 0, 0
+  index: -1
+face15_ca
+  rotate: true
+  xy: 2, 6
+  size: 142, 141
+  orig: 144, 144
+  offset: 0, 2
+  index: -1
+face15_d
+  rotate: false
+  xy: 195, 31
+  size: 13, 14
+  orig: 13, 14
+  offset: 0, 0
+  index: -1
+face15_e
+  rotate: false
+  xy: 210, 31
+  size: 13, 14
+  orig: 13, 14
+  offset: 0, 0
+  index: -1
+face15_f
+  rotate: false
+  xy: 185, 2
+  size: 35, 25
+  orig: 35, 25
+  offset: 0, 0
+  index: -1
+face15_g
+  rotate: false
+  xy: 145, 3
+  size: 38, 24
+  orig: 38, 24
+  offset: 0, 0
+  index: -1

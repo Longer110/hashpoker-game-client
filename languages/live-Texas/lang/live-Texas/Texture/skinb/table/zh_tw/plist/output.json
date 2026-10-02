@@ -1,0 +1,172 @@
+{"frames": [
+
+{
+	"filename": "auto.png",
+	"frame": {"x":0,"y":0,"w":219,"h":27},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":219,"h":27},
+	"sourceSize": {"w":219,"h":27}
+},
+{
+	"filename": "backGame.png",
+	"frame": {"x":229,"y":0,"w":111,"h":28},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":111,"h":28},
+	"sourceSize": {"w":111,"h":28}
+},
+{
+	"filename": "endLight.png",
+	"frame": {"x":0,"y":38,"w":142,"h":29},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":142,"h":29},
+	"sourceSize": {"w":142,"h":29}
+},
+{
+	"filename": "gen.png",
+	"frame": {"x":152,"y":38,"w":27,"h":26},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":27,"h":26},
+	"sourceSize": {"w":27,"h":26}
+},
+{
+	"filename": "genzhu.png",
+	"frame": {"x":189,"y":38,"w":54,"h":27},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":54,"h":27},
+	"sourceSize": {"w":54,"h":27}
+},
+{
+	"filename": "guopai.png",
+	"frame": {"x":253,"y":38,"w":58,"h":29},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":58,"h":29},
+	"sourceSize": {"w":58,"h":29}
+},
+{
+	"filename": "help.png",
+	"frame": {"x":0,"y":77,"w":284,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":284,"h":50},
+	"sourceSize": {"w":284,"h":50}
+},
+{
+	"filename": "jiazhu.png",
+	"frame": {"x":294,"y":77,"w":54,"h":27},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":54,"h":27},
+	"sourceSize": {"w":54,"h":27}
+},
+{
+	"filename": "labelSure.png",
+	"frame": {"x":358,"y":77,"w":54,"h":27},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":54,"h":27},
+	"sourceSize": {"w":54,"h":27}
+},
+{
+	"filename": "light.png",
+	"frame": {"x":0,"y":137,"w":72,"h":28},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":28},
+	"sourceSize": {"w":72,"h":28}
+},
+{
+	"filename": "logo.png",
+	"frame": {"x":82,"y":137,"w":221,"h":81},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":221,"h":81},
+	"sourceSize": {"w":221,"h":81}
+},
+{
+	"filename": "mangText.png",
+	"frame": {"x":313,"y":137,"w":58,"h":29},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":58,"h":29},
+	"sourceSize": {"w":58,"h":29}
+},
+{
+	"filename": "poolText.png",
+	"frame": {"x":381,"y":137,"w":63,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":63,"h":32},
+	"sourceSize": {"w":63,"h":32}
+},
+{
+	"filename": "qi.png",
+	"frame": {"x":0,"y":228,"w":54,"h":27},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":54,"h":27},
+	"sourceSize": {"w":54,"h":27}
+},
+{
+	"filename": "qiguo.png",
+	"frame": {"x":64,"y":228,"w":64,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":30},
+	"sourceSize": {"w":64,"h":30}
+},
+{
+	"filename": "record.png",
+	"frame": {"x":138,"y":228,"w":284,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":284,"h":50},
+	"sourceSize": {"w":284,"h":50}
+},
+{
+	"filename": "setting.png",
+	"frame": {"x":0,"y":288,"w":284,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":284,"h":50},
+	"sourceSize": {"w":284,"h":50}
+},
+{
+	"filename": "sitDown.png",
+	"frame": {"x":0,"y":348,"w":284,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":284,"h":50},
+	"sourceSize": {"w":284,"h":50}
+},
+{
+	"filename": "standUp.png",
+	"frame": {"x":0,"y":408,"w":284,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":284,"h":50},
+	"sourceSize": {"w":284,"h":50}
+},
+{
+	"filename": "userInfo.png",
+	"frame": {"x":294,"y":408,"w":152,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":152,"h":50},
+	"sourceSize": {"w":152,"h":50}
+}],
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":458,"h":458},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:fd77173bd6400d5c6e5b3953217a0e80$"
+}
+}

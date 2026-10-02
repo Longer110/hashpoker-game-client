@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "dbbd6bce-8b2b-4274-85cf-e235ed00e283",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 706,
+  "height": 579,
+  "platformSettings": {},
+  "subMetas": {
+    "自动牌局背景": {
+      "ver": "1.0.6",
+      "uuid": "fde5240c-9fa7-47b6-bb86-5f5553606082",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "dbbd6bce-8b2b-4274-85cf-e235ed00e283",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 706,
+      "height": 579,
+      "rawWidth": 706,
+      "rawHeight": 579,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

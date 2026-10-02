@@ -1,0 +1,132 @@
+{"frames": [
+
+{
+	"filename": "AOF.png",
+	"frame": {"x":1506,"y":52,"w":52,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":52,"h":23},
+	"sourceSize": {"w":54,"h":25}
+},
+{
+	"filename": "GPS.png",
+	"frame": {"x":1560,"y":27,"w":52,"h":23},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":52,"h":23},
+	"sourceSize": {"w":54,"h":25}
+},
+{
+	"filename": "IOS.png",
+	"frame": {"x":1506,"y":27,"w":52,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":52,"h":23},
+	"sourceSize": {"w":54,"h":25}
+},
+{
+	"filename": "IP.png",
+	"frame": {"x":1506,"y":77,"w":41,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":41,"h":23},
+	"sourceSize": {"w":43,"h":25}
+},
+{
+	"filename": "Straddle.png",
+	"frame": {"x":1506,"y":2,"w":88,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":88,"h":23},
+	"sourceSize": {"w":90,"h":25}
+},
+{
+	"filename": "advert1.png",
+	"frame": {"x":454,"y":1358,"w":750,"h":450},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":750,"h":450},
+	"sourceSize": {"w":750,"h":450}
+},
+{
+	"filename": "advert10.png",
+	"frame": {"x":454,"y":906,"w":750,"h":450},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":750,"h":450},
+	"sourceSize": {"w":750,"h":450}
+},
+{
+	"filename": "advert11.png",
+	"frame": {"x":454,"y":454,"w":750,"h":450},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":750,"h":450},
+	"sourceSize": {"w":750,"h":450}
+},
+{
+	"filename": "advert2.png",
+	"frame": {"x":1206,"y":1206,"w":750,"h":449},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":750,"h":449},
+	"sourceSize": {"w":750,"h":449}
+},
+{
+	"filename": "advert3.png",
+	"frame": {"x":1206,"y":454,"w":750,"h":449},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":750,"h":449},
+	"sourceSize": {"w":750,"h":449}
+},
+{
+	"filename": "advert4.png",
+	"frame": {"x":2,"y":1206,"w":750,"h":450},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":750,"h":450},
+	"sourceSize": {"w":750,"h":450}
+},
+{
+	"filename": "advert5.png",
+	"frame": {"x":2,"y":454,"w":750,"h":450},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":750,"h":450},
+	"sourceSize": {"w":750,"h":450}
+},
+{
+	"filename": "advert6.png",
+	"frame": {"x":754,"y":2,"w":750,"h":450},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":750,"h":450},
+	"sourceSize": {"w":750,"h":450}
+},
+{
+	"filename": "advert9.png",
+	"frame": {"x":2,"y":2,"w":750,"h":450},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":750,"h":450},
+	"sourceSize": {"w":750,"h":450}
+},
+{
+	"filename": "customTitle.png",
+	"frame": {"x":1596,"y":2,"w":182,"h":59},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":182,"h":59},
+	"sourceSize": {"w":182,"h":59}
+}],
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":1657,"h":1958},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:7aff482672e3c0e7e73dd84bb4c6bb49$"
+}
+}

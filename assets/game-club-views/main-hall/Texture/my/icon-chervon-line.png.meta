@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "418f64cc-4c94-415c-9b26-2c181e5712cc",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 24,
+  "height": 24,
+  "platformSettings": {},
+  "subMetas": {
+    "icon-chervon-line": {
+      "ver": "1.0.6",
+      "uuid": "7ba8fa36-cf60-4a62-aaba-b017093645cf",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "418f64cc-4c94-415c-9b26-2c181e5712cc",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 8,
+      "trimY": 5,
+      "width": 8,
+      "height": 14,
+      "rawWidth": 24,
+      "rawHeight": 24,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

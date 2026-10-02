@@ -1,0 +1,236 @@
+
+hl.png
+size: 1012,1022
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+diamond
+  rotate: true
+  xy: 2, 520
+  size: 253, 236
+  orig: 253, 236
+  offset: 0, 0
+  index: -1
+light
+  rotate: false
+  xy: 2, 775
+  size: 245, 245
+  orig: 245, 245
+  offset: 0, 0
+  index: -1
+lizi_002
+  rotate: true
+  xy: 249, 820
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_003
+  rotate: false
+  xy: 2, 268
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_004
+  rotate: true
+  xy: 501, 820
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_005
+  rotate: false
+  xy: 2, 16
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_006
+  rotate: true
+  xy: 753, 820
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_007
+  rotate: true
+  xy: 249, 618
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_008
+  rotate: true
+  xy: 501, 618
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_009
+  rotate: true
+  xy: 753, 618
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_010
+  rotate: true
+  xy: 240, 416
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_011
+  rotate: true
+  xy: 492, 416
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_012
+  rotate: true
+  xy: 744, 416
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_013
+  rotate: false
+  xy: 204, 164
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_014
+  rotate: false
+  xy: 406, 164
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_015
+  rotate: false
+  xy: 608, 164
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_016
+  rotate: false
+  xy: 810, 164
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+star
+  rotate: false
+  xy: 905, 107
+  size: 56, 55
+  orig: 56, 55
+  offset: 0, 0
+  index: -1
+word_en
+  rotate: false
+  xy: 437, 88
+  size: 243, 74
+  orig: 243, 74
+  offset: 0, 0
+  index: -1
+word_th
+  rotate: false
+  xy: 204, 63
+  size: 231, 99
+  orig: 231, 99
+  offset: 0, 0
+  index: -1
+word_tw
+  rotate: false
+  xy: 682, 69
+  size: 221, 93
+  orig: 221, 93
+  offset: 0, 0
+  index: -1
+word_vi
+  rotate: false
+  xy: 437, 2
+  size: 214, 84
+  orig: 214, 84
+  offset: 0, 0
+  index: -1
+you win
+  rotate: false
+  xy: 204, 11
+  size: 195, 50
+  orig: 195, 50
+  offset: 0, 0
+  index: -1
+
+hl2.png
+size: 945,456
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+lizi_017
+  rotate: false
+  xy: 2, 204
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_018
+  rotate: false
+  xy: 204, 204
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_019
+  rotate: true
+  xy: 2, 2
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_020
+  rotate: false
+  xy: 406, 204
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_021
+  rotate: true
+  xy: 254, 2
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_022
+  rotate: false
+  xy: 608, 204
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+lizi_023
+  rotate: true
+  xy: 506, 2
+  size: 200, 250
+  orig: 200, 250
+  offset: 0, 0
+  index: -1
+wing
+  rotate: true
+  xy: 758, 21
+  size: 181, 185
+  orig: 181, 185
+  offset: 0, 0
+  index: -1
+word_ch
+  rotate: true
+  xy: 810, 236
+  size: 218, 92
+  orig: 218, 92
+  offset: 0, 0
+  index: -1

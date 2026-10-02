@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "a7ee7f89-9634-4873-8f9f-896fce38944d",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 170,
+  "height": 51,
+  "platformSettings": {},
+  "subMetas": {
+    "my_depositBtn": {
+      "ver": "1.0.6",
+      "uuid": "f940c731-4520-45c4-97c8-6aa237f79fe1",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "a7ee7f89-9634-4873-8f9f-896fce38944d",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 170,
+      "height": 51,
+      "rawWidth": 170,
+      "rawHeight": 51,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

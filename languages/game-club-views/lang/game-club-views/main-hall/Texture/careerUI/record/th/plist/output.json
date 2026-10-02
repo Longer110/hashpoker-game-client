@@ -1,0 +1,28 @@
+{"frames": [
+
+{
+	"filename": "AOF.png",
+	"frame": {"x":52,"y":2,"w":48,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":24},
+	"sourceSize": {"w":48,"h":24}
+},
+{
+	"filename": "insure.png",
+	"frame": {"x":2,"y":2,"w":48,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":24},
+	"sourceSize": {"w":48,"h":24}
+}],
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":102,"h":28},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:8395c16f626452f2689269c3d16aa500$"
+}
+}

@@ -1,0 +1,29 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "pointAnim",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.5,
+  "sample": 60,
+  "speed": 0.3,
+  "wrapMode": 2,
+  "curveData": {
+    "props": {
+      "y": [
+        {
+          "frame": 0,
+          "value": 84.266
+        },
+        {
+          "frame": 0.3333333333333333,
+          "value": 66.351
+        },
+        {
+          "frame": 0.5,
+          "value": 84.266
+        }
+      ]
+    }
+  },
+  "events": []
+}

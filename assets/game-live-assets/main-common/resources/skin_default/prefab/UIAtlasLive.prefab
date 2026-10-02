@@ -1,0 +1,118 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "",
+    "_objFlags": 0,
+    "_native": "",
+    "data": {
+      "__id__": 1
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false,
+    "readonly": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "UIAtlasLive",
+    "_objFlags": 0,
+    "_parent": null,
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__id__": 3
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "209801m7jNA0KWDR7NmqZj5",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "atlasPokerLarge": {
+      "__uuid__": "f193a38a-b0d0-4d1c-9ebf-b0e2c9c2f9f2"
+    },
+    "atlasPokerSmall": {
+      "__uuid__": "7da7bf1b-7bd4-4e1b-ae9e-217949084c95"
+    },
+    "atlasPokerSmall2": {
+      "__uuid__": "ed9827a9-0515-4cdc-8f4a-c5a9fabe8104"
+    },
+    "atlasUserHead": {
+      "__uuid__": "33989aa7-fc90-48e9-965c-13e97d4f94d7"
+    },
+    "atlasPokerDeZhou": {
+      "__uuid__": "f365f9e5-efe2-46e8-aa1a-70a51815a9d7"
+    },
+    "atlasPokerDeZhou_default": {
+      "__uuid__": "67a97e87-b716-4fab-8050-66aa59061531"
+    },
+    "msdfMetarial": {
+      "__uuid__": "5a86f3bc-ccb6-43c5-84af-2b4ff2737814"
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "cdf3d054-4e4b-4a53-9210-e273ae466f00"
+    },
+    "fileId": "",
+    "sync": false
+  }
+]

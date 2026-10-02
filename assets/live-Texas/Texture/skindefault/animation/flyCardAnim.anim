@@ -1,0 +1,347 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "flyCardAnim",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.92,
+  "sample": 100,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "card1": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.02,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            }
+          ]
+        }
+      },
+      "card2": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.05,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.07,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.22,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.52,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.62,
+              "value": [
+                -93,
+                -449,
+                0
+              ]
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.05,
+              "value": true
+            }
+          ]
+        }
+      },
+      "card3": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.1,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.12,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.22,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.52,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.62,
+              "value": [
+                -93,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.72,
+              "value": [
+                -2,
+                -449,
+                0
+              ]
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.1,
+              "value": true
+            }
+          ]
+        }
+      },
+      "card4": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.15,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.17,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.2,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.22,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.52,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.62,
+              "value": [
+                -93,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.72,
+              "value": [
+                -2,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.82,
+              "value": [
+                93,
+                -449,
+                0
+              ]
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.15,
+              "value": true
+            }
+          ]
+        }
+      },
+      "card5": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.2,
+              "value": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.22,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.52,
+              "value": [
+                -184,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.62,
+              "value": [
+                -93,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.72,
+              "value": [
+                -2,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.82,
+              "value": [
+                93,
+                -449,
+                0
+              ]
+            },
+            {
+              "frame": 0.92,
+              "value": [
+                186,
+                -449,
+                0
+              ]
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.2,
+              "value": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

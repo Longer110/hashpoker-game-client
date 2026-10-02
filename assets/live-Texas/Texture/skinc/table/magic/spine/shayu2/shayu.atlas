@@ -1,0 +1,125 @@
+
+shayu.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glow
+  rotate: false
+  xy: 2, 85
+  size: 146, 165
+  orig: 146, 165
+  offset: 0, 0
+  index: -1
+glow2
+  rotate: false
+  xy: 682, 2
+  size: 117, 115
+  orig: 117, 115
+  offset: 0, 0
+  index: -1
+heidi
+  rotate: false
+  xy: 929, 25
+  size: 92, 92
+  orig: 92, 92
+  offset: 0, 0
+  index: -1
+sy
+  rotate: true
+  xy: 801, 20
+  size: 97, 126
+  orig: 97, 126
+  offset: 0, 0
+  index: -1
+sy_x01
+  rotate: false
+  xy: 150, 119
+  size: 113, 131
+  orig: 113, 131
+  offset: 0, 0
+  index: -1
+sy_x02
+  rotate: false
+  xy: 265, 119
+  size: 113, 131
+  orig: 113, 131
+  offset: 0, 0
+  index: -1
+sy_x03
+  rotate: false
+  xy: 380, 119
+  size: 113, 131
+  orig: 113, 131
+  offset: 0, 0
+  index: -1
+sy_x04
+  rotate: false
+  xy: 495, 119
+  size: 113, 131
+  orig: 113, 131
+  offset: 0, 0
+  index: -1
+sy_x05
+  rotate: false
+  xy: 610, 119
+  size: 113, 131
+  orig: 113, 131
+  offset: 0, 0
+  index: -1
+sy_x06
+  rotate: false
+  xy: 725, 119
+  size: 113, 131
+  orig: 113, 131
+  offset: 0, 0
+  index: -1
+sy_x07
+  rotate: false
+  xy: 840, 119
+  size: 113, 131
+  orig: 113, 131
+  offset: 0, 0
+  index: -1
+sy_x08
+  rotate: true
+  xy: 150, 4
+  size: 113, 131
+  orig: 113, 131
+  offset: 0, 0
+  index: -1
+sy_x09
+  rotate: true
+  xy: 283, 4
+  size: 113, 131
+  orig: 113, 131
+  offset: 0, 0
+  index: -1
+sy_x10
+  rotate: true
+  xy: 416, 4
+  size: 113, 131
+  orig: 113, 131
+  offset: 0, 0
+  index: -1
+sy_x11
+  rotate: true
+  xy: 549, 4
+  size: 113, 131
+  orig: 113, 131
+  offset: 0, 0
+  index: -1
+zui01
+  rotate: false
+  xy: 2, 59
+  size: 74, 24
+  orig: 74, 24
+  offset: 0, 0
+  index: -1
+zui02
+  rotate: true
+  xy: 955, 178
+  size: 72, 22
+  orig: 72, 22
+  offset: 0, 0
+  index: -1

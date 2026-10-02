@@ -1,0 +1,34 @@
+
+face30.png
+size: 365,157
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face30_a
+  rotate: true
+  xy: 340, 95
+  size: 60, 23
+  orig: 62, 25
+  offset: 1, 1
+  index: -1
+face30_b
+  rotate: false
+  xy: 2, 2
+  size: 177, 153
+  orig: 177, 153
+  offset: 0, 0
+  index: -1
+face30_c
+  rotate: false
+  xy: 181, 3
+  size: 157, 152
+  orig: 157, 152
+  offset: 0, 0
+  index: -1
+face30_d
+  rotate: true
+  xy: 340, 42
+  size: 51, 23
+  orig: 53, 25
+  offset: 1, 1
+  index: -1

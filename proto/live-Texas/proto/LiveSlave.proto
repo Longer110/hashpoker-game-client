@@ -1,0 +1,61 @@
+syntax = "proto2";
+ 
+
+//直播从服与客户端 协议
+message LiveSlave_Proto{             
+    // 主协议 
+    required int32 Main_CMD =1                [default = 302];          //直播从服 主协议      
+    required int32 LiveSlaveLogOnReq_CMD =2 [default = 2];              //登陆请求 (进入游戏，需要先登陆)
+    required int32 LiveSlaveLogOnRsp_CMD =3 [default = 3];              //登陆回复 
+    required int32 LiveSlaveBackToLobbyReq_CMD =4 [default = 4];        //返回大厅请求
+    required int32 LiveSlaveBackToLobbyRsp_CMD =5 [default = 5];        //返回大厅回复
+  
+    required int32 LiveSlaveGuessCardNotify_CMD=6     [default =6];     //旁观猜牌 通知
+    required int32 LiveSlaveGuessCardReq_CMD =7       [default =7];    //旁观猜牌 请求
+    required int32 LiveSlaveGuessCardRsp_CMD =8       [default =8];    //旁观猜牌 回复 
+  
+}     
+
+//  登陆请求 (进入游戏，需要先登陆)
+message LiveSlaveLogOnReq{
+    required int32 nUserId =1;
+    required string sTableId =2 [default = ""]; //桌子ID  (当使用有效nRoomId登陆时，该字段无效,填空串"") 
+    optional int32 nRoomId=3 [default = -1];    // 0:试玩场 1:新手场 2:初级场 3:中级场 4:高级场 其它:无效 
+}
+//DZ 登陆回复
+message LiveSlaveLogOnRsp{
+    required int32 nRlt=1;              //0:成功 17:桌子不存在 16:其它游戏中有未完成牌局 15:当天试玩场次数已用尽 其它:错误码
+    optional string strErr=2;           //错误描述 错误时有  
+}
+
+//返回大厅请求
+message LiveSlaveBackToLobbyReq
+{
+    optional int32 nNoUse=1;  
+}
+
+//返回大厅回复
+message LiveSlaveBackToLobbyRsp
+{
+    required int32 nRlt=1;                      //0:成功   其它:错误码  
+}
+
+
+//旁观猜牌通知   
+message LiveSlaveGuessCardNotify{
+    required int32 nUserId =1;      //触发用户ID
+    required string sName=2;        //昵称 
+    required string sFaceId=3;      //头像url 
+    required int32 nCardType=4;     //触发用户 问题牌型 
+    required int32 nTime=5;         //倒计时 秒
+}
+
+//旁观猜牌 请求
+message LiveSlaveGuessCardReq{
+    required bool isWhether =1;     //答复： true:是 false 否
+}
+
+//旁观猜牌 回复： 答对才有
+message LiveSlaveGuessCardRsp{
+    required int32 nAwardGold =1;      //答题奖励
+}

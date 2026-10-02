@@ -1,0 +1,48 @@
+
+face37.png
+size: 198,146
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face37_a
+  rotate: false
+  xy: 146, 74
+  size: 50, 70
+  orig: 50, 70
+  offset: 0, 0
+  index: -1
+face37_b
+  rotate: false
+  xy: 146, 48
+  size: 20, 24
+  orig: 20, 24
+  offset: 0, 0
+  index: -1
+face37_c
+  rotate: true
+  xy: 146, 22
+  size: 24, 15
+  orig: 24, 15
+  offset: 0, 0
+  index: -1
+face37_d
+  rotate: false
+  xy: 168, 58
+  size: 11, 14
+  orig: 11, 14
+  offset: 0, 0
+  index: -1
+face37_e
+  rotate: false
+  xy: 146, 7
+  size: 10, 13
+  orig: 10, 13
+  offset: 0, 0
+  index: -1
+face37_fa
+  rotate: false
+  xy: 2, 2
+  size: 142, 142
+  orig: 144, 144
+  offset: 0, 2
+  index: -1

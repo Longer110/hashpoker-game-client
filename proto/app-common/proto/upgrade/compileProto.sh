@@ -1,0 +1,1 @@
+pbjs -t static-module -w commonjs -o ../../assets/Script/app/protocal/upgrade/proto/proto_upgrade.js *.proto

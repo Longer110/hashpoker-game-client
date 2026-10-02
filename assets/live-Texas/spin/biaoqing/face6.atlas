@@ -1,0 +1,62 @@
+
+face6.png
+size: 233,146
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face6_a
+  rotate: true
+  xy: 179, 10
+  size: 33, 18
+  orig: 36, 20
+  offset: 2, 1
+  index: -1
+face6_b
+  rotate: false
+  xy: 144, 24
+  size: 33, 19
+  orig: 35, 21
+  offset: 1, 1
+  index: -1
+face6_c
+  rotate: false
+  xy: 144, 8
+  size: 16, 14
+  orig: 16, 14
+  offset: 0, 0
+  index: -1
+face6_d
+  rotate: false
+  xy: 162, 9
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+face6_ea
+  rotate: false
+  xy: 2, 4
+  size: 140, 140
+  orig: 144, 144
+  offset: 2, 2
+  index: -1
+face6_f
+  rotate: true
+  xy: 208, 60
+  size: 84, 19
+  orig: 84, 19
+  offset: 0, 0
+  index: -1
+face6_g
+  rotate: true
+  xy: 208, 2
+  size: 56, 23
+  orig: 56, 23
+  offset: 0, 0
+  index: -1
+face6_h
+  rotate: true
+  xy: 144, 45
+  size: 99, 62
+  orig: 99, 62
+  offset: 0, 0
+  index: -1

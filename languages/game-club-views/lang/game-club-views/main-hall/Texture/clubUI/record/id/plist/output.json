@@ -1,0 +1,28 @@
+{"frames": [
+
+{
+	"filename": "dayu.png",
+	"frame": {"x":148,"y":2,"w":170,"h":21},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":21},
+	"sourceSize": {"w":170,"h":21}
+},
+{
+	"filename": "tuhao.png",
+	"frame": {"x":2,"y":2,"w":144,"h":26},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":26},
+	"sourceSize": {"w":144,"h":26}
+}],
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":320,"h":30},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:60596bd342efb365fec7be63614627b3$"
+}
+}

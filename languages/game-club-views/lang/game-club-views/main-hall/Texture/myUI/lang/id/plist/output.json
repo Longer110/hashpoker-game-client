@@ -1,0 +1,28 @@
+{"frames": [
+
+{
+	"filename": "gold.png",
+	"frame": {"x":2,"y":65,"w":117,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":117,"h":51},
+	"sourceSize": {"w":117,"h":51}
+},
+{
+	"filename": "my_icon_shop.png",
+	"frame": {"x":2,"y":2,"w":137,"h":61},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":137,"h":61},
+	"sourceSize": {"w":137,"h":61}
+}],
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":141,"h":118},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:88cab5f9539d615c5f9395e93519ab8e$"
+}
+}

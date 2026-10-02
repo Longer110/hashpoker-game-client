@@ -1,0 +1,62 @@
+
+face9.png
+size: 204,144
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face9_a
+  rotate: true
+  xy: 144, 74
+  size: 68, 58
+  orig: 68, 58
+  offset: 0, 0
+  index: -1
+face9_b
+  rotate: true
+  xy: 144, 2
+  size: 44, 12
+  orig: 44, 12
+  offset: 0, 0
+  index: -1
+face9_c
+  rotate: false
+  xy: 163, 48
+  size: 18, 9
+  orig: 18, 9
+  offset: 0, 0
+  index: -1
+face9_da
+  rotate: false
+  xy: 2, 2
+  size: 140, 140
+  orig: 144, 144
+  offset: 2, 2
+  index: -1
+face9_e
+  rotate: true
+  xy: 179, 61
+  size: 11, 12
+  orig: 11, 12
+  offset: 0, 0
+  index: -1
+face9_f
+  rotate: false
+  xy: 163, 59
+  size: 14, 13
+  orig: 14, 13
+  offset: 0, 0
+  index: -1
+face9_g
+  rotate: true
+  xy: 158, 10
+  size: 36, 15
+  orig: 36, 15
+  offset: 0, 0
+  index: -1
+face9_h
+  rotate: true
+  xy: 144, 48
+  size: 24, 17
+  orig: 24, 17
+  offset: 0, 0
+  index: -1

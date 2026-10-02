@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "0cc1c6f8-58ac-4fca-9e4d-d521abc20e97",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 18,
+  "height": 42,
+  "platformSettings": {},
+  "subMetas": {
+    "buyChip_Box": {
+      "ver": "1.0.6",
+      "uuid": "05aa8f71-257c-4f0e-812e-adfab0dcb7f4",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "0cc1c6f8-58ac-4fca-9e4d-d521abc20e97",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 18,
+      "height": 42,
+      "rawWidth": 18,
+      "rawHeight": 42,
+      "borderTop": 20,
+      "borderBottom": 20,
+      "borderLeft": 8,
+      "borderRight": 8,
+      "subMetas": {}
+    }
+  }
+}

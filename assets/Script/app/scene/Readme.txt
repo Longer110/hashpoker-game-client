@@ -1,0 +1,1 @@
+主包AppMain.fire场景文件挂载了引擎内建子包internal中的image，使得引擎打包时将相关资源打进主包

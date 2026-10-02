@@ -1,0 +1,52 @@
+{"frames": [
+
+{
+	"filename": "balel_confirm.png",
+	"frame": {"x":587,"y":2,"w":78,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":78,"h":32},
+	"sourceSize": {"w":78,"h":32}
+},
+{
+	"filename": "jixuyouxi.png",
+	"frame": {"x":365,"y":2,"w":138,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":138,"h":40},
+	"sourceSize": {"w":138,"h":40}
+},
+{
+	"filename": "label_cancel.png",
+	"frame": {"x":505,"y":2,"w":80,"h":34},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":34},
+	"sourceSize": {"w":80,"h":34}
+},
+{
+	"filename": "label_logout.png",
+	"frame": {"x":193,"y":2,"w":170,"h":47},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":47},
+	"sourceSize": {"w":170,"h":47}
+},
+{
+	"filename": "tisInfo.png",
+	"frame": {"x":2,"y":2,"w":189,"h":47},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":189,"h":47},
+	"sourceSize": {"w":189,"h":47}
+}],
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":667,"h":51},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e8a95a7f4c8a7bf5498fab942912931d$"
+}
+}

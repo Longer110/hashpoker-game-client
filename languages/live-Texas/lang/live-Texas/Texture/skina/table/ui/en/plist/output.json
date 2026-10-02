@@ -1,0 +1,124 @@
+{"frames": [
+
+{
+	"filename": "action_damang.png",
+	"frame": {"x":176,"y":198,"w":174,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":174,"h":75},
+	"sourceSize": {"w":174,"h":75}
+},
+{
+	"filename": "action_deposit.png",
+	"frame": {"x":0,"y":0,"w":79,"h":49},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":79,"h":49},
+	"sourceSize": {"w":79,"h":49}
+},
+{
+	"filename": "action_gengzhu.png",
+	"frame": {"x":0,"y":283,"w":174,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":174,"h":75},
+	"sourceSize": {"w":174,"h":75}
+},
+{
+	"filename": "action_jiazhu.png",
+	"frame": {"x":184,"y":283,"w":174,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":174,"h":75},
+	"sourceSize": {"w":174,"h":75}
+},
+{
+	"filename": "action_qipai.png",
+	"frame": {"x":0,"y":368,"w":174,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":174,"h":75},
+	"sourceSize": {"w":174,"h":75}
+},
+{
+	"filename": "action_xiaomang.png",
+	"frame": {"x":184,"y":368,"w":174,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":174,"h":75},
+	"sourceSize": {"w":174,"h":75}
+},
+{
+	"filename": "btnBack.png",
+	"frame": {"x":192,"y":0,"w":166,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":166,"h":56},
+	"sourceSize": {"w":166,"h":56}
+},
+{
+	"filename": "btnRecord.png",
+	"frame": {"x":0,"y":66,"w":166,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":166,"h":56},
+	"sourceSize": {"w":166,"h":56}
+},
+{
+	"filename": "btnSetting.png",
+	"frame": {"x":176,"y":66,"w":166,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":166,"h":56},
+	"sourceSize": {"w":166,"h":56}
+},
+{
+	"filename": "btnSitDown.png",
+	"frame": {"x":0,"y":132,"w":166,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":166,"h":56},
+	"sourceSize": {"w":166,"h":56}
+},
+{
+	"filename": "btnStand.png",
+	"frame": {"x":176,"y":132,"w":166,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":166,"h":56},
+	"sourceSize": {"w":166,"h":56}
+},
+{
+	"filename": "btnType.png",
+	"frame": {"x":0,"y":198,"w":166,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":166,"h":56},
+	"sourceSize": {"w":166,"h":56}
+},
+{
+	"filename": "tableLogo.png",
+	"frame": {"x":0,"y":453,"w":251,"h":145},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":251,"h":145},
+	"sourceSize": {"w":251,"h":145}
+},
+{
+	"filename": "win.png",
+	"frame": {"x":89,"y":0,"w":93,"h":53},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":93,"h":53},
+	"sourceSize": {"w":93,"h":53}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":358,"h":598},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d28e83f1ef412662157d1f356098de98:2c2b5c95c489beaf413b78f1ee5e2fd0:0d09193906abb077207e7c2205ba0dc9$"
+}
+}

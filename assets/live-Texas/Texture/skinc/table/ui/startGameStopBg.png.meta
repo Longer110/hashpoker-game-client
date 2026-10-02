@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "d71ae9c5-f01d-4e52-a003-b3d7580dd797",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 96,
+  "height": 361,
+  "platformSettings": {},
+  "subMetas": {
+    "startGameStopBg": {
+      "ver": "1.0.6",
+      "uuid": "8451f6f5-7bdf-4fc9-8060-12d5b6884c86",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "d71ae9c5-f01d-4e52-a003-b3d7580dd797",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 96,
+      "height": 361,
+      "rawWidth": 96,
+      "rawHeight": 361,
+      "borderTop": 169,
+      "borderBottom": 166,
+      "borderLeft": 33,
+      "borderRight": 33,
+      "subMetas": {}
+    }
+  }
+}

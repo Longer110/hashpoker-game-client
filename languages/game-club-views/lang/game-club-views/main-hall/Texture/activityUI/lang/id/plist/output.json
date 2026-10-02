@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "ac_itemBg1.png",
+	"frame": {"x":2,"y":712,"w":704,"h":353},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":704,"h":353},
+	"sourceSize": {"w":704,"h":353}
+},
+{
+	"filename": "ac_itemBg2.png",
+	"frame": {"x":2,"y":357,"w":704,"h":353},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":704,"h":353},
+	"sourceSize": {"w":704,"h":353}
+},
+{
+	"filename": "ac_itemBg5.png",
+	"frame": {"x":2,"y":2,"w":704,"h":353},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":704,"h":353},
+	"sourceSize": {"w":704,"h":353}
+},
+{
+	"filename": "signin.png",
+	"frame": {"x":2,"y":1067,"w":660,"h":235},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":660,"h":235},
+	"sourceSize": {"w":660,"h":235}
+}],
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":708,"h":1304},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:48d0ba3cff9ff0662a39b3795b29e83e$"
+}
+}

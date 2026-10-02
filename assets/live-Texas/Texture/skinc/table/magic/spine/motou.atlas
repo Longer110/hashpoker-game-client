@@ -1,0 +1,13 @@
+
+motou.png
+size: 128,64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+motou
+  rotate: false
+  xy: 2, 2
+  size: 111, 45
+  orig: 111, 45
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "favourableTips.png",
+	"frame": {"x":2,"y":119,"w":89,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":89,"h":59},
+	"sourceSize": {"w":89,"h":59}
+},
+{
+	"filename": "icon_alipay.png",
+	"frame": {"x":2,"y":180,"w":38,"h":38},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":38,"h":38},
+	"sourceSize": {"w":38,"h":38}
+},
+{
+	"filename": "small_tips.png",
+	"frame": {"x":2,"y":2,"w":115,"h":91},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":91},
+	"sourceSize": {"w":115,"h":91}
+}],
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":95,"h":220},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:c9574a238133392d7d8b8a32b067f8f0$"
+}
+}

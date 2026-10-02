@@ -1,0 +1,44 @@
+syntax = "proto2";
+
+//魔法表情数组
+message MagicFaceMsg {
+    required int32 MagicFace = 1 [default = -1]; //魔法表情的标识 1- 6
+    required int32 NeedGold =2 [default = -1]; //使用魔法表情需要的金币值
+}
+
+// 请求获取用户信息
+message REQ_User_Msg {
+    required int32 UserID = 1 [default = 0];
+}
+
+//返回获取用户信息
+message REP_User_Msg {
+    required int32 UserID = 1 [default = -1];
+    required int32 Sex = 2 [default = -1];
+    required string Name = 3 [default = ""];
+    required double Gold = 4 [default = 0];
+    required int32 Sid = 5 [default = 0];
+    repeated MagicFaceMsg tMagicFaceArr = 6; // 魔法表情数组
+}
+
+// 使用魔法表情数据结构
+message UserMagicFace {
+    required int32 Sid = 1  [default = -1]; //请求对那个位置使用
+    required int32 MagicFace = 2 [default = -1]; //使用的表情
+}
+// 请求使用魔法表情
+message REQ_User_Face {
+    required UserMagicFace tMagicFace = 1 ; //使用的表情数据结构
+}
+
+// 返回请求的结果
+message REP_User_Face {
+  required int32 Result = 1 [default = 0]; // 1成功, -2参数错误 -3没有改表情, -4金币不足
+}
+
+// 成功会广播
+message REP_User_Face_All {
+    required int32 Sid = 1  [default = 0]; //发起表情目标座位号
+    required int32 SidTarget = 2  [default = 0]; //目标表情目标座位号
+    required int32 MagicFace = 3 [default = 0]; //使用的表情
+}

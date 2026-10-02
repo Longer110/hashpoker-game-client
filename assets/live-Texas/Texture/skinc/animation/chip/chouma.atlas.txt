@@ -1,0 +1,13 @@
+
+chouma.png
+size: 128,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cm
+  rotate: false
+  xy: 2, 2
+  size: 64, 65
+  orig: 64, 65
+  offset: 0, 0
+  index: -1

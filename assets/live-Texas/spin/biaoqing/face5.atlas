@@ -1,0 +1,76 @@
+
+face5.png
+size: 218,140
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face3_a
+  rotate: false
+  xy: 2, 2
+  size: 136, 136
+  orig: 136, 136
+  offset: 0, 0
+  index: -1
+face3_b
+  rotate: false
+  xy: 140, 46
+  size: 50, 92
+  orig: 52, 94
+  offset: 1, 1
+  index: -1
+face3_c
+  rotate: true
+  xy: 205, 49
+  size: 29, 11
+  orig: 31, 13
+  offset: 1, 1
+  index: -1
+face3_d
+  rotate: false
+  xy: 192, 124
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+face3_e
+  rotate: true
+  xy: 207, 95
+  size: 27, 8
+  orig: 33, 11
+  offset: 5, 2
+  index: -1
+face3_f
+  rotate: true
+  xy: 179, 10
+  size: 34, 33
+  orig: 34, 33
+  offset: 0, 0
+  index: -1
+face3_g
+  rotate: false
+  xy: 192, 80
+  size: 12, 16
+  orig: 12, 16
+  offset: 0, 0
+  index: -1
+face3_i
+  rotate: true
+  xy: 192, 47
+  size: 31, 11
+  orig: 34, 13
+  offset: 2, 1
+  index: -1
+face3_j
+  rotate: true
+  xy: 140, 9
+  size: 35, 37
+  orig: 35, 37
+  offset: 0, 0
+  index: -1
+face3_k
+  rotate: true
+  xy: 192, 98
+  size: 24, 13
+  orig: 26, 15
+  offset: 1, 1
+  index: -1

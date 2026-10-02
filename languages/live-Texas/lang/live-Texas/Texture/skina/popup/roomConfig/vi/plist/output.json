@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "sign1.png",
+	"frame": {"x":0,"y":0,"w":139,"h":58},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":139,"h":58},
+	"sourceSize": {"w":139,"h":58}
+},
+{
+	"filename": "sign2.png",
+	"frame": {"x":149,"y":0,"w":63,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":63,"h":31},
+	"sourceSize": {"w":63,"h":31}
+},
+{
+	"filename": "title.png",
+	"frame": {"x":222,"y":0,"w":280,"h":88},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":280,"h":88},
+	"sourceSize": {"w":280,"h":88}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":502,"h":88},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:2fc5cc283bc57ea843963cacd3ecdb25:a655b9d0cafb0041bdc23c488ced2a62:0d09193906abb077207e7c2205ba0dc9$"
+}
+}

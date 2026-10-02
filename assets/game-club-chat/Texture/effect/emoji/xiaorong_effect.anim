@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "xiaorong_effect",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.8333333333333334,
+  "sample": 6,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "0aecc145-bfb0-4edc-a429-2704fc4e9451"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "745c70fa-372d-4cb4-8a6f-12e28f24d239"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "2bf002f4-dc1b-42ea-a1e9-8ef77518ec97"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "018e8d18-ed3e-4a73-b09f-32437905fe4a"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "6a7bb3ba-d03f-4090-9c2c-61fc17f4d998"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

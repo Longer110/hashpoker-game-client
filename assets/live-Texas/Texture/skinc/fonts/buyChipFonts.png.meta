@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "3ff4d908-0a91-41fa-ab80-b6998982dc68",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 486,
+  "height": 34,
+  "platformSettings": {},
+  "subMetas": {
+    "buyChipFonts": {
+      "ver": "1.0.6",
+      "uuid": "0fa9fe68-a160-452e-82e3-0e36c67ad86a",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "3ff4d908-0a91-41fa-ab80-b6998982dc68",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -18,
+      "offsetY": -0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 448,
+      "height": 33,
+      "rawWidth": 486,
+      "rawHeight": 34,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

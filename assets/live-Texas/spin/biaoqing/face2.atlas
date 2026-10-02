@@ -1,0 +1,76 @@
+
+face2.png
+size: 233,151
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+2a
+  rotate: false
+  xy: 144, 53
+  size: 64, 96
+  orig: 66, 98
+  offset: 1, 1
+  index: -1
+2b
+  rotate: false
+  xy: 144, 5
+  size: 38, 13
+  orig: 40, 15
+  offset: 1, 1
+  index: -1
+2c
+  rotate: true
+  xy: 213, 35
+  size: 37, 18
+  orig: 39, 20
+  offset: 1, 1
+  index: -1
+2d
+  rotate: false
+  xy: 144, 20
+  size: 39, 31
+  orig: 41, 33
+  offset: 1, 1
+  index: -1
+2e
+  rotate: true
+  xy: 185, 2
+  size: 49, 26
+  orig: 51, 28
+  offset: 1, 1
+  index: -1
+2f
+  rotate: true
+  xy: 213, 8
+  size: 11, 9
+  orig: 13, 11
+  offset: 1, 1
+  index: -1
+2g
+  rotate: true
+  xy: 213, 21
+  size: 12, 10
+  orig: 15, 12
+  offset: 2, 1
+  index: -1
+2h
+  rotate: true
+  xy: 210, 108
+  size: 41, 21
+  orig: 43, 23
+  offset: 1, 1
+  index: -1
+2i
+  rotate: true
+  xy: 210, 74
+  size: 32, 20
+  orig: 35, 22
+  offset: 2, 1
+  index: -1
+2ja
+  rotate: false
+  xy: 2, 9
+  size: 140, 140
+  orig: 144, 144
+  offset: 2, 2
+  index: -1

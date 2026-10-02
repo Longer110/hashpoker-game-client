@@ -1,0 +1,31 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "mikeAnim",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.8333333333333334,
+  "sample": 12,
+  "speed": 0.65,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "fillRange": [
+          {
+            "frame": 0,
+            "value": 0
+          },
+          {
+            "frame": 0.4166666666666667,
+            "value": 1
+          },
+          {
+            "frame": 0.8333333333333334,
+            "value": 0
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

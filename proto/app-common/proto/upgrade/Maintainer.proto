@@ -1,0 +1,51 @@
+syntax = "proto2";
+
+
+//命令ID
+//注意: 命名规则为协议名称加后缀 '_CMD' ;本服代码中,以这一规则来寻找协议命令的。
+message Maintainer_Proto
+{
+	required int32	Main_CMD =1 			[default = 1200];	//主命令 (不可改)
+	required int32	VersionInfoReq_CMD=2 	[default = 1];	    //当前版本信息 请求
+	required int32	VersionInfoRsp_CMD=3 	[default = 2];		//当前版本信息 回复
+	required int32	MaintenanceNotify_CMD=4	[default = 3];		//维护 通知 
+	required int32  KickOutNotify_CMD =5	[default = 5];		//请离 通知
+}
+
+
+//当前版本信息请求
+message VersionInfoReq{
+	required string sPlatform=1;		//平台
+	required string sChannel=2;			//渠道
+}
+//当前版本信息回复
+message VersionInfoRsp{
+	message VersionInfo
+	{
+		required string sVersion=1;        				//当前版本号
+		required string sDownloadurl=2;  				//热更下载地址
+		required string sAppurl=3;      				//大版本安装包下载地址
+		required string sConfigUrl=4;					//配置文件下载地址
+		required string sConfigVersion=5;				//配置版本号
+	}
+	required int32 nResult=1;						//0:成功 其它:失败
+	optional VersionInfo tVersionInfo=2;			//nResult为0时有
+}
+
+//服务器正在维护通知 (维护期间，非本文件内的请求,都以该通知作为回复)
+message MaintenanceNotify{
+	required string sTimeStart=1;		//开始维护时间		(无表明时区)
+	required string sTimeEnd=2;			//预计维护结束时间	(无表明时区)
+	optional int32 nStartTimestamp=3;	//开始维护时间戳,>0     (转换为前端本地时间显示)
+	optional int32 nEndTimestamp=4;		//预计维护结束时间戳,>0 (转换为前端本地时间显示)
+}
+
+//收到改通知，前端帮忙弹个提示语，点确定后退回登陆界面
+message KickOutNotify{
+	required string sTips=1;			//提示语(1普通踢人，2强制踢人，8强制离座，9非维护后台强制踢人)
+	required int32 nToWhere=2;			//1:踢回到大厅 0:踢回到登陆界面 2:留在房间
+}
+
+
+
+

@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "weixiao_effect",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.625,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "5e11c4e6-af4d-4169-a217-b58ba3255743"
+            }
+          },
+          {
+            "frame": 0.125,
+            "value": {
+              "__uuid__": "20875f87-b5c5-4f93-8668-5897907e556a"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "0d34d2f1-b628-4322-a262-67c1f12e19f1"
+            }
+          },
+          {
+            "frame": 0.375,
+            "value": {
+              "__uuid__": "23909ce0-7669-482b-97ed-9ea58423452e"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "9653018e-79d1-437a-8ce7-d23b1fb87494"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

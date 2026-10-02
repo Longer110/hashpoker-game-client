@@ -1,0 +1,1 @@
+pbjs -t static-module -w commonjs -o ../../assets/Script/app/protocal/statistics/proto/proto_statistics.js *.proto

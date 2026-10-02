@@ -1,0 +1,34 @@
+
+face20.png
+size: 258,146
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face20_a
+  rotate: false
+  xy: 211, 96
+  size: 45, 48
+  orig: 48, 50
+  offset: 2, 1
+  index: -1
+face20_b
+  rotate: false
+  xy: 147, 81
+  size: 62, 63
+  orig: 62, 63
+  offset: 0, 0
+  index: -1
+face20_c
+  rotate: true
+  xy: 147, 18
+  size: 61, 97
+  orig: 61, 97
+  offset: 0, 0
+  index: -1
+face20_da
+  rotate: true
+  xy: 2, 2
+  size: 142, 143
+  orig: 144, 144
+  offset: 0, 0
+  index: -1

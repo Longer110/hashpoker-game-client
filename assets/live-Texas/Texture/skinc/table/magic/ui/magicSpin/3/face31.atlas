@@ -1,0 +1,20 @@
+
+face31.png
+size: 244,141
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face31_a
+  rotate: false
+  xy: 211, 108
+  size: 31, 31
+  orig: 33, 33
+  offset: 1, 1
+  index: -1
+face31_b
+  rotate: false
+  xy: 2, 2
+  size: 207, 137
+  orig: 207, 137
+  offset: 0, 0
+  index: -1

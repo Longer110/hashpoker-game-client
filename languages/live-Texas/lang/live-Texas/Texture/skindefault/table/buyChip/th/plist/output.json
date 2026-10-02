@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "auto.png",
+	"frame": {"x":0,"y":0,"w":185,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":185,"h":56},
+	"sourceSize": {"w":185,"h":56}
+},
+{
+	"filename": "haveGold.png",
+	"frame": {"x":0,"y":66,"w":99,"h":34},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":99,"h":34},
+	"sourceSize": {"w":99,"h":34}
+},
+{
+	"filename": "title.png",
+	"frame": {"x":0,"y":110,"w":158,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":158,"h":48},
+	"sourceSize": {"w":158,"h":48}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":185,"h":185},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:54d91633230eaa3f835f31d17e8480e2:32e0f7fdaf1eb799605890fc9111a5f4:0d09193906abb077207e7c2205ba0dc9$"
+}
+}

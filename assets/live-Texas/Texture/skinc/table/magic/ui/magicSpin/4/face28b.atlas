@@ -1,0 +1,13 @@
+
+face28b.png
+size: 21,21
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face_28_
+  rotate: false
+  xy: 2, 2
+  size: 17, 17
+  orig: 17, 17
+  offset: 0, 0
+  index: -1

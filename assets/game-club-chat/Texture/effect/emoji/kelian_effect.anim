@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "kelian_effect",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.625,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "3eb52438-ece3-4ed1-90f6-e57bf74d1d98"
+            }
+          },
+          {
+            "frame": 0.125,
+            "value": {
+              "__uuid__": "b9b22331-4deb-452d-b867-dc49893f549f"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "c175e1b7-d932-4fce-b1ae-1968dc87def2"
+            }
+          },
+          {
+            "frame": 0.375,
+            "value": {
+              "__uuid__": "57db7614-0074-42c1-b5d3-812a55ecd404"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "9046416c-2b9b-48c4-9a0e-f680d97a09e4"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

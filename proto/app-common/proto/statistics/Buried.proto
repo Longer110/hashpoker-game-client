@@ -1,0 +1,18 @@
+syntax = "proto2";
+
+message BurProto {
+	required int32 Main_CMD = 1 [default = 2101]; //统计服
+	required int32 Bur_UserInfoReq_CMD = 2     [default = 1];   //请求埋点数据到统计服
+	required int32 Bur_UserInfoRsp_CMD = 3     [default = 2];   //回馈埋点数据给客户端
+}
+
+//  BUR_USERINFOREQ_CMD   = 1  发送埋点数据到统计服
+message Bur_UserInfoREQ {
+  optional string tBuildUserData = 1 [default = ""]; //统计玩家数据cjson
+}
+
+//  BUR_USERINFORSP_CMD   = 1  回馈埋点数据给客户端
+message Bur_UserInfoRSP {
+  optional int32  nResult = 1 [default = -99]; //回馈统计结果 0成功， 非0失败 (暂时不需要回馈什么,临时用下)
+  optional string  sFReport = 2 [default = ""]; //失败时有
+}

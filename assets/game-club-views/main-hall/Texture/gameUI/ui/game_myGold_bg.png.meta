@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "702da3ed-b5b0-4a45-8bc3-40f14ba4567d",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 141,
+  "height": 46,
+  "platformSettings": {},
+  "subMetas": {
+    "game_myGold_bg": {
+      "ver": "1.0.6",
+      "uuid": "a9e5f3d7-1a02-479e-85f5-2ff3e5fce67b",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "702da3ed-b5b0-4a45-8bc3-40f14ba4567d",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 139,
+      "height": 44,
+      "rawWidth": 141,
+      "rawHeight": 46,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

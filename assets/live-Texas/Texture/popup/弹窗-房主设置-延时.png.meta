@@ -1,0 +1,38 @@
+{
+  "ver": "2.3.7",
+  "uuid": "172c4d8f-c2ab-45d5-b1cd-98c2ebee4f65",
+  "importer": "texture",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1080,
+  "height": 1920,
+  "platformSettings": {},
+  "subMetas": {
+    "弹窗-房主设置-延时": {
+      "ver": "1.0.6",
+      "uuid": "1fe0d57e-cb0c-4ab1-a636-aa172ee54a62",
+      "importer": "sprite-frame",
+      "rawTextureUuid": "172c4d8f-c2ab-45d5-b1cd-98c2ebee4f65",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1080,
+      "height": 1920,
+      "rawWidth": 1080,
+      "rawHeight": 1920,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

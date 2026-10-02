@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "ca_gameInfo_banker.png",
+	"frame": {"x":688,"y":2,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":34,"h":32}
+},
+{
+	"filename": "ca_m_l1.png",
+	"frame": {"x":485,"y":2,"w":201,"h":90},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":201,"h":90},
+	"sourceSize": {"w":201,"h":90}
+},
+{
+	"filename": "ca_m_l2.png",
+	"frame": {"x":282,"y":2,"w":201,"h":103},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":201,"h":103},
+	"sourceSize": {"w":201,"h":103}
+},
+{
+	"filename": "ca_m_l3.png",
+	"frame": {"x":2,"y":2,"w":278,"h":106},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":278,"h":106},
+	"sourceSize": {"w":278,"h":106}
+}],
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":722,"h":110},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:24ee8333730e9e51413a73aaf4a27913$"
+}
+}

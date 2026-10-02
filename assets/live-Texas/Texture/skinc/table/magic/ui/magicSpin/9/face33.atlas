@@ -1,0 +1,13 @@
+
+face33.png
+size: 134,147
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face33_c
+  rotate: false
+  xy: 2, 2
+  size: 130, 143
+  orig: 130, 143
+  offset: 0, 0
+  index: -1

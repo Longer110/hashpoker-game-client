@@ -1,0 +1,186 @@
+
+huojian.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bz_01
+  rotate: false
+  xy: 2, 679
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_02
+  rotate: false
+  xy: 355, 679
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_03
+  rotate: true
+  xy: 2, 326
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_04
+  rotate: false
+  xy: 2, 2
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_05
+  rotate: true
+  xy: 326, 326
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_06
+  rotate: false
+  xy: 355, 2
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_07
+  rotate: true
+  xy: 650, 326
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+huojian
+  rotate: true
+  xy: 708, 914
+  size: 87, 229
+  orig: 87, 229
+  offset: 0, 0
+  index: -1
+zayan01
+  rotate: false
+  xy: 708, 824
+  size: 88, 88
+  orig: 88, 88
+  offset: 0, 0
+  index: -1
+zayan02
+  rotate: false
+  xy: 798, 824
+  size: 88, 88
+  orig: 88, 88
+  offset: 0, 0
+  index: -1
+zayan03
+  rotate: false
+  xy: 888, 824
+  size: 88, 88
+  orig: 88, 88
+  offset: 0, 0
+  index: -1
+
+huojian2.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bz_08
+  rotate: false
+  xy: 2, 679
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_09
+  rotate: false
+  xy: 355, 679
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_10
+  rotate: true
+  xy: 2, 326
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_11
+  rotate: false
+  xy: 2, 2
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_12
+  rotate: true
+  xy: 326, 326
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_13
+  rotate: false
+  xy: 355, 2
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_14
+  rotate: true
+  xy: 650, 326
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+
+huojian3.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bz_15
+  rotate: false
+  xy: 2, 650
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_16
+  rotate: false
+  xy: 2, 326
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_17
+  rotate: false
+  xy: 355, 650
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_18
+  rotate: false
+  xy: 2, 2
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_19
+  rotate: false
+  xy: 355, 326
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1
+bz_20
+  rotate: false
+  xy: 355, 2
+  size: 351, 322
+  orig: 351, 322
+  offset: 0, 0
+  index: -1

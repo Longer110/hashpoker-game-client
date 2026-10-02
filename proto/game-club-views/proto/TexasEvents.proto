@@ -1,0 +1,276 @@
+syntax = "proto2";
+
+//命令ID
+//注意: 命名规则为协议名称加后缀 '_CMD' ;本游戏服代码中,以这一规则来寻找协议命令的。
+//命名为啥加个LBR前缀，因为与其他游戏命名冲突
+
+
+
+//
+message TEvt_Proto {			    
+	required int32 Main_CMD =1 					[default = 337]; //主命令
+	required int32 TEvtLogonReq_CMD	= 2  		[default = 1];	 //x比赛服登陆 请求 
+	required int32 TEvtLogonRsp_CMD=3			[default = 2];	 //x比赛服登陆 返回
+	
+	required int32 TEvtEventsOpenReq_CMD= 4  	[default = 3];//x赛事列表 请求
+	required int32 TEvtEventsOpenRsp_CMD= 5  	[default = 4];//x赛事列表 返回
+	required int32 TEvtEventsCloseReq_CMD= 6  	[default = 5];//x赛事列表关闭 请求 (关闭后不再接收通知:TEvtUserCntNotify,TEvtRuleDNotify)
+	required int32 TEvtUserCntNotify_CMD= 7  	[default = 6];//x报名人数变化 通知
+	required int32 TEvtRuleDNotify_CMD= 8  		[default = 7];//比赛信息=>规则(动态部分)变化 通知
+	required int32 TEvtUsersReq_CMD= 9  		[default = 8];//x比赛信息=>玩家列表 请求
+	required int32 TEvtUsersRsp_CMD= 10  		[default = 9];//x比赛信息=>玩家列表 返回
+	required int32 TEvtAwardsReq_CMD= 11 		[default =10];//x比赛信息=>奖励列表 请求
+	required int32 TEvtAwardsRsp_CMD= 12  		[default =11];//x比赛信息=>奖励列表 返回
+	required int32 TEvtSignUpReq_CMD= 13  		[default =12];//x报名 请求
+	required int32 TEvtSignUpRsp_CMD= 14  		[default =13];//x报名 返回
+	required int32 TEvtSignUpCancelReq_CMD= 15  [default =14];//x取消报名 请求
+	required int32 TEvtSignUpCancelRsp_CMD=16  	[default =15];//x取消报名 返回
+	required int32 TEvtSignUpDReq_CMD=17  		[default =16];//x延迟报名 请求
+	required int32 TEvtSignUpDRsp_CMD=18  		[default =17];//x延迟报名 返回
+	required int32 TEvtWatchReq_CMD	=19  		[default =18];//x观战 请求
+	required int32 TEvtWatchRsp_CMD	=20  		[default =19];//x观战 返回
+	required int32 TEvtEnterReq_CMD	=21  		[default =20];//x进入比赛 请求 (调用后分两情况:1进入倒计时等待,倒计时完后,前端重新调用该请求 2直接进入比赛桌子)
+	required int32 TEvtEnterRsp_CMD	=22  		[default =21];//x进入比赛 返回
+	required int32 TEvtCancelNotify_CMD	=23  	[default =22];//走马灯 比赛未达到开赛要求,被取消 通知
+	required int32 TEvtToStartNotify_CMD=24     [default =23];//x走马灯 比赛即将开始 通知
+	required int32 TEvtCheckReq_CMD	=25  		[default =24];//x入口提示查询 请求
+	required int32 TEvtCheckRsp_CMD	=26  		[default =25];//x入口提示查询 返回
+	required int32 TEvtQuitReq_CMD	=27  		[default =26];//退出比赛(弹窗里的;不再进行离线托管) 请求
+	required int32 TEvtStatusNotify_CMD=28		[default =27];//x赛事状态更新 通知
+}
+
+//比赛信息=>规则(动态部分)结构
+message TEvtRuleD{
+	required int32 nUserCnt=1;		//比赛剩余人数
+	required int32 nBlindUpR=2;		//涨盲剩余时间 秒 (前端需要自己倒计时至0)
+	required int32 nBlindLevel=3;	//当前盲注级别
+	required int32 nChipAvg=4;		//平均记分牌
+	required int32 nLevelUpTo=5;	//截止买入级别
+}
+
+
+//登陆 请求
+message TEvtLogonReq {
+	required int32 nUserID=1; //用户ID
+}
+//登陆 返回
+message TEvtLogonRsp{
+	required int32 nRlt=1; 	  //0成功  1失败
+}
+
+//赛事列表 请求
+message TEvtEventsOpenReq{
+	optional int32 nNoUse=1;
+}
+//赛事列表 返回
+message TEvtEventsOpenRsp{
+	//盲注列表元素
+	message LvItem{
+		required int32 nLv=1;			//级别
+		required int32 nSmallB=2;		//小盲
+		required int32 nBigB=3;			//大盲(通常等于:小盲x2)
+		required int32 nRA=4;			//重购标识;1:可重购 2:可增购 0:不能购
+		optional int32 nPreAnte=5;		//前注
+	}
+	//重购或增购规则
+	message TakInCfg{
+		required int32 nLevel=1; //盲注级别
+		required int32 nCnt=2;	 //可购次数
+		required int32 nChip=3;	 //增加的筹码数量
+	}
+	//报名费、重购费、增购费都使用该结构表示
+	message Fee{
+		required int32 nFeeType=1;		//费用类型,1免费 2仅门票 3金币或门票
+		optional int32 nTicketNeed=2;	//所需门票数量					(nFeeType 2或3时有效)
+		optional int32 nFeeA=3;			//参赛费						(nFeeType 3时有效)
+		optional int32 nFeeB=4;			//报名服务费 或重购费 或增购费 	(nFeeType 3时有效)
+	}
+	//赛事
+	message Item{
+		required int32 nEventId=1;				//赛事ID
+		required string sName=2;				//赛事名称
+		required string sBackground=3;			//背景图url (空字符串时,前端默认一个图)
+		required int32 nStatus=4;				//赛事状态 -1:没开始(不能报名) 0:进行中 1:结束 (可废弃,改用nStage字段)
+		required int32 nTimeStampBegin=5;		//开赛时间戳
+		required int32 nTimeBefore=6;			//开赛前时间 秒(期间内，已报名者可"进入比赛")
+		required int32 nTimeAfter=7;			//开赛后时间 秒(期间内，未报名者可"延迟报名",超过后所有人仅能"观战")
+		required int32 nUserCnt=8;				//当前报名人数
+		required int32 nUserCntMax=9;			//最大报名人数	(比赛信息页面=>规则 静态部分)
+		required int32 nOp=10;					//当前可进行的操作 1报名 2取消报名 3进入比赛 4延迟报名 5观战 0不能操作(未报名时有:1,4,5; 已报名时有:2,3,5;已淘汰时:5;已绑定时:3)
+		required int32 nSignUp=11;				//当前用户状态 0:未报名 1:已报名 2:已淘汰 3:已绑定到比赛桌比赛
+		required Fee tFeeSignUp=12;  			//报名费 		(比赛信息页面=>规则 静态部分)
+		required Fee tFeeR=13;		  			//重购费 		(比赛信息页面=>规则 静态部分)
+		required Fee tFeeA=14;		  			//增购费  		(比赛信息页面=>规则 静态部分)
+		required int32 nTakeIn=15;				//初始记分牌 	(比赛信息页面=>规则 静态部分)
+		required int32 nCntBegin=16;			//最小开赛人数  (比赛信息页面=>规则 静态部分)
+		required int32 nBlindUpGap=17;			//涨盲时间 秒   (比赛信息页面=>规则 静态部分)
+		required int32 nUserCntOfTable=18;		//单桌人数		(比赛信息页面=>规则 静态部分)
+		required TakInCfg tEvtTakInR=19;		//重购规则		(比赛信息页面=>规则 静态部分)
+		required TakInCfg tEvtTakInA=20;		//增购规则		(比赛信息页面=>规则 静态部分)
+		optional TEvtRuleD tSt=21;				//(比赛信息页面=>规则 动态部分,比赛中才有)
+		repeated LvItem arrLvItem=22;			//(比赛信息页面=>盲注列表)
+		required int32 nTicketOwn=23;			//拥有的门票数量
+		optional int32 nStage=24;			    //赛事阶段 0:报名前阶段 1报名阶段 2可进入比赛阶段 3可延迟报名阶段  4比赛阶段(截止报名) 5排名阶段 6奖励阶段 10比赛结束阶段
+		optional int32 nGameId =25;				//游戏id (125:普通德州 126:奥哈马 175:短牌)
+	}
+	
+	required int32 nTimeStampNow=1;	//当前时间戳 (前端自行倒计时,且更新当前可进行的操作)
+	repeated Item arrEvents=2;		//赛事列表
+} 
+
+
+//赛事列表关闭 请求 (关闭后不再接收通知:TEvtUserCntNotify,TEvtRuleDNotify, TEvtStatusNotify)
+message TEvtEventsCloseReq{
+	optional int32 nNoUse=1;
+}
+
+//报名人数变化 通知
+message TEvtUserCntNotify{
+	required int32 nEventId=1;		//赛事ID
+	required int32 nUserCnt=2;		//当前报名人数
+}
+
+//比赛信息=>规则(动态部分)变化 通知
+message TEvtRuleDNotify{
+	required int32 nEventId=1;			//赛事ID
+	required int32 nRlt=2;				//0:成功 1:比赛已结束
+	optional TEvtRuleD tSt=3;			//成功时有
+}
+//赛事状态更新 通知
+message TEvtStatusNotify{
+	required int32 nEventId=1;			//赛事ID
+	required int32 nStage=2;			//赛事阶段 1报名阶段 2可进入比赛阶段 3可延迟报名阶段  4比赛阶段(截止报名) 5排名阶段 6奖励阶段 10比赛结束阶段
+	required int32 nOp=3;				//当前可进行的操作 1报名 2取消报名 3进入比赛 4延迟报名 5观战 0不能操作
+	optional int32 nTimeStampBegin=4;	//开赛时间戳
+	optional int32 nTimeStampNow=5;		//当前时间戳
+}
+
+
+
+//比赛信息=>玩家列表 请求
+message TEvtUsersReq{
+	required int32 nEventId=1;		//赛事ID
+}
+//比赛信息=>玩家列表 返回
+message TEvtUsersRsp{
+	message Item{
+		required int32 nUserId=1;			 //玩家ID
+		required string sFaceId=2;			 //头像url
+		required string sName=3;			 //昵称
+		required int32 nSex=4;	    		 //性别 0:男 1:女
+		required int32 nChip=5;				 //持有筹码 (-1时,表示未开赛)
+	}
+	repeated Item arrItems=1;				//玩家列表 (太长时会进行分段发送)
+	required int32 nCntOfAll=2;				//所有玩家数量
+    required int32 nCntOfRsp=3;				//当前已发出的玩家数量
+}
+
+//比赛信息=>奖励列表 请求
+message TEvtAwardsReq{
+	required int32 nEventId=1;		//赛事ID
+}
+//比赛信息=>奖励列表 返回
+message TEvtAwardsRsp{
+	message Item{
+		required int32 nRank=1;			//名次
+		required int32 nCoin=2;			//金币数
+		required int32 nTicket=3;		//门票数
+	}
+	repeated Item arrItems =1;			//已按名次排序的列表
+}
+
+
+
+//1报名 2取消报名 3进入比赛 4延迟报名 5观战
+
+//报名 请求。
+message TEvtSignUpReq{
+	required int32 nEventId=1;		//赛事ID
+}
+//报名 返回
+message TEvtSignUpRsp{
+	required int32 nEventId=1;		//赛事ID
+	required int32 nRlt=2;			//0:报名成功 1: 费用不足 2:报名人数达上限 3:超出报名时间 其它:未定义错误
+	optional int32 nOp=3;			//本操作后,可进行的操作 1报名 2取消报名 3进入比赛 4延迟报名 5观战 0不能操作
+}
+
+//取消报名 请求
+message TEvtSignUpCancelReq{
+	required int32 nEventId=1;		//赛事ID
+}
+//取消报名 返回
+message TEvtSignUpCancelRsp{
+	required int32 nEventId=1;		//赛事ID
+	required int32 nRlt=2;			//0:取消成功 其它:未定义错误
+	optional int32 nOp=3;			//本操作后,可进行的操作 1报名 2取消报名 3进入比赛 4延迟报名 5观战 0不能操作
+}
+
+//延迟报名 请求
+message TEvtSignUpDReq{
+	required int32 nEventId=1;		//赛事ID
+}
+//延迟报名 返回
+message TEvtSignUpDRsp{
+	required int32 nEventId=1;		//赛事ID
+	required int32 nRlt=2;			//0:报名成功 1: 费用不足 2:报名人数达上限 3:超出报名时间 5:本轮比赛即将结束，请留意下一轮 其它:未定义错误
+	optional string sTableId=3;		//比赛桌子id,根据该id前端自行进入牌桌 (成功时有效)
+	optional int32 nOp=4;			//本操作后,可进行的操作 1报名 2取消报名 3进入比赛 4延迟报名 5观战 0不能操作
+	optional int32 nGameId =5;		//游戏id (125:普通德州 126:奥哈马 175:短牌)
+}
+
+//观战 请求
+message TEvtWatchReq{
+	required int32 nEventId=1;		//赛事ID
+}
+//观战 返回
+message TEvtWatchRsp{
+	required int32 nEventId=1;		//赛事ID
+	required int32 nRlt=2;			//0:成功  其它:未定义错误
+	optional string sTableId=3;		//比赛桌子id,根据该id前端自行进入牌桌(成功时有效)
+	optional int32 nOp=4;			//本操作后,可进行的操作 1报名 2取消报名 3进入比赛 4延迟报名 5观战 0不能操作
+	optional int32 nGameId =5;		//游戏id (125:普通德州 126:奥哈马 175:短牌)
+}
+
+//进入比赛 请求 
+message TEvtEnterReq{
+	required int32 nEventId=1;		//赛事ID
+}
+//进入比赛 返回
+message TEvtEnterRsp{
+	required int32 nEventId=1;		//赛事ID
+	required int32 nRlt=2;			//2:成功 5:本轮比赛即将结束，请留意下一轮 其它:错误
+	optional int32 nRemainT=3;		//废弃字段
+	optional string sTableId=4;		//比赛桌子id,根据该id前端自行进入牌桌	(成功时有效)
+	optional int32 nOp=5;			//本操作后,可进行的操作 1报名 2取消报名 3进入比赛 4延迟报名 5观战 0不能操作
+	optional int32 nGameId =6;		//游戏id (125:普通德州 126:奥哈马 175:短牌)
+}
+
+
+//走马灯 比赛未达到开赛要求,被取消通知
+message TEvtCancelNotify{
+	required int32 nEventId=1;		//赛事ID
+	required string sName=2;		//赛事名称
+}
+
+//走马灯 比赛即将开始 通知
+message TEvtToStartNotify{
+	required int32 nEventId=1;		//赛事ID
+	required string sName=2;		//赛事名称
+	required int32 nRemainT=3;		//距离比赛开始剩余时间 秒
+}
+
+//入口提示查询 请求
+message TEvtCheckReq{
+	optional int32 nNoUse=1;
+}
+//入口提示查询 返回
+message TEvtCheckRsp{
+	required int32 nRlt=1;			//0:正在比赛当中 1:可以进入比赛 -1:没提示
+	optional int32 nEventId=2;		//赛事ID 
+	optional string sName=3;		//赛事名称
+}
+
+//退出比赛(弹窗里的;不再进行离线托管) 请求
+message TEvtQuitReq{
+	required int32 nEventId=1;
+}

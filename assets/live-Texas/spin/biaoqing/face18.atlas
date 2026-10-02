@@ -1,0 +1,41 @@
+
+face18.png
+size: 144,240
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face18_a
+  rotate: false
+  xy: 99, 86
+  size: 35, 10
+  orig: 35, 10
+  offset: 0, 0
+  index: -1
+face18_b
+  rotate: true
+  xy: 96, 31
+  size: 26, 20
+  orig: 26, 20
+  offset: 0, 0
+  index: -1
+face18_c
+  rotate: true
+  xy: 2, 59
+  size: 37, 95
+  orig: 39, 97
+  offset: 1, 1
+  index: -1
+face18_d
+  rotate: true
+  xy: 2, 2
+  size: 55, 92
+  orig: 57, 94
+  offset: 1, 1
+  index: -1
+face18_ea
+  rotate: false
+  xy: 2, 98
+  size: 140, 140
+  orig: 144, 144
+  offset: 2, 2
+  index: -1

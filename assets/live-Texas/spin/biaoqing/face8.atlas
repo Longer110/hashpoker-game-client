@@ -1,0 +1,83 @@
+
+face8.png
+size: 223,156
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+face8_a
+  rotate: false
+  xy: 144, 76
+  size: 30, 78
+  orig: 32, 80
+  offset: 1, 1
+  index: -1
+face8_b
+  rotate: false
+  xy: 176, 79
+  size: 45, 75
+  orig: 47, 77
+  offset: 1, 1
+  index: -1
+face8_c
+  rotate: true
+  xy: 197, 39
+  size: 38, 15
+  orig: 38, 15
+  offset: 0, 0
+  index: -1
+face8_d
+  rotate: false
+  xy: 144, 2
+  size: 39, 24
+  orig: 39, 24
+  offset: 0, 0
+  index: -1
+face8_e
+  rotate: false
+  xy: 185, 14
+  size: 14, 20
+  orig: 14, 20
+  offset: 0, 0
+  index: -1
+face8_f
+  rotate: false
+  xy: 201, 17
+  size: 14, 20
+  orig: 14, 20
+  offset: 0, 0
+  index: -1
+face8_ga
+  rotate: false
+  xy: 2, 14
+  size: 140, 140
+  orig: 144, 144
+  offset: 2, 2
+  index: -1
+face8_h
+  rotate: true
+  xy: 2, 2
+  size: 10, 8
+  orig: 10, 8
+  offset: 0, 0
+  index: -1
+face8_i
+  rotate: false
+  xy: 12, 3
+  size: 11, 9
+  orig: 11, 9
+  offset: 0, 0
+  index: -1
+face8_j
+  rotate: true
+  xy: 176, 36
+  size: 41, 19
+  orig: 41, 19
+  offset: 0, 0
+  index: -1
+face8_k
+  rotate: true
+  xy: 144, 28
+  size: 46, 30
+  orig: 46, 30
+  offset: 0, 0
+  index: -1

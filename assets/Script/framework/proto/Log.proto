@@ -1,0 +1,49 @@
+syntax = "proto2";
+
+//命令ID
+//注意: 命名规则为协议名称加后缀 '_CMD' ;本服代码中,以这一规则来寻找协议命令的。
+message Log_Proto
+{
+	required int32 Main_CMD =1 				[default = 1300];	//主命令 (不可改)
+	required int32 LogFileCreateReq_CMD=2	[default = 5];		//创建本连接日志文件 请求
+	required int32 LogFileCreateRsp_CMD=3	[default = 6];		//创建本连接日志文件 回复
+	required int32 LogWriteReq_CMD	=4		[default = 4];		//写日志 请求
+  	required int32 LineCheckReq_CMD=7 		[default=7];		//客户端线路检测请求
+  	required int32 LineCheckRsp_CMD=8       [default=8];		//客户端线路检测返回
+}
+
+//创建本连接日志文件 请求
+message LogFileCreateReq{
+	required string sFileName=1;		//文件标识
+}
+//创建本连接日志文件 回复
+message LogFileCreateRsp{
+	required int32 nResult=1;			//0:成功 ;不考虑失败
+}
+
+//写日志请求 (该请求不回复)
+message LogWriteReq{
+	required string sText=2;			//写入的日志内容
+}
+
+message LineInfo{
+	optional int32 nTimeDiffer=1;          // 线路来回时间差(99999 断开线路,其他正常)
+	required string sLineName=2;           // 线路名称  
+}
+
+//客户端线路检测请求
+message LineCheckReq{
+  required int32 nType = 1;               // 1发时间戳、2计算来回时间差
+  required int32 nUserId = 2;             // 用户ID
+  optional double nSendTime=3;            // 客户端发送时间戳  
+  repeated LineInfo arrLineInfo=4;        //线路队列
+}
+
+//客户端线路检测返回
+message LineCheckRsp{
+  optional int32 nType = 1;               // 1发时间戳、2计算来回时间差
+  optional double nSendTime =2;          // 客户端发送时间戳  
+}
+
+
+

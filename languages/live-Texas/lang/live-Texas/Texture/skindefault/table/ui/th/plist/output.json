@@ -1,0 +1,268 @@
+{"frames": [
+
+{
+	"filename": "actionOther_damang.png",
+	"frame": {"x":551,"y":0,"w":90,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":30},
+	"sourceSize": {"w":90,"h":30}
+},
+{
+	"filename": "actionOther_genzhu.png",
+	"frame": {"x":651,"y":0,"w":80,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":30},
+	"sourceSize": {"w":80,"h":30}
+},
+{
+	"filename": "actionOther_jiazhu.png",
+	"frame": {"x":831,"y":0,"w":80,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":30},
+	"sourceSize": {"w":80,"h":30}
+},
+{
+	"filename": "actionOther_qipai.png",
+	"frame": {"x":921,"y":0,"w":80,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":30},
+	"sourceSize": {"w":80,"h":30}
+},
+{
+	"filename": "actionOther_trust.png",
+	"frame": {"x":741,"y":0,"w":80,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":30},
+	"sourceSize": {"w":80,"h":30}
+},
+{
+	"filename": "actionOther_xiaomang.png",
+	"frame": {"x":60,"y":0,"w":90,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":30},
+	"sourceSize": {"w":90,"h":30}
+},
+{
+	"filename": "actionSelf_damang.png",
+	"frame": {"x":1455,"y":54,"w":151,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":151,"h":51},
+	"sourceSize": {"w":151,"h":51}
+},
+{
+	"filename": "actionSelf_genzhu.png",
+	"frame": {"x":1293,"y":54,"w":152,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":152,"h":51},
+	"sourceSize": {"w":152,"h":51}
+},
+{
+	"filename": "actionSelf_jiazhu.png",
+	"frame": {"x":709,"y":115,"w":163,"h":63},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":163,"h":63},
+	"sourceSize": {"w":163,"h":63}
+},
+{
+	"filename": "actionSelf_qipai.png",
+	"frame": {"x":161,"y":115,"w":152,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":152,"h":51},
+	"sourceSize": {"w":152,"h":51}
+},
+{
+	"filename": "actionSelf_trust.png",
+	"frame": {"x":323,"y":115,"w":151,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":151,"h":51},
+	"sourceSize": {"w":151,"h":51}
+},
+{
+	"filename": "actionSelf_xiaomang.png",
+	"frame": {"x":0,"y":115,"w":151,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":151,"h":51},
+	"sourceSize": {"w":151,"h":51}
+},
+{
+	"filename": "action_guopai.png",
+	"frame": {"x":160,"y":0,"w":80,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":30},
+	"sourceSize": {"w":80,"h":30}
+},
+{
+	"filename": "btn_jc_no.png",
+	"frame": {"x":1172,"y":0,"w":150,"h":44},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":44},
+	"sourceSize": {"w":150,"h":44}
+},
+{
+	"filename": "btn_jc_no_1.png",
+	"frame": {"x":1332,"y":0,"w":150,"h":44},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":44},
+	"sourceSize": {"w":150,"h":44}
+},
+{
+	"filename": "btn_jc_yes.png",
+	"frame": {"x":1011,"y":0,"w":151,"h":44},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":151,"h":44},
+	"sourceSize": {"w":151,"h":44}
+},
+{
+	"filename": "btn_jc_yes_1.png",
+	"frame": {"x":0,"y":54,"w":151,"h":44},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":151,"h":44},
+	"sourceSize": {"w":151,"h":44}
+},
+{
+	"filename": "btn_pauseGame.png",
+	"frame": {"x":961,"y":54,"w":156,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":156,"h":48},
+	"sourceSize": {"w":156,"h":48}
+},
+{
+	"filename": "btn_restoreGame.png",
+	"frame": {"x":1127,"y":54,"w":156,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":156,"h":48},
+	"sourceSize": {"w":156,"h":48}
+},
+{
+	"filename": "btn_startGame1.png",
+	"frame": {"x":1335,"y":115,"w":250,"h":82},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":82},
+	"sourceSize": {"w":250,"h":82}
+},
+{
+	"filename": "btn_startGame2.png",
+	"frame": {"x":882,"y":115,"w":242,"h":74},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":242,"h":74},
+	"sourceSize": {"w":242,"h":74}
+},
+{
+	"filename": "dichi.png",
+	"frame": {"x":250,"y":0,"w":176,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":176,"h":30},
+	"sourceSize": {"w":176,"h":30}
+},
+{
+	"filename": "helpIcon.png",
+	"frame": {"x":481,"y":54,"w":150,"h":45},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":45},
+	"sourceSize": {"w":150,"h":45}
+},
+{
+	"filename": "kickBtn.png",
+	"frame": {"x":581,"y":115,"w":118,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":59},
+	"sourceSize": {"w":118,"h":59}
+},
+{
+	"filename": "label_null.png",
+	"frame": {"x":0,"y":0,"w":50,"h":27},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":27},
+	"sourceSize": {"w":50,"h":27}
+},
+{
+	"filename": "mangzhu.png",
+	"frame": {"x":436,"y":0,"w":105,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":30},
+	"sourceSize": {"w":105,"h":30}
+},
+{
+	"filename": "recordIcon.png",
+	"frame": {"x":161,"y":54,"w":150,"h":45},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":45},
+	"sourceSize": {"w":150,"h":45}
+},
+{
+	"filename": "settingIcon.png",
+	"frame": {"x":321,"y":54,"w":150,"h":45},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":45},
+	"sourceSize": {"w":150,"h":45}
+},
+{
+	"filename": "standDowIcon.png",
+	"frame": {"x":641,"y":54,"w":150,"h":45},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":45},
+	"sourceSize": {"w":150,"h":45}
+},
+{
+	"filename": "standUpIcon.png",
+	"frame": {"x":801,"y":54,"w":150,"h":45},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":45},
+	"sourceSize": {"w":150,"h":45}
+},
+{
+	"filename": "tableIogo.png",
+	"frame": {"x":1134,"y":115,"w":191,"h":79},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":191,"h":79},
+	"sourceSize": {"w":191,"h":79}
+},
+{
+	"filename": "win.png",
+	"frame": {"x":484,"y":115,"w":87,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":87,"h":51},
+	"sourceSize": {"w":87,"h":51}
+}],
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":1616,"h":210},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:b1c19e31701d1fff0226c03ef7519459$"
+}
+}

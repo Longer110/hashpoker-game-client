@@ -1,0 +1,90 @@
+
+jlb_dl.png
+size: 737,519
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BTTPOKER
+  rotate: true
+  xy: 251, 22
+  size: 495, 97
+  orig: 495, 97
+  offset: 0, 0
+  index: -1
+Popular game center
+  rotate: false
+  xy: 251, 2
+  size: 349, 18
+  orig: 349, 18
+  offset: 0, 0
+  index: -1
+guangxiao01
+  rotate: true
+  xy: 510, 73
+  size: 189, 64
+  orig: 189, 64
+  offset: 0, 0
+  index: -1
+guangxiao02
+  rotate: true
+  xy: 602, 4
+  size: 283, 21
+  orig: 283, 21
+  offset: 0, 0
+  index: -1
+guangxiao03
+  rotate: false
+  xy: 350, 40
+  size: 168, 26
+  orig: 168, 26
+  offset: 0, 0
+  index: -1
+huangguan
+  rotate: true
+  xy: 625, 9
+  size: 157, 85
+  orig: 157, 85
+  offset: 0, 0
+  index: -1
+lizi_glow
+  rotate: false
+  xy: 602, 397
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+pai_01
+  rotate: true
+  xy: 350, 264
+  size: 253, 244
+  orig: 253, 244
+  offset: 0, 0
+  index: -1
+pai_02
+  rotate: true
+  xy: 596, 289
+  size: 106, 139
+  orig: 106, 139
+  offset: 0, 0
+  index: -1
+pai_03
+  rotate: true
+  xy: 625, 168
+  size: 119, 98
+  orig: 119, 98
+  offset: 0, 0
+  index: -1
+pai_04
+  rotate: true
+  xy: 350, 68
+  size: 194, 158
+  orig: 194, 158
+  offset: 0, 0
+  index: -1
+pai_05
+  rotate: true
+  xy: 2, 7
+  size: 510, 247
+  orig: 510, 247
+  offset: 0, 0
+  index: -1

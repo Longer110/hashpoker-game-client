@@ -1,0 +1,58 @@
+<!-- <h2>A Simple Vue Panel</h2>
+
+<input v-model="message">
+<p>Input Value = <span>{{message}}</span></p> -->
+<div id="warp" class="warp">
+    <!-- <div class="text" v-show=true>{{strFullPath}}</div>
+    <div class="text_error" v-show="!isExistPath()">目标路径不存在</div>
+    <ui-prop v-show=true name="汇总目录" tooltip="本项目构建后会将资源复制到该目录">
+        <ui-input class="flex-1" v-value="options.strPathTarget" v-on:confirm="onPathTarget"></ui-input>
+        <!-- <ui-buttion class="self-end green">默认</ui-buttion>  -->
+    </ui-prop> -->
+    
+    <div class="text">当前项目 svn 版本号</div>
+    <ui-prop v-show=true name="svn 版本号 (自动获取)" tooltip="当前项目 svn 版本号">
+        <ui-input class="flex-1" readonly="true" v-value="strSvnVersion"></ui-input>
+    </ui-prop>
+
+    <div class="text">{{strProjectVersionTitle}}</div>
+    <ui-prop v-show=true name="版本号 (手动填写)" tooltip="构建发布时填写的版本号">
+        <ui-input class="flex-1" v-value="strProjectVersion" v-on:confirm="onChangeVersion"></ui-input>
+    </ui-prop>
+    
+    <div class="text" v-show="options.isMainBundle">主包会复制全部资源到汇总目录</div>
+    <div class="text" v-show="!options.isMainBundle">非主包只复制子游戏资源到汇总目录</div>
+    <ui-prop name="是否主包" tooltip="主包会复制全部资源，子包只复制子游戏资源">
+        <div class="layout horizontal center flex-1 ">
+            <ui-checkbox v-bind:checked="options.isMainBundle" v-on:change="onCheckMainBundle"></ui-checkbox>
+        </div>
+    </ui-prop>
+
+    <div class="text">打包汇总目标目录</div>
+    <ui-prop v-show=true name="汇总目录选择" tooltip="选择复制资源到哪个汇总目录">
+        <ui-select v-on:change="onChangeTarget" v-value="curBuildTarget">
+            <option value="build-sets">build-sets</option>
+            <option value="build-live">build-live</option>
+            <option value="build-app">build-app</option>
+            <option value="build-lib">build-lib</option>
+            <option value="build-club">build-club</option>
+        </ui-select>
+    </ui-prop>
+
+    <!-- <div class="text" v-show="!options.isAutoCopy">项目构建后是否将资源复制到目标目录</div>
+    <div class="text" v-show="options.isAutoCopy">项目构建后自动将资源复制到目标目录</div>
+    <ui-prop name="自动复制" tooltip="自动复制构建结果到目标目录">
+        <div class="layout horizontal center flex-1 ">
+            <ui-checkbox readonly="true" v-bind:checked="options.isAutoCopy" v-on:change="onAutoCopy"></ui-checkbox>
+        </div>
+    </ui-prop>
+    
+    <div class="text" v-show="!options.isAutoCopy">项目构建后需要手动将资源复制到目标目录</div>
+    <ui-prop v-show="!options.isAutoCopy"  name="手动复制" tooltip="本项目构建后需要手动点击复制资源到目标目录">
+        <div class="self-end layout center horizontal">
+            
+            <ui-button class="self-end green" v-on:confirm="onCopyAssets">复制资源</ui-button>
+            <!-- <ui-button v-on:confirm="onClean">清除</ui-button> -->
+        </div>
+    </ui-prop> -->
+</div>>

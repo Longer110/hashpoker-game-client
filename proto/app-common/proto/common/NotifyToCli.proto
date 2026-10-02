@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+
+//命令ID
+// 注意: 命名规则为协议名称加后缀 '_CMD' ;本游戏服代码中,以这一规则来寻找协议命令的。
+message NotifyCli_Proto
+{
+	required int32	Main_CMD =1 			[default = 1100];	//主命令 (不可改)
+	required int32	RepeatLogonNotify_CMD=2 [default = 1];	    //重复登陆,连接即将关闭通知 (账号在另一地方登陆)
+	required int32	PlayingNotify_CMD=3 	[default = 2];		//需要重连通知
+}
+
+
+//重复登陆,连接失效并即将关闭通知  (账号在另一地方登陆)
+message RepeatLogonNotify
+{
+	required int32 nSecondsToClose =1;  		//多少秒后连接关闭(大概一秒)
+}
+
+//需要重连通知 (具体的场景信息，到对应游戏服取)
+message PlayingNotify
+{
+	required int32 nGameId=1;	//正在玩的所在游戏id (105:扎金花 113:三公 106:21点 104:百人牛牛 103:通比牛牛 102:随机庄家牛牛 101:看牌抢庄牛牛)
+	optional int32 nRoomId=2;	//房间(场次)id  1新手 2初级 3中级 4高级 0免费; (仅用于前端提示用户在哪个场次玩)
+}

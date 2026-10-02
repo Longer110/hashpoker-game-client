@@ -1,0 +1,92 @@
+{"frames": [
+
+{
+	"filename": "btn_line.png",
+	"frame": {"x":97,"y":1,"w":56,"h":55},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":55},
+	"sourceSize": {"w":56,"h":58}
+},
+{
+	"filename": "gen.png",
+	"frame": {"x":154,"y":1,"w":52,"h":25},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":52,"h":25},
+	"sourceSize": {"w":52,"h":25}
+},
+{
+	"filename": "genzhu.png",
+	"frame": {"x":181,"y":1,"w":52,"h":25},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":52,"h":25},
+	"sourceSize": {"w":52,"h":25}
+},
+{
+	"filename": "guopai.png",
+	"frame": {"x":280,"y":1,"w":80,"h":25},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":25},
+	"sourceSize": {"w":80,"h":25}
+},
+{
+	"filename": "huidaopaiju.png",
+	"frame": {"x":368,"y":1,"w":79,"h":28},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":79,"h":28},
+	"sourceSize": {"w":79,"h":28}
+},
+{
+	"filename": "jiazhu.png",
+	"frame": {"x":368,"y":31,"w":72,"h":26},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":26},
+	"sourceSize": {"w":72,"h":26}
+},
+{
+	"filename": "jieshuhouliangpai.png",
+	"frame": {"x":208,"y":38,"w":158,"h":25},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":158,"h":25},
+	"sourceSize": {"w":158,"h":25}
+},
+{
+	"filename": "liangpai.png",
+	"frame": {"x":208,"y":1,"w":70,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":35},
+	"sourceSize": {"w":70,"h":35}
+},
+{
+	"filename": "qihuoguo.png",
+	"frame": {"x":1,"y":1,"w":67,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":59},
+	"sourceSize": {"w":67,"h":59}
+},
+{
+	"filename": "qipai.png",
+	"frame": {"x":70,"y":1,"w":59,"h":25},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":25},
+	"sourceSize": {"w":59,"h":25}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "output.png",
+	"format": "RGBA8888",
+	"size": {"w":448,"h":64},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:335f2350aaa285e9947a7258bccb5da3:c56b8a711bf485e1ded789fd27617eed:0d09193906abb077207e7c2205ba0dc9$"
+}
+}

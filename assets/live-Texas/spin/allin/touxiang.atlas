@@ -1,0 +1,62 @@
+
+touxiang.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+down/down_00000
+  rotate: false
+  xy: 2, 209
+  size: 211, 201
+  orig: 256, 256
+  offset: 21, 28
+  index: -1
+down/down_00001
+  rotate: false
+  xy: 427, 208
+  size: 211, 202
+  orig: 256, 256
+  offset: 21, 28
+  index: -1
+down/down_00002
+  rotate: false
+  xy: 214, 3
+  size: 210, 204
+  orig: 256, 256
+  offset: 22, 27
+  index: -1
+down/down_00003
+  rotate: false
+  xy: 2, 4
+  size: 210, 203
+  orig: 256, 256
+  offset: 22, 27
+  index: -1
+down/down_00004
+  rotate: false
+  xy: 426, 2
+  size: 209, 204
+  orig: 256, 256
+  offset: 23, 26
+  index: -1
+down/down_00005
+  rotate: false
+  xy: 637, 2
+  size: 210, 204
+  orig: 256, 256
+  offset: 23, 25
+  index: -1
+down/down_00006
+  rotate: false
+  xy: 640, 208
+  size: 209, 202
+  orig: 256, 256
+  offset: 23, 26
+  index: -1
+down/down_00007
+  rotate: false
+  xy: 215, 209
+  size: 210, 201
+  orig: 256, 256
+  offset: 22, 27
+  index: -1
