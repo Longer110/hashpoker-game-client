@@ -137,19 +137,42 @@ cc.Class({
             }
         } catch (e) {}
 
-        QYLogs.log(TAG, "[loadActivityDataViaRest] calling getAllActivityData");
-        AppWebApi.getAllActivityData(function(err, restData){
-            if (err) {
-                QYLogs.error(TAG, "[loadActivityDataViaRest] getAllActivityData failed:", err && err.errorMessage ? err.errorMessage : err);
-                self._allData = self.formatActivityData({ actTypeList: [], actList: [] });
-                self.initToggle(self._allData);
+        let fallbackEmpty = function(reason, extraErr) {
+            try {
+                QYLogs.warn(TAG, "[loadActivityDataViaRest] fallback empty, reason=" + reason + (extraErr ? (" err=" + extraErr) : ""));
+            } catch (e) {}
+            self._allData = self.formatActivityData({ actTypeList: [], actList: [] });
+            self.initToggle(self._allData);
+        };
+
+        try {
+            if (!AppWebApi || typeof AppWebApi.getAllActivityData !== "function") {
+                fallbackEmpty("getAllActivityData missing");
                 return;
             }
-            let data = self._mapRestToActivityData(restData);
-            self._allData = self.formatActivityData(data);
-            QYLogs.log(TAG, "[loadActivityDataViaRest] 整理后的数据:", JSON.stringify(self._allData));
-            self.initToggle(self._allData);
-        });
+        } catch (e) {
+            fallbackEmpty("precheck exc", e.message);
+            return;
+        }
+
+        QYLogs.log(TAG, "[loadActivityDataViaRest] calling getAllActivityData");
+        try {
+            AppWebApi.getAllActivityData(function(err, restData){
+                try {
+                    if (err) {
+                        QYLogs.error(TAG, "[loadActivityDataViaRest] getAllActivityData failed:", err && err.errorMessage ? err.errorMessage : err);
+                    }
+                    let data = self._mapRestToActivityData(restData);
+                    self._allData = self.formatActivityData(data);
+                    QYLogs.log(TAG, "[loadActivityDataViaRest] 整理后的数据:", JSON.stringify(self._allData));
+                    self.initToggle(self._allData);
+                } catch (eCb) {
+                    fallbackEmpty("callback exc", eCb.message);
+                }
+            });
+        } catch (eCall) {
+            fallbackEmpty("call exc", eCall.message);
+        }
     },
 
     loadActivityData(url) {

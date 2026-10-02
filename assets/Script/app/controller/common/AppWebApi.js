@@ -709,6 +709,65 @@ let AppWebApi = {
         this.requestRest("GET", path, null, callback);
     },
 
+    getAllActivityData(callback){
+        let path = "/api/activityDefine/getActivityDefinePublic";
+        let self = this;
+        let onDone = function(err, resp){
+            if (err) {
+                try { QYLogs.error("AppWebApi", "[getAllActivityData] err:" + (err && err.errorMessage ? err.errorMessage : err.status)); } catch (e) {}
+                callback(err, { actTypeList: [], actList: [] });
+                return;
+            }
+            if (!resp) {
+                callback(null, { actTypeList: [], actList: [] });
+                return;
+            }
+            let out = { actTypeList: [], actList: [] };
+            try {
+                if (resp.code === 0 && resp.data) {
+                    let d = resp.data;
+                    if (d.actTypeList || d.ActTypeList) out.actTypeList = d.actTypeList || d.ActTypeList || [];
+                    if (d.actList     || d.ActList)     out.actList     = d.actList     || d.ActList     || [];
+                    if (Array.isArray(d)) {
+                        try {
+                            if (d.length >= 1 && d[0] && (d[0].name !== undefined || d[0].Name !== undefined || d[0].sort !== undefined)) {
+                                let allAct = [];
+                                let allType = [];
+                                for (let i = 0; i < d.length; i++) {
+                                    let it = d[i];
+                                    if (!it) continue;
+                                    if (it.typeId !== undefined || it.TypeId !== undefined || it.id !== undefined) {
+                                        let isType = (it.name !== undefined || it.Name !== undefined) &&
+                                                     ((it.id !== undefined || it.ID !== undefined) &&
+                                                      (it.state !== undefined || it.State !== undefined) &&
+                                                      (it.sort !== undefined || it.Sort !== undefined) &&
+                                                      it.image === undefined && it.Image === undefined && it.url === undefined && it.Url === undefined);
+                                        if (isType) allType.push(it); else allAct.push(it);
+                                    } else {
+                                        allAct.push(it);
+                                    }
+                                }
+                                if (allType.length > 0) out.actTypeList = allType;
+                                if (allAct.length > 0)  out.actList = allAct;
+                            }
+                        } catch (eShape) {}
+                    }
+                } else if (Array.isArray(resp.actTypeList) || Array.isArray(resp.actList)) {
+                    out.actTypeList = resp.actTypeList || resp.ActTypeList || [];
+                    out.actList     = resp.actList     || resp.ActList     || [];
+                } else if (resp.data && Array.isArray(resp.data) && resp.data.length > 0 && resp.data[0] && (resp.data[0].ActTypeList || resp.data[0].actTypeList)) {
+                    let first = resp.data[0];
+                    out.actTypeList = first.actTypeList || first.ActTypeList || [];
+                    out.actList     = first.actList     || first.ActList     || [];
+                }
+            } catch (e) {
+                try { QYLogs.error("AppWebApi", "[getAllActivityData] parse exc:" + e.message); } catch (e1) {}
+            }
+            callback(null, out);
+        };
+        this.requestRest("GET", path, null, onDone);
+    },
+
 }
 
 module.exports = AppWebApi;
