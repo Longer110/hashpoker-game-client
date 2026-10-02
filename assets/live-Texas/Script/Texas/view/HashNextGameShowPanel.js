@@ -57,7 +57,7 @@ cc.Class({
         {
             curLabelStr = "当前"
         }
-        var seed = ((data.seed || "未知牌局") + "").replace(/^kk/i, "HP");
+        var seed = ((data.seed || "未知牌局") + "").replace(/^kk/i, "hp");
         this.node.getChildByName("seed").getChildByName("value").getComponent(cc.Label).string = seed
         this.node.getChildByName("turn").getChildByName("value").getComponent(cc.Label).string = curLabelStr;
 

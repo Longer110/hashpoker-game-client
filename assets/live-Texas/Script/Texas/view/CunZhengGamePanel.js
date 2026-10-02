@@ -65,8 +65,7 @@ cc.Class({
         
 
         this.initData = data;
-        var seed = ((data.seed || "未知牌局") + "").replace(/^kk/i, "HP");
-        this.nameLabel.string = seed;
+        this.nameLabel.string = data.seed || "未知牌局";
         this.cardhashLabel.string = data.cards + ""
         this._resetPanel();
 

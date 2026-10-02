@@ -33,9 +33,9 @@ let HallClubControl = require("HallClubControl");
 let LocalStorage = require("LocalStorage");
 let HallClubLogic = require("HallClubLogic");
 // let componentList = ["HallGame", "HallClubMain", "HallCareerMain", "HallMyInfo","HallMttMain"];
-let componentList = ["HallCommunity", "HallGame", "HallClubMain", "HallActivityMain", "HallMyInfoNew"];
+let componentList = ["HallGame", "HallClubMain", "HallActivityMain", "HallMyInfoNew"];
 let _btnCommunityHideList = ["btn_community"];
-let _defaultCurTag = 4;
+let _defaultCurTag = 3;
 // let componentList = ["HallGame", "HallMyInfo"];
 // let GoogleAdController = require("GoogleAdController");
 let SDKPlatform = require("SDKPlatform");
@@ -67,7 +67,7 @@ cc.Class({
         createUserInfo: cc.Prefab,
         moreInfoPrefab: cc.Prefab,
 
-        _curTag: 4, //1:社区 2：牌局 3：俱乐部 4： 活动 5:我的 (默认活动页)
+        _curTag: 3, //1：牌局 2：俱乐部 3：活动 4:我的 (默认活动页)
         _inviteRedPoint: 0, //通知里面邀请未处理数量
     },
 
@@ -79,7 +79,7 @@ cc.Class({
 
     start() {
         this.registerMsg();
-        this.loadPrefab(2);
+        this.loadPrefab(1);
         HallClubControl.init(this);
         this.loginClub();
         HallClubCacheData.savePlayBackData({});
@@ -87,6 +87,12 @@ cc.Class({
         // this.openMoreInfo();
         // this.showCreateUserInfo();//去除第一次登录显示修改名称和头像
 
+        // 隐藏教学tab按钮
+        for (let i = 0; i < this.menuList.length; i++) {
+            if (_btnCommunityHideList.indexOf(this.menuList[i].name) !== -1) {
+                this.menuList[i].active = false;
+            }
+        }
     },
 
 
@@ -269,29 +275,25 @@ cc.Class({
 
 
         if (this._curTag == 1) {
-            this.loadPrefab(1, true);
-            this.setBtnStatus("btn_community");
-        }
-        else if (this._curTag == 2) {
             //牌局界面
-            this.loadPrefab(2, true);
+            this.loadPrefab(1, true);
             this.setBtnStatus("btn_game");
-        } else if (this._curTag == 3) {
+        } else if (this._curTag == 2) {
             //俱乐部界面
             if (data.tScence && data.tScence.nClubId == 0) {
                 //牌局界面
-                this.loadPrefab(2, true);
+                this.loadPrefab(1, true);
                 this.setBtnStatus("btn_game");
 
             } else {
                 //俱乐部界面
-                this.loadPrefab(3, true);
+                this.loadPrefab(2, true);
                 this.setBtnStatus("btn_club");
             }
+        } else if (this._curTag == 3) {
+            this.loadPrefab(3, true);
         } else if (this._curTag == 4) {
-            this.loadPrefab(4, true);
-        } else if (this._curTag == 5) {
-            this.loadPrefab(5, true, true);
+            this.loadPrefab(4, true, true);
         }
 
         this.updateClubRedPoint();
@@ -335,15 +337,15 @@ cc.Class({
             this.loginClub();
         }
 
-        if (this._curTag == 3) {
+        if (this._curTag == 2) {
             //俱乐部界面
-            let com = this.getComponentByName(componentList[2]);
+            let com = this.getComponentByName(componentList[1]);
             if (com) {
                 com.updateMenu(data.arrClub);
             }
-        } else if (this._curTag == 2) {
+        } else if (this._curTag == 1) {
             //牌局界面
-            let com = this.getComponentByName(componentList[1]);
+            let com = this.getComponentByName(componentList[0]);
             if (com) {
                 com.updateMenu(data.arrClub);
             }
@@ -364,8 +366,8 @@ cc.Class({
             let clubId = HallClubLogic.getCanLoginClubId();
 
             if (clubId == null) {
-                if (this._curTag == 2) {
-                    this.loadPrefab(2);
+                if (this._curTag == 1) {
+                    this.loadPrefab(1);
                 }
             }
 
@@ -377,7 +379,7 @@ cc.Class({
         if (data.nType == 1 && data.tApply.nStatus == 1) {
             this.requestClubList();
             let clubId = HallClubCacheData.getCurLoginClub();
-            if (clubId == 0 && this._curTag == 2) {
+            if (clubId == 0 && this._curTag == 1) {
                 clubId = data.tClubInfo.nClubId;
                 this.changeClub(clubId);
             }
@@ -535,21 +537,9 @@ cc.Class({
         if (targetName !== "btn_club") {
             this._cleanupClubOverlay();
         }
-        if (event.target.name === "btn_community") {
-            var currentClubId = HallClubCacheData.getCurLoginClub();
-            if (currentClubId !== null && Number(currentClubId) !== 0) {
-                this.changeClub(0);
-            }
-            if (this._curTag == 1) {
-                return;
-            }
-
-            //点击社区按钮
-            this.loadPrefab(1, true);
-            this.setBtnStatus(event.target.name, true);
-        } else if (event.target.name === "btn_club") {
+        if (event.target.name === "btn_club") {
             //点击俱乐部
-            if (this._curTag == 3) {
+            if (this._curTag == 2) {
                 return;
             }
 
@@ -559,18 +549,18 @@ cc.Class({
                 if (clubId) {
                     this.changeClub(clubId);
                 } else {
-                    this.loadPrefab(3, true);
+                    this.loadPrefab(2, true);
                     this.setBtnStatus(event.target.name, true);
                 }
 
             } else {
-                this.loadPrefab(3, true);
+                this.loadPrefab(2, true);
                 this.setBtnStatus(event.target.name, true);
             }
 
-            this._curTag = 3;
+            this._curTag = 2;
         } else if (event.target.name === "btn_game") {
-            if (this._curTag == 2) {
+            if (this._curTag == 1) {
                 return;
             }
 
@@ -579,40 +569,40 @@ cc.Class({
             if (clubId == null) {
                 this.loginClub();
             }
-            this.loadPrefab(2, true);
+            this.loadPrefab(1, true);
             this.setBtnStatus(event.target.name, true);
 
-            this._curTag = 2;
+            this._curTag = 1;
         }
         // else if (event.target.name === "btn_career") {
         //     //点击生涯
-        //     if (this._curTag == 3) {
+        //     if (this._curTag == 2) {
         //         return;
         //     }
-        //     this.loadPrefab(3, true);
+        //     this.loadPrefab(2, true);
         //     this.setBtnStatus(event.target.name, true);
         // } 
         else if (event.target.name === "btn_activity") {
             //点击活动
+            if (this._curTag == 3) {
+                return;
+            }
+            this.loadPrefab(3, true);
+            this.setBtnStatus(event.target.name, true);
+        } else if (event.target.name === "btn_my") {
+            //点击我的
             if (this._curTag == 4) {
                 return;
             }
             this.loadPrefab(4, true);
             this.setBtnStatus(event.target.name, true);
-        } else if (event.target.name === "btn_my") {
+        }
+        else if (event.target.name === "btn_my1") {
             //点击我的
             if (this._curTag == 5) {
                 return;
             }
             this.loadPrefab(5, true);
-            this.setBtnStatus(event.target.name, true);
-        }
-        else if (event.target.name === "btn_my1") {
-            //点击我的
-            if (this._curTag == 6) {
-                return;
-            }
-            this.loadPrefab(6, true);
             this.setBtnStatus(event.target.name, true);
         }
         // else if (event.target.name === "btn_mtt") {//mtt
@@ -658,7 +648,7 @@ cc.Class({
         }
     },
 
-    //inde: 1--社区 2--俱乐部 3--牌局 4--活动 5--我的
+    //inde: 1--牌局 2--俱乐部 3--活动 4--我的
     loadPrefab(index, isClick, isNotDeletPopup) {
         //删除其他界面
         if (!isNotDeletPopup) {
@@ -677,7 +667,7 @@ cc.Class({
         if (child) {
             child.active = true;
             let component = child.getComponent(componentList[index - 1]);
-            if (component && index == 3) {
+            if (component && index == 2) {
                 component._clubPageVisible = true;
                 component._initEntryLock = 0;
             }
@@ -693,7 +683,7 @@ cc.Class({
 
             this.content.addChild(node, 0, "1000" + index.toString());
             let component = node.getComponent(componentList[index - 1]);
-            if (component && index == 3) {
+            if (component && index == 2) {
                 component._clubPageVisible = true;
                 component._initEntryLock = 0;
             }
@@ -964,14 +954,14 @@ cc.Class({
 
     //显示被邀请好友弹窗
     _onShowTopFriend(data) {
-        if (data && this._curTag != 4) {
+        if (data && this._curTag != 3) {
             UIFrame.showTopNotification(TopNotificationManager.NotificationTypeEnum.INVITE_FRIEND, data, { duration: 10 });
         }
     },
 
     //显示系统消息弹窗
     _onShowSysTopInfoTips(data) {
-        if (data && this._curTag != 4) {
+        if (data && this._curTag != 3) {
             UIFrame.showSysTopInfoTips(data)
         }
     },
@@ -990,10 +980,10 @@ cc.Class({
 
     //打开活动界面
     _onOpenActivityUI(index) {
-        this.loadPrefab(4, true, true);
-        this.setBtnStatus("btn_my");
-        this._curTag = 4;
-        let component = this.getComponentByName(componentList[3]);
+        this.loadPrefab(3, true, true);
+        this.setBtnStatus("btn_activity");
+        this._curTag = 3;
+        let component = this.getComponentByName(componentList[2]);
         if (component) {
             component.init(index);
         }

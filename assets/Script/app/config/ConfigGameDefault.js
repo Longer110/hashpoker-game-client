@@ -109,8 +109,6 @@ let object = {
     
     DEVELOPVERSION : 0,                  //区分开发版本，0：测试服，1：预发布，2：正式服
 
-   // API_MAIN_HOST: "https://game-api.hashpoker.vip/api",
-    API_MAIN_HOST: "http://15.165.39.0:8888/api",
     IMKEY:"",                           //IM KEY
     //渠道包发布定制(以下配置当 ENABLE_CHANNEL 为 true 时才判断)
     CUSTOM:{

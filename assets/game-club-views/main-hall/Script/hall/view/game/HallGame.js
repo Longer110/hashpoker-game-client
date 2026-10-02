@@ -479,308 +479,6 @@ cc.Class({
         this.updateMoneyCount(userInfo.nGold);
         // this.label_id.string = `ID:${userInfo.nUserID}`;
         this.btn_createGameNode.active = HallClubLogic.isClubCreator() || HallClubLogic.isCanMangeGame();
-
-        this.scheduleOnce(() => {
-            this._optimizeTopStatusBar();
-        }, 0.05);
-        this.scheduleOnce(() => {
-            this._optimizeTopStatusBar();
-        }, 0.5);
-    },
-
-    _optimizeTopStatusBar() {
-        try {
-            if (this.label_moduleName && cc.isValid(this.label_moduleName.node)) {
-                this.label_moduleName.node.color = cc.Color.WHITE;
-                this.label_moduleName.node.opacity = 255;
-            }
-
-            let scContent = this.node.getChildByName("scContent");
-            let topNode = null;
-            if (scContent) {
-                topNode = scContent.getChildByName("top");
-            }
-            if (!topNode) {
-                topNode = this.node.getChildByName("top");
-            }
-            if (!topNode && this.label_moduleName && cc.isValid(this.label_moduleName.node)) {
-                let p = this.label_moduleName.node;
-                for (let i = 0; i < 6; i++) {
-                    let parent = p.parent;
-                    if (!parent) break;
-                    let pname = (parent.name || "").toLowerCase();
-                    if (pname === "top" || pname === "header" || parent.width >= cc.winSize.width * 0.8) {
-                        topNode = parent;
-                        break;
-                    }
-                    p = parent;
-                }
-            }
-            if (topNode && cc.isValid(topNode)) {
-                this._hideNativeSpriteOnNode(topNode);
-                this._applyDarkBlueBGOverlayTo(topNode, false);
-            }
-
-            if (this.info_node && cc.isValid(this.info_node)) {
-                this._hideNativeSpriteOnNode(this.info_node);
-                this._applyDarkBlueBGOverlayTo(this.info_node, true);
-            }
-
-            this._optimizeTopInfoBarLabels();
-        } catch (e) {
-            cc.warn("_optimizeTopStatusBar error:", e);
-        }
-    },
-
-    _coverTopWithCanvasOverlaid() {
-    },
-
-    _hideNativeSpriteOnNode(node) {
-        try {
-            if (!node || !cc.isValid(node)) return;
-            let spr = node.getComponent(cc.Sprite);
-            if (spr) {
-                spr.enabled = false;
-                spr.spriteFrame = null;
-            }
-            node.color = new cc.Color(10, 18, 42, 255);
-            node.opacity = 255;
-
-            let children = node.children;
-            for (let i = 0; i < children.length; i++) {
-                let ch = children[i];
-                if (!ch || !cc.isValid(ch)) continue;
-                let chName = (ch.name || "").toLowerCase();
-                if (chName.indexOf("label") === 0 || chName.indexOf("module") !== -1 ||
-                    chName.indexOf("member") !== -1 || chName.indexOf("btn_") !== -1 ||
-                    chName.indexOf("button") !== -1 || chName.indexOf("icon") !== -1 ||
-                    chName.indexOf("nick") !== -1 || chName.indexOf("head") !== -1 ||
-                    chName.indexOf("avatar") !== -1 || chName.indexOf("money") !== -1 ||
-                    chName.indexOf("gold") !== -1 || chName.indexOf("id") !== -1) {
-                    continue;
-                }
-                let hasLabel = ch.getComponent(cc.Label) || (ch.getComponentsInChildren && ch.getComponentsInChildren(cc.Label).length > 0);
-                let hasButton = ch.getComponent(cc.Button);
-                let sprCh = ch.getComponent(cc.Sprite);
-                if (sprCh && !hasLabel && !hasButton && ch.height > 40 && ch.width > 200) {
-                    sprCh.enabled = false;
-                    sprCh.spriteFrame = null;
-                    ch.opacity = 30;
-                    ch.color = new cc.Color(8, 14, 36, 255);
-                    ch.active = true;
-                }
-                this._hideNativeSpriteOnNode(ch);
-            }
-        } catch (e) {}
-    },
-
-    _applyDarkBlueBGOverlayTo(containerNode, isInfoPanel) {
-        try {
-            if (!containerNode || !cc.isValid(containerNode)) return;
-            let bgName = isInfoPanel ? "_info_darkblue_bg_auto_" : "_topbar_darkblue_bg_auto_";
-            let bgNode = containerNode.getChildByName(bgName);
-            let cW = containerNode.width;
-            let cH = containerNode.height;
-            if (cW < 50) cW = this.node.width || cc.winSize.width;
-            if (cH < 30) cH = isInfoPanel ? 300 : 185;
-
-            if (!bgNode) {
-                bgNode = new cc.Node(bgName);
-                containerNode.insertChild(bgNode, 0);
-                bgNode.setAnchorPoint(0.5, 0.5);
-                let wg = bgNode.addComponent(cc.Widget);
-                wg.isAlignTop = true;
-                wg.isAlignBottom = true;
-                wg.isAlignLeft = true;
-                wg.isAlignRight = true;
-                wg.top = 0; wg.bottom = 0; wg.left = 0; wg.right = 0;
-                wg.alignMode = cc.Widget.AlignMode.ON_WINDOW_RESIZE;
-                bgNode._hittest = function () { return false; };
-            } else {
-                bgNode.setSiblingIndex(0);
-            }
-
-            let spr = bgNode.getComponent(cc.Sprite);
-            if (!spr) spr = bgNode.addComponent(cc.Sprite);
-
-            let texW = Math.max(1080, Math.floor(cW * 1.5));
-            let texH = Math.max(200, Math.floor(cH * 1.5));
-            let tex = this._createTechBlueGradientTexture(texW, texH, !!isInfoPanel);
-            if (tex) {
-                spr.spriteFrame = new cc.SpriteFrame(tex);
-                spr.type = cc.Sprite.Type.SIMPLE;
-                spr.sizeMode = cc.Sprite.SizeMode.CUSTOM;
-            }
-            bgNode.setContentSize(cW, cH);
-            let wg = bgNode.getComponent(cc.Widget);
-            if (wg) wg.updateAlignment();
-            bgNode.opacity = 255;
-            bgNode.active = true;
-
-            let allLabels = containerNode.getComponentsInChildren(cc.Label);
-            for (let li = 0; li < allLabels.length; li++) {
-                let lbl = allLabels[li];
-                if (!lbl || !cc.isValid(lbl.node)) continue;
-                try {
-                    let p = lbl.node.parent;
-                    if (p) {
-                        lbl.node.setSiblingIndex(p.childrenCount - 1);
-                    }
-                    lbl.node.opacity = 255;
-                } catch (e) {}
-            }
-        } catch (e) {
-            cc.warn("_applyDarkBlueBGOverlayTo error:", e);
-        }
-    },
-
-    _applyDarkGreenBGOverlayTo(containerNode, isInfoPanel, directContainer) {
-        this._applyDarkBlueBGOverlayTo(containerNode, isInfoPanel);
-    },
-
-    _forceDisableAllSpritesInNode(rootNode, exceptNode) {
-    },
-
-    _createTechBlueGradientTexture(width, height, isDarker) {
-        try {
-            if (!window || typeof document === 'undefined') return null;
-            width = Math.max(8, Math.floor(width));
-            height = Math.max(8, Math.floor(height));
-            let canvas = document.createElement('canvas');
-            canvas.width = width;
-            canvas.height = height;
-            let ctx = canvas.getContext('2d');
-            if (!ctx) return null;
-
-            let grad = ctx.createLinearGradient(0, 0, width, 0);
-            if (isDarker) {
-                grad.addColorStop(0,    '#060f2b');
-                grad.addColorStop(0.18, '#0a204e');
-                grad.addColorStop(0.4,  '#113878');
-                grad.addColorStop(0.5,  '#133e83');
-                grad.addColorStop(0.6,  '#103070');
-                grad.addColorStop(0.82, '#081e50');
-                grad.addColorStop(1,    '#040e24');
-            } else {
-                grad.addColorStop(0,    '#0a1d48');
-                grad.addColorStop(0.18, '#10306e');
-                grad.addColorStop(0.4,  '#1a4a9c');
-                grad.addColorStop(0.5,  '#1d56ad');
-                grad.addColorStop(0.6,  '#17438f');
-                grad.addColorStop(0.82, '#0c2766');
-                grad.addColorStop(1,    '#071742');
-            }
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, width, height);
-
-            let vg = ctx.createLinearGradient(0, 0, 0, height);
-            vg.addColorStop(0,    'rgba(120,170,255,0.10)');
-            vg.addColorStop(0.35, 'rgba(255,255,255,0.02)');
-            vg.addColorStop(0.6,  'rgba(0,0,0,0.18)');
-            vg.addColorStop(1,    'rgba(0,0,0,0.45)');
-            ctx.fillStyle = vg;
-            ctx.fillRect(0, 0, width, height);
-
-            ctx.strokeStyle = 'rgba(120,180,255,0.07)';
-            ctx.lineWidth = 1;
-            let gridSize = Math.max(20, Math.floor(height / 6));
-            for (let x = 0; x < width; x += gridSize) {
-                ctx.beginPath();
-                ctx.moveTo(x + 0.5, 0);
-                ctx.lineTo(x + 0.5, height);
-                ctx.stroke();
-            }
-            for (let y = 0; y < height; y += gridSize) {
-                ctx.beginPath();
-                ctx.moveTo(0, y + 0.5);
-                ctx.lineTo(width, y + 0.5);
-                ctx.stroke();
-            }
-
-            let texture = new cc.Texture2D();
-            texture.initWithElement(canvas);
-            texture.handleLoadedTexture();
-            return texture;
-        } catch (e) {
-            cc.warn("_createTechBlueGradientTexture error:", e);
-            return null;
-        }
-    },
-
-    _createDarkOliveGradientTexture(width, height, isDarker) {
-        return this._createTechBlueGradientTexture(width, height, isDarker);
-    },
-
-    _createGreenBlueCenterGradientTexture(width, height) {
-        return this._createTechBlueGradientTexture(width, height, false);
-    },
-
-    _applyGradientBGToInfoNode() {
-    },
-
-    _applyGradientBGToInfoNode() {
-    },
-
-    _optimizeTopInfoBarLabels() {
-        try {
-            let topNode = this.node;
-            let allTopLabels = topNode ? topNode.getComponentsInChildren(cc.Label) : [];
-            let skipGreenKeywords = ["充币", "提币", "redpacket", "红包", "deposit", "withdraw"];
-            for (let j = 0; j < allTopLabels.length; j++) {
-                let lbl = allTopLabels[j];
-                if (!lbl || !cc.isValid(lbl.node)) continue;
-                let str = (lbl.string || "").toString();
-                let r = lbl.node.color.r, g = lbl.node.color.g, b = lbl.node.color.b;
-                let isMoneyGreen = (r < 160 && g > 160 && b < 180);
-                let isSkipBtnText = false;
-                for (let ski = 0; ski < skipGreenKeywords.length; ski++) {
-                    if (str && str.indexOf(skipGreenKeywords[ski]) !== -1) {
-                        isSkipBtnText = true; break;
-                    }
-                }
-                if (isMoneyGreen || isSkipBtnText) {
-                    lbl.node.opacity = 255;
-                    continue;
-                }
-                lbl.node.color = cc.Color.WHITE;
-                lbl.node.opacity = 255;
-            }
-
-            if (this.label_moduleName && cc.isValid(this.label_moduleName.node)) {
-                this.label_moduleName.node.color = cc.Color.WHITE;
-                this.label_moduleName.node.opacity = 255;
-            }
-            if (this.nick_name && cc.isValid(this.nick_name.node)) {
-                this.nick_name.node.color = cc.Color.WHITE;
-                this.nick_name.node.opacity = 255;
-            }
-            if (this.label_id && cc.isValid(this.label_id.node)) {
-                this.label_id.node.color = new cc.Color(210, 225, 255, 255);
-                this.label_id.node.opacity = 255;
-            }
-            if (this.label_memberNum && cc.isValid(this.label_memberNum.node)) {
-                this.label_memberNum.node.color = cc.Color.WHITE;
-                this.label_memberNum.node.opacity = 255;
-            }
-            if (this.tabel_count && cc.isValid(this.tabel_count.node)) {
-                this.tabel_count.node.color = cc.Color.WHITE;
-                this.tabel_count.node.opacity = 255;
-            }
-            if (this.label_money && cc.isValid(this.label_money.node)) {
-                this.label_money.node.color = cc.Color.WHITE;
-                this.label_money.node.opacity = 255;
-            }
-            if (this.label_gold && cc.isValid(this.label_gold.node)) {
-                this.label_gold.node.color = cc.Color.WHITE;
-                this.label_gold.node.opacity = 255;
-            }
-        } catch (e) {
-            cc.warn("_optimizeTopInfoBarLabels error:", e);
-        }
-    },
-
-    _createGreenBlueCenterGradientTexture(width, height) {
-        return this._createTechBlueGradientTexture(width, height, false);
     },
 
     _createHXPokerBannerTexture() {
@@ -840,8 +538,8 @@ cc.Class({
             ctx.save();
             var starColors = ['#fff4c2', '#ffffff', '#8ab8ff', '#d4a84a'];
             for (i = 0; i < 60; i++) {
-                var sx = Math.floor((i * 137.5) % W);
-                var sy = Math.floor(((i * 73) + (i % 3) * 11) % H);
+                var sx = (i * 137.5) % W;
+                var sy = ((i * 73) + (i % 3) * 11) % H;
                 var sr = (i % 5 === 0) ? 2 : 1;
                 ctx.fillStyle = starColors[i % starColors.length];
                 ctx.globalAlpha = 0.3 + ((i % 7) * 0.08);
@@ -870,8 +568,7 @@ cc.Class({
                 ctx.lineWidth = Math.max(1.5, r * 0.06);
                 ctx.strokeStyle = 'rgba(138,99,24,0.9)';
                 ctx.stroke();
-                var s;
-                for (s = 0; s < 8; s++) {
+                for (var s = 0; s < 8; s++) {
                     var a = (s / 8) * Math.PI * 2;
                     ctx.beginPath();
                     ctx.moveTo(Math.cos(a) * r * 0.55, Math.sin(a) * r * 0.55);
@@ -1112,7 +809,7 @@ cc.Class({
             ctx.fillStyle = sg;
             ctx.shadowColor = 'rgba(255,224,122,0.6)';
             ctx.shadowBlur = 12;
-            ctx.fillText('签到 · 分享 · 推荐 · 充值 多重奖励', cx2, cy2);
+            ctx.fillText('签到 · 分享 · 推荐 · 多重奖励', cx2, cy2);
 
             ctx.restore();
 
@@ -1162,183 +859,6 @@ cc.Class({
             return tex;
         } catch (e) {
             cc.warn("_createHXActivityBannerTexture error:", e);
-            return null;
-        }
-    },
-
-    _createHXRechargeBannerTexture() {
-        try {
-            if (!window || typeof document === 'undefined') return null;
-            var W = 1080, H = 180;
-            var canvas = document.createElement('canvas');
-            canvas.width = W;
-            canvas.height = H;
-            var ctx = canvas.getContext('2d');
-            if (!ctx) return null;
-
-            var bgGrad = ctx.createRadialGradient(W * 0.2, H * 0.5, 20, W * 0.5, H * 0.5, W * 0.8);
-            bgGrad.addColorStop(0, '#3a0a0a');
-            bgGrad.addColorStop(0.3, '#4a0f0f');
-            bgGrad.addColorStop(0.55, '#1a0528');
-            bgGrad.addColorStop(0.8, '#0a1030');
-            bgGrad.addColorStop(1, '#060820');
-            ctx.fillStyle = bgGrad;
-            ctx.fillRect(0, 0, W, H);
-
-            var topLight = ctx.createLinearGradient(0, 0, W, H);
-            topLight.addColorStop(0, 'rgba(255,215,120,0.12)');
-            topLight.addColorStop(0.5, 'rgba(255,140,180,0.04)');
-            topLight.addColorStop(1, 'rgba(0,0,0,0.4)');
-            ctx.fillStyle = topLight;
-            ctx.fillRect(0, 0, W, H);
-
-            ctx.strokeStyle = 'rgba(255,180,100,0.10)';
-            ctx.lineWidth = 1;
-            var i;
-            for (i = 0; i <= W; i += 27) {
-                ctx.beginPath();
-                ctx.moveTo(i + 0.5, 0);
-                ctx.lineTo(i + 0.5, H);
-                ctx.stroke();
-            }
-            for (i = 0; i <= H; i += 22) {
-                ctx.beginPath();
-                ctx.moveTo(0, i + 0.5);
-                ctx.lineTo(W, i + 0.5);
-                ctx.stroke();
-            }
-
-            function drawCoin(cx, cy, r, angle) {
-                ctx.save();
-                ctx.translate(cx, cy);
-                ctx.rotate(angle || 0);
-                var gr = ctx.createRadialGradient(-r * 0.4, -r * 0.4, r * 0.1, 0, 0, r);
-                gr.addColorStop(0, '#fff8dc');
-                gr.addColorStop(0.35, '#ffe066');
-                gr.addColorStop(0.7, '#f5a623');
-                gr.addColorStop(1, '#9a5a00');
-                ctx.fillStyle = gr;
-                ctx.beginPath();
-                ctx.ellipse(0, 0, r, r * 0.92, 0, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.lineWidth = Math.max(2, r * 0.08);
-                ctx.strokeStyle = 'rgba(255,248,220,0.55)';
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.arc(0, 0, r * 0.6, 0, Math.PI * 2);
-                ctx.lineWidth = Math.max(1.5, r * 0.06);
-                ctx.strokeStyle = 'rgba(138,90,0,0.75)';
-                ctx.stroke();
-                ctx.font = 'bold ' + Math.floor(r * 0.9) + 'px Arial Black';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillStyle = '#8a5a00';
-                ctx.fillText('$', 0, r * 0.05);
-                ctx.restore();
-            }
-            drawCoin(90, 40, 32, -0.2);
-            drawCoin(150, 140, 28, 0.15);
-            drawCoin(40, 110, 20, 0.3);
-            drawCoin(W - 100, 50, 36, 0.1);
-            drawCoin(W - 170, 135, 26, -0.18);
-            drawCoin(W - 50, 130, 18, 0.22);
-
-            function drawL(x, y, w, h, color) {
-                ctx.save();
-                ctx.strokeStyle = color;
-                ctx.lineWidth = 3;
-                ctx.globalAlpha = 0.8;
-                ctx.beginPath();
-                ctx.moveTo(x, y + h * 0.4);
-                ctx.lineTo(x, y);
-                ctx.lineTo(x + w * 0.4, y);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(x + w, y + h - h * 0.4);
-                ctx.lineTo(x + w, y + h);
-                ctx.lineTo(x + w - w * 0.4, y + h);
-                ctx.stroke();
-                ctx.restore();
-            }
-            drawL(18, 18, 90, H - 36, '#ffd47a');
-            drawL(W - 108, 18, 90, H - 36, '#ffd47a');
-
-            ctx.save();
-            ctx.textAlign = 'left';
-            ctx.textBaseline = 'middle';
-            var t1x = 230, t1y = H / 2 - 18;
-            ctx.shadowColor = 'rgba(255,200,100,0.9)';
-            ctx.shadowBlur = 26;
-            ctx.font = 'bold 70px "PingFang SC","Microsoft YaHei",sans-serif';
-            var tg = ctx.createLinearGradient(t1x, t1y - 40, t1x, t1y + 20);
-            tg.addColorStop(0, '#fffcde');
-            tg.addColorStop(0.3, '#ffe066');
-            tg.addColorStop(0.6, '#ffb347');
-            tg.addColorStop(1, '#c46a00');
-            ctx.fillStyle = tg;
-            ctx.fillText('首充超值礼包', t1x, t1y);
-            ctx.shadowBlur = 0;
-            ctx.strokeStyle = 'rgba(150,70,0,0.6)';
-            ctx.lineWidth = 2;
-            ctx.strokeText('首充超值礼包', t1x, t1y);
-            var t2x = 230, t2y = H / 2 + 34;
-            ctx.font = 'bold 34px "PingFang SC",sans-serif';
-            var sg = ctx.createLinearGradient(t2x, t2y - 20, t2x, t2y + 20);
-            sg.addColorStop(0, '#ffffff');
-            sg.addColorStop(0.5, '#ffe5a0');
-            sg.addColorStop(1, '#ffbd6b');
-            ctx.fillStyle = sg;
-            ctx.shadowColor = 'rgba(255,200,120,0.6)';
-            ctx.shadowBlur = 12;
-            ctx.fillText('充 100 送 30   充 500 送 200   充 1000 送 500', t2x, t2y);
-            ctx.restore();
-
-            ctx.save();
-            ctx.textAlign = 'right';
-            ctx.textBaseline = 'middle';
-            var bx = W - 70, by = H / 2, bw = 170, bh = 82, br = 20;
-            var btnGrad = ctx.createLinearGradient(bx - bw / 2, by - bh / 2, bx + bw / 2, by + bh / 2);
-            btnGrad.addColorStop(0, '#fff3b0');
-            btnGrad.addColorStop(0.4, '#ffd24d');
-            btnGrad.addColorStop(0.75, '#ff9f1a');
-            btnGrad.addColorStop(1, '#c96a00');
-            ctx.fillStyle = btnGrad;
-            ctx.beginPath();
-            ctx.moveTo(bx - bw / 2 + br, by - bh / 2);
-            ctx.lineTo(bx + bw / 2 - br, by - bh / 2);
-            ctx.quadraticCurveTo(bx + bw / 2, by - bh / 2, bx + bw / 2, by - bh / 2 + br);
-            ctx.lineTo(bx + bw / 2, by + bh / 2 - br);
-            ctx.quadraticCurveTo(bx + bw / 2, by + bh / 2, bx + bw / 2 - br, by + bh / 2);
-            ctx.lineTo(bx - bw / 2 + br, by + bh / 2);
-            ctx.quadraticCurveTo(bx - bw / 2, by + bh / 2, bx - bw / 2, by + bh / 2 - br);
-            ctx.lineTo(bx - bw / 2, by - bh / 2 + br);
-            ctx.quadraticCurveTo(bx - bw / 2, by - bh / 2, bx - bw / 2 + br, by - bh / 2);
-            ctx.closePath();
-            ctx.fill();
-            ctx.lineWidth = 2.5;
-            ctx.strokeStyle = 'rgba(255,255,255,0.55)';
-            ctx.stroke();
-            ctx.shadowColor = 'rgba(255,180,50,0.7)';
-            ctx.shadowBlur = 16;
-            ctx.font = 'bold 38px "PingFang SC","Microsoft YaHei",sans-serif';
-            ctx.fillStyle = '#5a2e00';
-            ctx.shadowBlur = 6;
-            ctx.shadowColor = 'rgba(255,255,255,0.4)';
-            ctx.fillText('去充值', bx - 6, by + 2);
-            ctx.restore();
-
-            ctx.save();
-            ctx.strokeStyle = 'rgba(255,200,100,0.3)';
-            ctx.lineWidth = 1;
-            ctx.strokeRect(1.5, 1.5, W - 3, H - 3);
-            ctx.restore();
-
-            var tex = new cc.Texture2D();
-            tex.initWithElement(canvas);
-            tex.handleLoadedTexture();
-            return tex;
-        } catch (e) {
-            cc.warn("_createHXRechargeBannerTexture error:", e);
             return null;
         }
     },
@@ -1425,7 +945,6 @@ cc.Class({
                 ctx.textBaseline = 'bottom';
                 ctx.font = 'bold ' + Math.floor(h * 0.32) + 'px Arial Black';
                 ctx.save();
-                ctx.translate(0, 0);
                 ctx.rotate(Math.PI);
                 ctx.fillText(face, -w / 2 + 6, -h / 2 + 4);
                 ctx.font = Math.floor(h * 0.22) + 'px serif';
@@ -1437,11 +956,11 @@ cc.Class({
                 ctx.fillText(suit, 0, 2);
                 ctx.restore();
             }
-            drawCard(W - 110, 50, 66, 92, 'A', '♠', '#1a1a1a', -0.18);
-            drawCard(W - 50, 80, 66, 92, 'K', '♥', '#d21f2f', 0.12);
-            drawCard(W - 160, 120, 66, 92, 'Q', '♦', '#d21f2f', -0.06);
-            drawCard(120, 50, 66, 92, 'J', '♣', '#1a1a1a', 0.14);
-            drawCard(60, 110, 66, 92, '10', '♠', '#1a1a1a', -0.12);
+            drawCard(W - 110, 50, 66, 92, 'A', '\u2660', '#1a1a1a', -0.18);
+            drawCard(W - 50, 80, 66, 92, 'K', '\u2665', '#d21f2f', 0.12);
+            drawCard(W - 160, 120, 66, 92, 'Q', '\u2666', '#d21f2f', -0.06);
+            drawCard(120, 50, 66, 92, 'J', '\u2663', '#1a1a1a', 0.14);
+            drawCard(60, 110, 66, 92, '10', '\u2660', '#1a1a1a', -0.12);
 
             function drawL(x, y, w, h, color) {
                 ctx.save();
@@ -1498,11 +1017,11 @@ cc.Class({
             ctx.textAlign = 'right';
             ctx.textBaseline = 'middle';
             var bx = W - 270, by = H / 2, bw = 160, bh = 80, br = 18;
-            var bg = ctx.createLinearGradient(bx - bw / 2, by - bh / 2, bx + bw / 2, by + bh / 2);
-            bg.addColorStop(0, '#5aa8ff');
-            bg.addColorStop(0.5, '#3778e6');
-            bg.addColorStop(1, '#1e4fb0');
-            ctx.fillStyle = bg;
+            var bgBtn = ctx.createLinearGradient(bx - bw / 2, by - bh / 2, bx + bw / 2, by + bh / 2);
+            bgBtn.addColorStop(0, '#5aa8ff');
+            bgBtn.addColorStop(0.5, '#3778e6');
+            bgBtn.addColorStop(1, '#1e4fb0');
+            ctx.fillStyle = bgBtn;
             ctx.beginPath();
             ctx.moveTo(bx - bw / 2 + br, by - bh / 2);
             ctx.lineTo(bx + bw / 2 - br, by - bh / 2);
@@ -1548,12 +1067,10 @@ cc.Class({
         try {
             var tex1 = this._createHXPokerBannerTexture();
             var tex2 = this._createHXActivityBannerTexture();
-            var tex3 = this._createHXRechargeBannerTexture();
-            var tex4 = this._createHXQuickPlayBannerTexture();
+            var tex3 = this._createHXQuickPlayBannerTexture();
             if (tex1) list.push(new cc.SpriteFrame(tex1));
             if (tex2) list.push(new cc.SpriteFrame(tex2));
             if (tex3) list.push(new cc.SpriteFrame(tex3));
-            if (tex4) list.push(new cc.SpriteFrame(tex4));
         } catch (e) {
             cc.warn("_getGeneratedBanners error:", e);
         }

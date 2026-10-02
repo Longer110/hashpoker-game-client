@@ -1100,35 +1100,6 @@ let UtilManager = {
         // return path;
     },
 
-    // 回退加载本地默认头像（编号1），并恢复节点显示
-    _fallbackDefaultHead(target, wrapper, callBack, err) {
-        var self = this;
-        if (!target || !cc.isValid(target)) {
-            if (callBack) callBack(err);
-            return;
-        }
-        target.tmpId = null;
-        try {
-            var defaultURL = "1";
-            var wrapperForDefault = wrapper;
-            if (!wrapperForDefault) {
-                wrapperForDefault = app.config.IS_CLUB_ONLY ? app.ClubAssets : (app.config.IS_LIVE_ONLY ? app.LiveAssets : app.SetAssets);
-            }
-            var defaultPath = "game/head/1";
-            var spriteFrame = wrapperForDefault.getUserHead(defaultPath, target);
-            if (spriteFrame) {
-                target.spriteFrame = spriteFrame;
-                if (self._checkIsCircle(target)) {
-                    try { self.setSpriteShader(target, spriteFrame); } catch (e) {}
-                }
-            }
-        } catch (e) {
-            cc.warn("UtilManager", "_fallbackDefaultHead 回退失败：", e);
-        }
-        target.node.active = true;
-        if (callBack) callBack(err);
-    },
-
     // 获取玩家头像
     changeUserHead(headSprite, headURL, wrapper, callBack) {
         let self = this;
@@ -1146,17 +1117,6 @@ let UtilManager = {
         let url = "game/head/1";
         let target = headSprite;
 
-        if (!target || !cc.isValid(target)) {
-            cc.warn("UtilManager", "changeUserHead target 无效");
-            if (callBack) callBack(new Error("target invalid"));
-            return;
-        }
-
-        // 空值防护：空字符串/undefined/null 直接用默认头像
-        if (!headURL || typeof headURL !== "string") {
-            headURL = "1";
-        }
-
         // 本地头像逻辑
         if (!headURL.startsWith("http")) {
             let lastPart = Number(headURL.split("/").pop());
@@ -1166,31 +1126,47 @@ let UtilManager = {
 
             if (headURL !== "1") {
                 url = wrapper.path(headURL, null, "main-common/resources/");
-            } else {
-                url = "game/head/1";
             }
 
             let spriteFrame = wrapper.getUserHead(url, target);
-            if (spriteFrame && self._checkIsCircle(target)) {
+            if (self._checkIsCircle(target)) {
                 self.setSpriteShader(target, spriteFrame);
             }
 
             target.tmpId = null;
-            target.node.active = true;
             if (callBack) callBack();
             return;
         }
 
-        // 网络头像逻辑：清洗 URL（去除 \/ 反斜杠转义、去除多余空白）
-        url = String(headURL).replace(/\\\//g, "/").replace(/\\/g, "").trim();
+        // 网络头像逻辑
+        url = headURL;
 
-        if (target.tmpId !== url) {
+        if (target && target.tmpId !== url) {
             target.node.active = false;
         } else if (target.tmpId && target.spriteFrame != null) {
-            target.node.active = true;
             return;
         }
         target.tmpId = url;
+
+        // 圆形材质加载
+        // if (!self._checkIsCircle(target)) {
+        //      let wrapper = app.ClubViews;
+        //     let path = "circle_avatar";
+        //     path = wrapper.path(path,null,"main-hall/resources/headShare/");
+
+        //     app.ClubViews.bundle.load(
+        //         path,
+        //         cc.Material,
+        //         (err, material) => {
+        //             if (!err && cc.isValid(target)) {
+        //                 target.setMaterial(0, material);
+        //                 cc.log("UtilManager", "已替换为圆形头像材质 circle_avatar.mtl");
+        //             } else if (err) {
+        //                 cc.log("UtilManager", "加载 circle_avatar.mtl 失败：", err);
+        //             }
+        //         }
+        //     );
+        // }
 
         const isSvg = url.toLowerCase().endsWith(".svg");
 
@@ -1206,7 +1182,6 @@ let UtilManager = {
                     img.onload = () => {
                         if (!cc.isValid(target) || target.tmpId !== url) {
                             URL.revokeObjectURL(objectUrl);
-                            self._fallbackDefaultHead(target, wrapper, callBack, null);
                             return;
                         }
 
@@ -1228,23 +1203,23 @@ let UtilManager = {
                     };
 
                     img.onerror = (err) => {
-                        cc.error("UtilManager", "加载 SVG 失败(IMG onerror): " + url, err);
-                        try { URL.revokeObjectURL(objectUrl); } catch (e) {}
-                        self._fallbackDefaultHead(target, wrapper, callBack, err || new Error("svg img onerror"));
+                        cc.error("UtilManager", "加载 SVG 失败: " + url, err);
+                        URL.revokeObjectURL(objectUrl);
+                        if (callBack) callBack(err);
                     };
 
                     img.src = objectUrl;
                 })
                 .catch(err => {
                     cc.error("UtilManager", "fetch SVG 失败: " + url, err);
-                    self._fallbackDefaultHead(target, wrapper, callBack, err);
+                    if (callBack) callBack(err);
                 });
         } else {
             // 普通 PNG / JPG 网络头像
             cc.loader.load({ url: url }, function (error, texture) {
                 if (error) {
                     cc.error("UtilManager", "加载头像出错: url=" + url, error);
-                    self._fallbackDefaultHead(target, wrapper, callBack, error);
+                    if (callBack) callBack(error);
                     return;
                 }
 
@@ -1257,9 +1232,6 @@ let UtilManager = {
                         // self.setSpriteShader(target, spriteFrame);
                     }
 
-                    target.node.active = true;
-                    if (callBack) callBack();
-                } else if (cc.isValid(target)) {
                     target.node.active = true;
                     if (callBack) callBack();
                 }
@@ -1436,7 +1408,23 @@ let UtilManager = {
     },
 
     urlAppendTimestamp(url) {
-        if (url.indexOf("?")) {
+        if (!url || typeof url !== 'string') return url;
+
+        if (url.indexOf('?_v=') >= 0 || url.indexOf('&_v=') >= 0
+            || url.indexOf('?v=') >= 0 || url.indexOf('&v=') >= 0) {
+            return url;
+        }
+
+        var lowerUrl = url.toLowerCase();
+        if (lowerUrl.endsWith('.js') || lowerUrl.endsWith('.css')
+            || lowerUrl.endsWith('.png') || lowerUrl.endsWith('.jpg') || lowerUrl.endsWith('.jpeg')
+            || lowerUrl.endsWith('.json') || lowerUrl.endsWith('.webp') || lowerUrl.endsWith('.gif')
+            || lowerUrl.endsWith('.mp3') || lowerUrl.endsWith('.wav') || lowerUrl.endsWith('.fnt')
+            || lowerUrl.endsWith('.plist') || lowerUrl.endsWith('.zbin')) {
+            return url;
+        }
+
+        if (url.indexOf("?") >= 0) {
             url += '&_t=' + (new Date() - 0);
         } else {
             url += '?_t=' + (new Date() - 0);

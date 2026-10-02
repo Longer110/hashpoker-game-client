@@ -125,8 +125,7 @@ cc.Class({
         let gameId = app.game.getGame().getSubGameID()
         this.nGame.string = "" + Base64.decode(data.sTableName || "");
 
-        var paijuId = ((data.sPaiJuId || "") + "").replace(/^kk/i, "HP");
-        this.nRecordNum.string = paijuId;//牌局编号
+        this.nRecordNum.string = data.sPaiJuId;//牌局编号
 
         let text = Utils.showClubTableInfo(
             '',

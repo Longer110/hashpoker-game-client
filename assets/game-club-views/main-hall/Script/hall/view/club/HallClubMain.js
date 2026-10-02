@@ -1612,23 +1612,6 @@ cc.Class({
                 cLb.fontSize = 44;
                 try { cLb.node.color = cc.color(248, 240, 255, 235); } catch (e) {}
                 avatarNode.addChild(cNode, 1);
-                try {
-                    var avatarUrl = data.sFaceId || data.Avatar || data.avatar || data.Logo || data.logo || data.ClubLogo || data.clubLogo || data.LogoUrl || data.logoUrl || "";
-                    if (avatarUrl) {
-                        var imageNode = new cc.Node("av_image");
-                        imageNode.setContentSize(avatarSize - 6, avatarSize - 6);
-                        var sprite = imageNode.addComponent(cc.Sprite);
-                        sprite.sizeMode = cc.Sprite.SizeMode.CUSTOM;
-                        avatarNode.addChild(imageNode, 2);
-                        (function(avLabelNode, imgNode) {
-                            Utils.changeUserHead(sprite, String(avatarUrl), app.ClubAssets, function(err) {
-                                if (err || !cc.isValid(imgNode)) return;
-                                imgNode.setContentSize(avatarSize - 6, avatarSize - 6);
-                                if (avLabelNode && avLabelNode.node) avLabelNode.node.active = false;
-                            });
-                        })(cLb, imageNode);
-                    }
-                } catch (eAv) {}
             } catch (e2) {}
         } catch (e) {}
         node.addChild(avatarNode, 1);

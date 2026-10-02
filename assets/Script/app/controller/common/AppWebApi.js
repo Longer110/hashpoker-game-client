@@ -709,25 +709,6 @@ let AppWebApi = {
         this.requestRest("GET", path, null, callback);
     },
 
-    getAllActivityData(callback){
-        var path = "/api/activity/getAllActivityData";
-        this.requestRest("GET", path, null, function(err, resp){
-            if (err) {
-                callback(err, null);
-                return;
-            }
-            var data = null;
-            if (resp) {
-                if (resp.code !== undefined && resp.code !== 0 && resp.code !== 200) {
-                    callback({status: resp.code, errorMessage: resp.message || resp.msg || "getAllActivityData failed"}, null);
-                    return;
-                }
-                data = resp.data !== undefined ? resp.data : resp;
-            }
-            callback(null, data);
-        });
-    },
-
 }
 
 module.exports = AppWebApi;

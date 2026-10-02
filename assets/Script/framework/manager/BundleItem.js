@@ -443,9 +443,11 @@ proto._loadBundleVersions = function (options, resolve, reject) {
     }
     
     if(!cc.sys.isNative && !window.IS_NATIVE_LIB && !window.IS_BUILDIN_APP){
-        url += '?_v=' + app.config.VERSION;
-        if(!manager.disableBundleTimestamp){
-            url += '&_t=' + timestamp;
+        if(window.ChessSetConfig && window.ChessSetConfig.BUILDVERSION){
+            url += '?_v=' + window.ChessSetConfig.BUILDVERSION;
+        }
+        else{
+            url += '?_v=' + app.config.VERSION;
         }
     }
     

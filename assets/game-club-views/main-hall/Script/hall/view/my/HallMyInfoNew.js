@@ -263,98 +263,11 @@ cc.Class({
         app.net.send(CMD.GAME_CLUB.value, CMD.GAME_CLUB.ClubSGetPersonTableStaticReq_CMD, data);
     },
 
-    _parseTgUserFromInit(initDataUnsafe) {
-        if (!initDataUnsafe) return null;
-        if (typeof initDataUnsafe === "object") {
-            if (initDataUnsafe.user && typeof initDataUnsafe.user === "object") return initDataUnsafe.user;
-            if (typeof initDataUnsafe.id !== "undefined" && (initDataUnsafe.username || initDataUnsafe.first_name || initDataUnsafe.photo_url)) return initDataUnsafe;
-            return null;
-        }
-        if (typeof initDataUnsafe !== "string") return null;
-        var raw = initDataUnsafe.trim();
-        if (!raw) return null;
-        if (raw.charAt(0) === "{" || raw.charAt(0) === "[") {
-            try {
-                var p1 = JSON.parse(raw);
-                if (p1) {
-                    if (p1.user && typeof p1.user === "object") return p1.user;
-                    if (typeof p1.id !== "undefined") return p1;
-                }
-            } catch (e) {}
-        }
-        var win = window;
-        var userStr = null;
-        try {
-            if (win.URLSearchParams) {
-                var usp = new win.URLSearchParams(raw);
-                userStr = usp.get("user");
-            }
-        } catch (eQS) { userStr = null; }
-        if (!userStr) {
-            try {
-                var m = raw.match(/[?&]?user=([^&]+)/);
-                if (m && m[1]) userStr = decodeURIComponent(m[1]);
-            } catch (e) { userStr = null; }
-        }
-        if (!userStr) return null;
-        try {
-            if (userStr.indexOf("%") >= 0) userStr = decodeURIComponent(userStr);
-        } catch (eDec) {}
-        try {
-            var p2 = JSON.parse(userStr);
-            if (p2 && typeof p2 === "object") return p2;
-        } catch (e) {}
-        return null;
-    },
-
-    _normalizeTgPhotoUrl(rawUrl) {
-        if (!rawUrl || typeof rawUrl !== "string") return "";
-        var url = String(rawUrl).trim();
-        if (!url) return "";
-        try {
-            if (/%[0-9A-Fa-f]{2}/.test(url)) url = decodeURIComponent(url);
-        } catch (e) {}
-        url = url.replace(/\\\//g, "/").replace(/\\/g, "");
-        return url.trim();
-    },
-
-    _getFinalFaceId(serverFaceId) {
-        var faceId = serverFaceId || "";
-        // 优先使用 UserInfo 中缓存的头像（登录成功时用 Telegram photo_url 兜底写入的 strHeadUrl）
-        var cachedHead = UserInfo.getInfo().strHeadUrl;
-        if (cachedHead && typeof cachedHead === "string" && cachedHead.toLowerCase().startsWith("http")) {
-            faceId = cachedHead;
-        }
-        // 再次兜底：如果服务端没有传 http 头像，且是 Telegram 环境，直接读取本地 initDataUnsafe/initData 中的 user.photo_url
-        if ((!faceId || typeof faceId !== "string" || !faceId.toLowerCase().startsWith("http")) &&
-            cc.sys.isBrowser && window.Telegram && window.Telegram.WebApp) {
-            var tgUser = null;
-            try {
-                if (window.Telegram.WebApp.initDataUnsafe) tgUser = this._parseTgUserFromInit(window.Telegram.WebApp.initDataUnsafe);
-                if (!tgUser && window.Telegram.WebApp.initData) tgUser = this._parseTgUserFromInit(window.Telegram.WebApp.initData);
-            } catch (e) { tgUser = null; }
-            if (tgUser) {
-                var photoUrl = this._normalizeTgPhotoUrl(tgUser.photo_url);
-                if (photoUrl && photoUrl.toLowerCase().startsWith("http")) {
-                    faceId = photoUrl;
-                    UserInfo.setInfo({ strHeadUrl: faceId });
-                    console.log("HallMyInfoNew", "[TG 头像兜底] 最终使用本地 Telegram 头像:", faceId);
-                }
-            }
-        }
-        // 对最终的 http URL 再做一次统一清洗（去除 \/ 反斜杠等）
-        if (faceId && typeof faceId === "string" && faceId.toLowerCase().startsWith("http")) {
-            faceId = this._normalizeTgPhotoUrl(faceId);
-        }
-        if (!faceId) faceId = "1";
-        return faceId;
-    },
-
     initUI(data) {
 
         cc.log('HallMyInfo initUI ', JSON.stringify(data))
         this.label_name.string = Base64.decode(data.sName);//玩家昵称
-        this.label_ID.string = "ID:" + data.nUserId;
+        this.label_ID.string = `ID:${data.nUserId}`;
         // if (!data.nVip) {
         //     this.noVip.active = true;
         //     this.vip.active = false;
@@ -368,8 +281,7 @@ cc.Class({
         // }
 
         //this.gold_label.string = '$' + Utils.convertNumberToStr(data.nGold);
-        var finalFaceId = this._getFinalFaceId(data.sFaceId);
-        Utils.changeUserHead(this.head, finalFaceId, app.ClubAssets);
+        Utils.changeUserHead(this.head, data.sFaceId, app.ClubAssets);
         if (data.sMail) {
             if (data.sMail.indexOf('@') != -1) {
                 let strArr = data.sMail.split('@')
@@ -798,11 +710,11 @@ cc.Class({
         const tg = window.Telegram?.WebApp;
 
         let botName = "localhost_hxdzpk_bot";
-        let appName = "star";
+        let appName = "start";
 
         if (app.config.DEVELOPVERSION == 2) {
             botName = "localhost_hxdzpk_bot";
-            appName = "star";
+            appName = "start";
         }
 
         const inviteUserId = UserInfo.getInfo().nUserID;
@@ -816,7 +728,7 @@ cc.Class({
         }
 
         const encodedUrl = encodeURIComponent(miniAppUrl);
-        const encodedText = encodeURIComponent("邀请您加入 HASH Poker");
+        const encodedText = encodeURIComponent("邀请您加入 KK Poker");
 
         const telegramShareUrl =
             `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}`;
@@ -879,23 +791,16 @@ cc.Class({
         //     "nGloryLevel":0,"nLevelStart":0,"nOpenProtection":0,"nWithDrawGold":0,"nNotWithDrawGold":199980,"nReviewedGold":0,"nExchangeRate":1,"nTransSwitch":0,"sMail":""}}
         if (data.nRlt == 0) {
             this._userInfo = data.tUserInfo;
-            // 顺便同步 Telegram 头像/昵称到 UserInfo 缓存（如果有的话），供后续全局使用
-            var extraInfo = {
+            UserInfo.setInfo({
                 sMail: data.tUserInfo.sMail,
                 nOpenProtection: data.tUserInfo.nOpenProtection,
                 nFreeCount: data.tUserInfo.nFreeCount,
                 nPrice: data.tUserInfo.nPrice,
-            };
-            var tgFace = this._getFinalFaceId(data.tUserInfo.sFaceId);
-            if (tgFace && typeof tgFace === "string" && tgFace.toLowerCase().startsWith("http")) {
-                extraInfo.strHeadUrl = tgFace;
-            }
-            UserInfo.setInfo(extraInfo);
+            })
             this.initUI(this._userInfo);
         } else {
-            var finalFace = this._getFinalFaceId(data.sFaceId);
-            if (data.sFaceId || finalFace) {
-                Utils.changeUserHead(this.head, finalFace, app.ClubAssets);
+            if (data.sFaceId) {
+                Utils.changeUserHead(this.head, data.sFaceId, app.ClubAssets);
             }
             if (data.sName) {
                 this.label_name.string = Base64.decode(data.sName);

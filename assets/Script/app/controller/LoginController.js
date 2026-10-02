@@ -292,131 +292,18 @@ cc.Class({
         //console.log("_onWXHideCallbak", this.name, params)
     },
 
-    // 通用方法：从 Telegram WebApp.initDataUnsafe 中解析出 user 对象
-    // 兼容三种格式：
-    // 1) initDataUnsafe 本身就是对象，且含 .user 对象
-    // 2) initDataUnsafe 是 JSON 字符串 {"user":{...},...}
-    // 3) initDataUnsafe 是 URL QueryString（如 "user=%7B...%7D&auth_date=..."）
-    _parseTgUserFromInit(initDataUnsafe) {
-        if (!initDataUnsafe) return null;
-        // 情况 1
-        if (typeof initDataUnsafe === "object") {
-            if (initDataUnsafe.user && typeof initDataUnsafe.user === "object") {
-                return initDataUnsafe.user;
-            }
-            // 有些 SDK 会直接把 user 属性展开在顶层，判断顶层是否有 id 字段
-            if (typeof initDataUnsafe.id !== "undefined" && (initDataUnsafe.username || initDataUnsafe.first_name || initDataUnsafe.photo_url)) {
-                return initDataUnsafe;
-            }
-            return null;
-        }
-        if (typeof initDataUnsafe !== "string") return null;
-        var raw = initDataUnsafe.trim();
-        if (!raw) return null;
-        // 情况 2
-        if (raw.charAt(0) === "{" || raw.charAt(0) === "[") {
-            try {
-                var p1 = JSON.parse(raw);
-                if (p1) {
-                    if (p1.user && typeof p1.user === "object") return p1.user;
-                    if (typeof p1.id !== "undefined") return p1;
-                }
-            } catch (e) { /* 继续走 qs 解析 */ }
-        }
-        // 情况 3：Query String "user=%7B%22id%22...
-        var win = window;
-        var userStr = null;
-        try {
-            if (win.URLSearchParams) {
-                var usp = new win.URLSearchParams(raw);
-                userStr = usp.get("user");
-            }
-        } catch (eQS) { userStr = null; }
-        if (!userStr) {
-            // 兼容老浏览器：手动正则
-            try {
-                var m = raw.match(/[?&]?user=([^&]+)/);
-                if (m && m[1]) userStr = decodeURIComponent(m[1]);
-            } catch (e) { userStr = null; }
-        }
-        if (!userStr) return null;
-        // 如果拿到的 userStr 还未被解码则再 decode
-        try {
-            if (userStr.indexOf("%") >= 0) {
-                userStr = decodeURIComponent(userStr);
-            }
-        } catch (eDec) { /* 跳过 */ }
-        try {
-            var p2 = JSON.parse(userStr);
-            if (p2 && typeof p2 === "object") return p2;
-        } catch (e) {
-            cc.warn("LoginController", "_parseTgUserFromInit 解析 user JSON 失败:", userStr);
-        }
-        return null;
-    },
-
-    // 对 Telegram photo_url 做标准化清洗：decode URI、去除 JSON 反斜杠转义(\/)、去掉首尾空白
-    _normalizeTgPhotoUrl(rawUrl) {
-        if (!rawUrl || typeof rawUrl !== "string") return "";
-        var url = String(rawUrl).trim();
-        if (!url) return "";
-        // 先尝试整体 URL decode（处理 %3A%2F%2F 等编码）
-        try {
-            if (/%[0-9A-Fa-f]{2}/.test(url)) {
-                url = decodeURIComponent(url);
-            }
-        } catch (e) {}
-        // 去除 JSON 反斜杠转义 \/
-        url = url.replace(/\\\//g, "/").replace(/\\/g, "");
-        return url.trim();
-    },
-
     _onLoginSuccess(data) {
         // data.nLoginCount = 1
         if (data && data.nUserID) {
-            var infoToSet = {
+            UserInfo.setInfo({
                 nUserID: data.nUserID,
                 boolHasLogined: true,
                 nLoginCount: data.nLoginCount,
-            };
+            })
 
-            // Telegram 头像兜底：如果用户信息(服务端返回的)头像为空或默认值，则用本地 Telegram.WebApp.initDataUnsafe.user.photo_url
-            if (cc.sys.isBrowser && window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
-                var tgInit = window.Telegram.WebApp.initDataUnsafe;
-                var tgUser = this._parseTgUserFromInit(tgInit);
-                // 再从 initData 兜底解析一次（有时 initDataUnsafe 为空但 initData 有内容）
-                if (!tgUser && window.Telegram.WebApp.initData) {
-                    try { tgUser = this._parseTgUserFromInit(window.Telegram.WebApp.initData); } catch (e) { tgUser = null; }
-                }
-                if (tgUser) {
-                    console.log("LoginController", "[TG 用户解析成功] user=", JSON.stringify(tgUser));
-                    var photoUrl = this._normalizeTgPhotoUrl(tgUser.photo_url);
-                    if (photoUrl && photoUrl.toLowerCase().startsWith("http")) {
-                        var serverFace = data.sFaceId || data.sFaceID || "";
-                        var serverIsDefault = !serverFace || serverFace === "1" || serverFace === 1 || (typeof serverFace === "string" && !serverFace.toLowerCase().startsWith("http"));
-                        if (serverIsDefault) {
-                            infoToSet.strHeadUrl = photoUrl;
-                            console.log("LoginController", "[TG 头像兜底] 使用本地 Telegram photo_url 覆盖默认头像:", photoUrl);
-                        }
-                    }
-                    // 同步昵称兜底（用 first_name + last_name 或者 username）
-                    if (!infoToSet.strNickName && UserInfo.getInfo().strNickName === "[null]") {
-                        var nick = "";
-                        if (tgUser.first_name) nick += tgUser.first_name;
-                        if (tgUser.last_name) nick += (nick ? " " : "") + tgUser.last_name;
-                        if (!nick && tgUser.username) nick = tgUser.username;
-                        if (nick) infoToSet.strNickName = nick;
-                    }
-                } else {
-                    cc.warn("LoginController", "[TG 用户解析失败] 未能从 initDataUnsafe/initData 中解析出 user");
-                }
-            }
-
-            UserInfo.setInfo(infoToSet);
-
-            var msg = "ID=" + data.nUserID + "&&DEVICE=" + Utils.getDevicesId();
+            let msg = "ID=" + data.nUserID + "&&DEVICE=" + Utils.getDevicesId();
             if (cc.sys.isBrowser) {
-                msg += "&&HASH=" + Base64.encode(window.location.href + "[" + data.nUserID + "]");
+                msg += "&&HASH=" + Base64.encode(window.location.href + `[${data.nUserID}]`);
             }
             console.log("LoginController", "_onLoginSuccess", msg);
             QYLogs.dumpSysInfo();

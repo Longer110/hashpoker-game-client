@@ -55,7 +55,7 @@ cc.Class({
 
         this.initData = data;
 
-        var seed = ((data.seed || "未知牌局") + "").replace(/^kk/i, "HP");
+        var seed = ((data.seed || "未知牌局") + "").replace(/^kk/i, "hp");
         this.scrollViewContent.getChildByName("seed").getChildByName("value").getComponent(cc.Label).string = seed
         this.scrollViewContent.getChildByName("turn").getChildByName("value").getComponent(cc.Label).string = "Hand " + data.nPlayCnt;
 

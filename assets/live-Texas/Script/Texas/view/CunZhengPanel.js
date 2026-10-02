@@ -431,7 +431,7 @@ cc.Class({
     _showHashCardsPanel(data) {
         var self = this;
         let viewNode4 = self.viewList[3]
-        var seed = (this.selectData.seed + "").replace(/^kk/i, "HP");
+        var seed = (this.selectData.seed + "").replace(/^kk/i, "hp");
 
         viewNode4.getChildByName("kkName").getComponent(cc.Label).string = seed;
         viewNode4.getChildByName("cardsHash").getChildByName("value").getComponent(cc.Label).string = this.selectData.hash + ""
@@ -559,7 +559,7 @@ cc.Class({
 
     _showOldHashPanel(data) {
         let viewNode3 = this.viewList[2]
-        var seed = ((data.seed || "未知牌局") + "").replace(/^kk/i, "HP");
+        var seed = ((data.seed || "未知牌局") + "").replace(/^kk/i, "hp");
 
         viewNode3.getChildByName("selfCheckBtn").active = true;
         viewNode3.getChildByName("verifiedCards").active = false;
@@ -581,7 +581,7 @@ cc.Class({
 
     _showCurHashPanel(data) {
         let viewNode2 = this.viewList[1].getChildByName("bg")
-        var seed = ((data.seed || "未知牌局") + "").replace(/^kk/i, "HP");
+        var seed = ((data.seed || "未知牌局") + "").replace(/^kk/i, "hp");
 
         let testData = this.testViewData().historyData[0] // test data
         viewNode2.getChildByName("kkName").getComponent(cc.Label).string = seed
