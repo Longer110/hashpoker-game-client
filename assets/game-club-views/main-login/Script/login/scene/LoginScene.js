@@ -239,7 +239,8 @@ cc.Class({
         App.isInLoginScene = false;
 
         target.targetOff(this);
-        // MsgManager.un(this._onLoginInitPanel,this);
+
+        this._destroyLoginTechAnimations();
 
         if (this.scview) {
             this.scview.destroy();
@@ -266,6 +267,7 @@ cc.Class({
         this._replaceLogoWithStaticImage();
         this.scheduleOnce(() => {
             this._enhanceLoginUI();
+            this._initLoginTechAnimations();
         }, 0.1);
     },
 
@@ -525,7 +527,7 @@ cc.Class({
                 hpBadgeNode.x = 0;
                 hpBadgeNode.y = badgeY;
                 hpBadgeNode.setAnchorPoint(0.5, 0.5);
-                if (hpBadgeNode.width < 300) hpBadgeNode.width = 460;
+                if (hpBadgeNode.width < 300) hpBadgeNode.width = 560;
                 if (hpBadgeNode.height < 300) hpBadgeNode.height = 460;
                 hpBadgeNode.scaleX = 1; hpBadgeNode.scaleY = 1;
                 hpBadgeNode.opacity = 255;
@@ -1001,78 +1003,129 @@ cc.Class({
             let halfH = H * 0.5;
 
             g.rect(-halfW, -halfH, W, H);
-            g.fillColor = cc.color(10, 15, 44, 255);
+            g.fillColor = cc.color(8, 16, 42, 255);
             g.fill();
 
-            let stripW = 260;
-            let cols = Math.ceil((W + H) / stripW) + 2;
-            for (let c = -cols; c < cols; c++) {
-                g.moveTo(-halfW + c * stripW, -halfH);
-                g.lineTo(-halfW + c * stripW + H, halfH);
-                g.lineTo(-halfW + c * stripW + H + stripW * 0.45, halfH);
-                g.lineTo(-halfW + c * stripW + stripW * 0.45, -halfH);
-                g.close();
-                g.fillColor = (c % 2 === 0) ? cc.color(28, 22, 85, 85) : cc.color(55, 28, 120, 65);
+            let bgGradSteps = 18;
+            for (let si = 0; si < bgGradSteps; si++) {
+                let t = si / bgGradSteps;
+                let r = Math.floor(8 + t * (28 - 8));
+                let gg = Math.floor(16 + t * (50 - 16));
+                let b = Math.floor(42 + t * (100 - 42));
+                let layerH = H / bgGradSteps;
+                g.rect(-halfW, halfH - (si + 1) * layerH, W, layerH + 1);
+                g.fillColor = cc.color(r, gg, b, 255);
                 g.fill();
             }
 
-            g.circle(-halfW * 0.38, halfH * 0.48, Math.min(W, H) * 0.4);
-            g.fillColor = cc.color(115, 65, 190, 115);
-            g.fill();
-            g.circle(halfW * 0.38, -halfH * 0.48, Math.min(W, H) * 0.38);
-            g.fillColor = cc.color(55, 95, 210, 105);
-            g.fill();
+            let vignetteSteps = 12;
+            let vgMaxR = Math.sqrt(halfW * halfW + halfH * halfH);
+            for (let vi = vignetteSteps; vi >= 1; vi--) {
+                let vr = vgMaxR * (vi / vignetteSteps);
+                let alpha = Math.floor(6 + (vignetteSteps - vi) * 3);
+                g.circle(0, 0, vr);
+                g.fillColor = cc.color(2, 6, 20, alpha);
+                g.fill();
+            }
 
-            let starCount = 100;
-            for (let i = 0; i < starCount; i++) {
-                let sx = (Math.random() * 2 - 1) * halfW * 0.95;
-                let sy = (Math.random() * 2 - 1) * halfH * 0.95;
-                let r = 0.9 + Math.random() * 2.8;
+            let haloCx = -halfW * 0.45;
+            let haloCy = halfH * 0.55;
+            let haloR = Math.min(W, H) * 0.52;
+            let haloSteps = 10;
+            for (let hi = haloSteps; hi >= 1; hi--) {
+                let hr = haloR * (hi / haloSteps);
+                let alpha = Math.floor(4 + (haloSteps - hi) * 4);
+                g.circle(haloCx, haloCy, hr);
+                g.fillColor = cc.color(70, 100, 175, alpha);
+                g.fill();
+            }
+
+            let halo2Cx = halfW * 0.5;
+            let halo2Cy = -halfH * 0.5;
+            let halo2R = Math.min(W, H) * 0.45;
+            for (let hi = haloSteps; hi >= 1; hi--) {
+                let hr = halo2R * (hi / haloSteps);
+                let alpha = Math.floor(3 + (haloSteps - hi) * 3);
+                g.circle(halo2Cx, halo2Cy, hr);
+                g.fillColor = cc.color(50, 80, 150, alpha);
+                g.fill();
+            }
+
+            let cornerSize = Math.min(W, H) * 0.12;
+            let cornerLineW = 2.2;
+            let cornerAlpha = 110;
+
+            let drawCorner = function (cx, cy, dirX, dirY) {
+                g.moveTo(cx, cy - dirY * cornerSize * 0.75);
+                g.lineTo(cx, cy);
+                g.lineTo(cx - dirX * cornerSize * 0.75, cy);
+                g.strokeColor = cc.color(205, 170, 100, cornerAlpha);
+                g.lineWidth = cornerLineW;
+                g.stroke();
+
+                let inS = cornerSize * 0.55;
+                let off = cornerSize * 0.08;
+                g.moveTo(cx - dirX * off, cy - dirY * (inS + off));
+                g.lineTo(cx - dirX * off, cy - dirY * off);
+                g.lineTo(cx - dirX * (inS + off), cy - dirY * off);
+                g.strokeColor = cc.color(205, 170, 100, Math.floor(cornerAlpha * 0.55));
+                g.lineWidth = 1.2;
+                g.stroke();
+            };
+            drawCorner(-halfW + cornerSize * 0.18, halfH - cornerSize * 0.18, -1, 1);
+            drawCorner(halfW - cornerSize * 0.18, halfH - cornerSize * 0.18, 1, 1);
+            drawCorner(-halfW + cornerSize * 0.18, -halfH + cornerSize * 0.18, -1, -1);
+            drawCorner(halfW - cornerSize * 0.18, -halfH + cornerSize * 0.18, 1, -1);
+
+            let gridStep = Math.min(W, H) * 0.095;
+            g.lineWidth = 0.45;
+            g.strokeColor = cc.color(120, 155, 210, 10);
+            for (let gx = -halfW; gx <= halfW + gridStep; gx += gridStep) {
+                g.moveTo(gx, -halfH);
+                g.lineTo(gx, halfH);
+            }
+            for (let gy = -halfH; gy <= halfH + gridStep; gy += gridStep) {
+                g.moveTo(-halfW, gy);
+                g.lineTo(halfW, gy);
+            }
+            g.stroke();
+
+            let dotCount = 80;
+            for (let i = 0; i < dotCount; i++) {
+                let dx = (Math.random() * 2 - 1) * halfW * 0.96;
+                let dy = (Math.random() * 2 - 1) * halfH * 0.96;
+                let r = 0.6 + Math.random() * 1.4;
                 let shade = Math.random();
                 let col;
-                if (shade < 0.5) col = cc.color(255, 255, 255, 195 + Math.floor(Math.random() * 60));
-                else if (shade < 0.85) col = cc.color(195, 215, 255, 175 + Math.floor(Math.random() * 70));
-                else col = cc.color(255, 228, 155, 195 + Math.floor(Math.random() * 60));
-                g.circle(sx, sy, r);
+                if (shade < 0.72) {
+                    col = cc.color(200, 220, 255, 55 + Math.floor(Math.random() * 35));
+                } else {
+                    col = cc.color(235, 205, 145, 60 + Math.floor(Math.random() * 35));
+                }
+                g.circle(dx, dy, r);
                 g.fillColor = col;
                 g.fill();
             }
 
-            let cubes = [
-                { x: -halfW * 0.7, y: halfH * 0.7, s: 46, col: cc.color(95, 135, 250, 115) },
-                { x: halfW * 0.7, y: halfH * 0.45, s: 60, col: cc.color(255, 195, 125, 105) },
-                { x: -halfW * 0.58, y: -halfH * 0.6, s: 68, col: cc.color(95, 135, 250, 115) },
-                { x: halfW * 0.7, y: -halfH * 0.68, s: 56, col: cc.color(255, 215, 165, 110) },
-                { x: halfW * 0.1, y: halfH * 0.82, s: 36, col: cc.color(155, 185, 255, 90) },
-                { x: -halfW * 0.18, y: -halfH * 0.85, s: 42, col: cc.color(255, 230, 175, 85) },
-                { x: -halfW * 0.84, y: -halfH * 0.1, s: 34, col: cc.color(85, 125, 235, 105) },
-                { x: halfW * 0.88, y: -halfH * 0.08, s: 30, col: cc.color(255, 220, 165, 95) }
-            ];
-            for (let k = 0; k < cubes.length; k++) {
-                let cu = cubes[k];
-                let cx = cu.x, cy = cu.y, s = cu.s, hs = s * 0.5;
-                g.rect(cx - hs, cy - hs, s, s);
-                g.fillColor = cu.col;
+            let accentDotCount = 6;
+            for (let i = 0; i < accentDotCount; i++) {
+                let dx = (Math.random() * 2 - 1) * halfW * 0.82;
+                let dy = (Math.random() * 2 - 1) * halfH * 0.82;
+                let rings = 3;
+                for (let ri = rings; ri >= 1; ri--) {
+                    let rr = (2.2 + ri * 3.2);
+                    let a = 10 + (rings - ri) * 14;
+                    g.circle(dx, dy, rr);
+                    g.strokeColor = cc.color(205, 170, 100, a);
+                    g.lineWidth = 0.9;
+                    g.stroke();
+                }
+                g.circle(dx, dy, 1.6);
+                g.fillColor = cc.color(230, 195, 135, 150);
                 g.fill();
-                g.moveTo(cx - hs, cy); g.lineTo(cx + hs, cy);
-                g.moveTo(cx, cy - hs); g.lineTo(cx, cy + hs);
-                g.strokeColor = cc.color(255, 255, 255, 125);
-                g.lineWidth = 1.1;
-                g.stroke();
-                g.rect(cx - hs, cy - hs, s, s);
-                g.strokeColor = cc.color(255, 255, 255, 155);
-                g.lineWidth = 1.5;
-                g.stroke();
             }
 
-            g.circle(-halfW * 0.9, halfH * 0.88, 8);
-            g.fillColor = cc.color(255, 218, 128, 215);
-            g.fill();
-            g.circle(halfW * 0.88, -halfH * 0.9, 9);
-            g.fillColor = cc.color(255, 218, 128, 215);
-            g.fill();
-
-            cc.log("_drawTechFullscreenBackground: 科技风登录页背景绘制完成", W, "x", H);
+            cc.log("_drawTechFullscreenBackground: 商务系德州扑克登录页背景绘制完成", W, "x", H);
         } catch (e) {
             cc.warn("_drawTechFullscreenBackground failed:", e && e.message);
         }
@@ -1324,7 +1377,7 @@ cc.Class({
             hpBadgeSeparate.setAnchorPoint(0.5, 0.5);
             hpBadgeSeparate.x = 0;
             hpBadgeSeparate.y = badgeTargetY;
-            hpBadgeSeparate.width = 460;
+            hpBadgeSeparate.width = 560;
             hpBadgeSeparate.height = 460;
             hpBadgeSeparate.scaleX = 1; hpBadgeSeparate.scaleY = 1;
             hpBadgeSeparate.opacity = 255;
@@ -1344,12 +1397,12 @@ cc.Class({
             let hp = spineNode.getChildByName("_logo_hp_text_");
             if (hp) hp.destroy();
             hp = new cc.Node("_logo_hp_text_");
-            hp.width = 280;
+            hp.width = 480;
             hp.height = 230;
             let lbl = hp.addComponent(cc.Label);
-            lbl.string = "HP";
-            lbl.fontSize = 196;
-            lbl.lineHeight = 196;
+            lbl.string = "哈希德州";
+            lbl.fontSize = 156;
+            lbl.lineHeight = 156;
             lbl.fontFamily = "Arial Black, Arial, Helvetica, sans-serif";
             lbl.horizontalAlign = cc.Label.HorizontalAlign.CENTER;
             lbl.verticalAlign = cc.Label.VerticalAlign.CENTER;
@@ -1466,7 +1519,220 @@ cc.Class({
         tryNext();
     },
 
-    // update (dt) {},
+    update(dt) {
+        this._tickLoginTechAnimations(dt);
+    },
+
+    _initLoginTechAnimations() {
+        try {
+            let scene = this.node;
+            let bgAnimName = "_tech_bg_anim_layer_";
+            let old = scene.getChildByName(bgAnimName);
+            if (old) old.destroy();
+            let animLayer = new cc.Node(bgAnimName);
+            let winS = cc.winSize;
+            let W = Math.max(winS.width, scene.width || 1080);
+            let H = Math.max(winS.height, scene.height || 1920);
+            animLayer.width = W;
+            animLayer.height = H;
+            animLayer.setAnchorPoint(0.5, 0.5);
+            animLayer.setPosition(0, 0);
+            animLayer.opacity = 255;
+            if (scene.insertChild) {
+                scene.insertChild(animLayer, 1);
+            } else {
+                scene.addChild(animLayer, 1);
+            }
+            let g = animLayer.addComponent(cc.Graphics);
+            this._techAnim = {
+                node: animLayer,
+                g: g,
+                W: W,
+                H: H,
+                halfW: W * 0.5,
+                halfH: H * 0.5,
+                t: 0,
+                stars: [],
+                pulses: [],
+                scanY: -1.0,
+                lastCornerBlink: 0,
+                cornerPhase: 0
+            };
+            let starCount = 90;
+            for (let i = 0; i < starCount; i++) {
+                let sx = (Math.random() * 2 - 1) * 0.96;
+                let sy = (Math.random() * 2 - 1) * 0.96;
+                let sz = 0.5 + Math.random() * 1.6;
+                let vx = (Math.random() - 0.5) * 0.012;
+                let vy = (Math.random() - 0.5) * 0.012;
+                let phase = Math.random() * Math.PI * 2;
+                let freq = 0.8 + Math.random() * 1.8;
+                let shade = Math.random();
+                let col;
+                if (shade < 0.75) {
+                    col = { r: 200, g: 220, b: 255 };
+                } else {
+                    col = { r: 235, g: 205, b: 145 };
+                }
+                this._techAnim.stars.push({
+                    x: sx, y: sy, vx: vx, vy: vy,
+                    size: sz, phase: phase, freq: freq, col: col
+                });
+            }
+            let pulseCount = 5;
+            for (let i = 0; i < pulseCount; i++) {
+                let px = (Math.random() * 2 - 1) * 0.8;
+                let py = (Math.random() * 2 - 1) * 0.8;
+                let delay = i * (2.6 / pulseCount);
+                let baseR = 4.5 + Math.random() * 4;
+                this._techAnim.pulses.push({
+                    x: px, y: py, delay: delay,
+                    baseR: baseR
+                });
+            }
+        } catch (e) {
+            cc.warn("_initLoginTechAnimations failed:", e && e.message);
+            this._techAnim = null;
+        }
+    },
+
+    _tickLoginTechAnimations(dt) {
+        if (!this._techAnim) return;
+        try {
+            let A = this._techAnim;
+            A.t += dt;
+            let g = A.g;
+            g.clear();
+            let halfW = A.halfW;
+            let halfH = A.halfH;
+            let W = A.W;
+            let H = A.H;
+
+            for (let i = 0; i < A.stars.length; i++) {
+                let s = A.stars[i];
+                s.x += s.vx * dt * 60;
+                s.y += s.vy * dt * 60;
+                if (s.x > 1.0) s.x = -1.0;
+                if (s.x < -1.0) s.x = 1.0;
+                if (s.y > 1.0) s.y = -1.0;
+                if (s.y < -1.0) s.y = 1.0;
+                let breathe = 0.55 + 0.45 * Math.sin(A.t * s.freq + s.phase);
+                let r = s.size * (0.75 + 0.65 * breathe);
+                let baseA = 75;
+                let a = Math.floor(baseA + breathe * 150);
+                if (a > 255) a = 255;
+                if (a < 10) a = 10;
+                g.circle(s.x * halfW, s.y * halfH, r);
+                g.fillColor = cc.color(s.col.r, s.col.g, s.col.b, a);
+                g.fill();
+                if (breathe > 0.88 && Math.random() < 0.35) {
+                    let rayLen = r * 2.6;
+                    g.lineWidth = 0.8;
+                    g.strokeColor = cc.color(255, 250, 230, Math.floor(a * 0.65));
+                    g.moveTo(s.x * halfW - rayLen, s.y * halfH);
+                    g.lineTo(s.x * halfW + rayLen, s.y * halfH);
+                    g.moveTo(s.x * halfW, s.y * halfH - rayLen);
+                    g.lineTo(s.x * halfW, s.y * halfH + rayLen);
+                    g.stroke();
+                }
+            }
+
+            for (let i = 0; i < A.pulses.length; i++) {
+                let p = A.pulses[i];
+                let localT = Math.max(0, (A.t - p.delay) % 2.8);
+                let prog = localT / 2.8;
+                let ringCount = 3;
+                for (let ri = 0; ri < ringCount; ri++) {
+                    let rP = (prog - ri * 0.15);
+                    if (rP < 0 || rP > 1) continue;
+                    let rr = p.baseR + rP * 42;
+                    let alpha = Math.floor(55 * (1 - rP));
+                    if (alpha < 2) continue;
+                    g.circle(p.x * halfW, p.y * halfH, rr);
+                    g.strokeColor = cc.color(205, 170, 100, alpha);
+                    g.lineWidth = 1.0;
+                    g.stroke();
+                }
+                let coreA = 40 + Math.floor(30 * Math.sin(A.t * 3 + i));
+                if (coreA > 0) {
+                    g.circle(p.x * halfW, p.y * halfH, 1.6);
+                    g.fillColor = cc.color(230, 195, 135, coreA);
+                    g.fill();
+                }
+            }
+
+            A.scanY += dt * 0.14;
+            if (A.scanY > 1.2) A.scanY = -1.2;
+            let sy = A.scanY;
+            let bandH = H * 0.16;
+            let yMin = sy * halfH - bandH * 0.5;
+            let yMax = sy * halfH + bandH * 0.5;
+            let gradSteps = 10;
+            for (let gi = 0; gi < gradSteps; gi++) {
+                let gt = gi / gradSteps;
+                let yt = yMin + (yMax - yMin) * gt;
+                let bell = 1 - Math.abs(gt - 0.5) * 2;
+                bell = bell * bell;
+                let alpha = Math.floor(22 * bell);
+                if (alpha < 1) continue;
+                g.rect(-halfW, yt, W, bandH / gradSteps + 1);
+                g.fillColor = cc.color(155, 195, 255, alpha);
+                g.fill();
+            }
+            let centerBright = 0.45 + 0.55 * Math.sin(A.t * 2.2);
+            let coreA = Math.floor(18 * centerBright);
+            if (coreA > 0) {
+                let coreY = sy * halfH;
+                g.rect(-halfW, coreY - Math.max(1, H * 0.0025), W, Math.max(2, H * 0.005));
+                g.fillColor = cc.color(210, 230, 255, coreA);
+                g.fill();
+            }
+
+            let cornerBlinkPeriod = 3.8;
+            A.cornerPhase += dt;
+            let blinkCycle = A.t % cornerBlinkPeriod;
+            let cornerAlpha;
+            if (blinkCycle < 0.55) {
+                let k = blinkCycle / 0.55;
+                cornerAlpha = Math.floor(60 + Math.sin(k * Math.PI) * 130);
+            } else {
+                cornerAlpha = 60;
+            }
+            let cornerSize = Math.min(W, H) * 0.12;
+            let cs = cornerSize * 0.75;
+            let inS = cornerSize * 0.55;
+            let off = cornerSize * 0.08;
+            let drawCorner = function (cx, cy, dirX, dirY) {
+                g.moveTo(cx, cy - dirY * cs);
+                g.lineTo(cx, cy);
+                g.lineTo(cx - dirX * cs, cy);
+                g.strokeColor = cc.color(210, 175, 105, cornerAlpha);
+                g.lineWidth = 2.2;
+                g.stroke();
+                g.moveTo(cx - dirX * off, cy - dirY * (inS + off));
+                g.lineTo(cx - dirX * off, cy - dirY * off);
+                g.lineTo(cx - dirX * (inS + off), cy - dirY * off);
+                g.strokeColor = cc.color(210, 175, 105, Math.floor(cornerAlpha * 0.6));
+                g.lineWidth = 1.2;
+                g.stroke();
+            };
+            drawCorner(-halfW + cornerSize * 0.18, halfH - cornerSize * 0.18, -1, 1);
+            drawCorner(halfW - cornerSize * 0.18, halfH - cornerSize * 0.18, 1, 1);
+            drawCorner(-halfW + cornerSize * 0.18, -halfH + cornerSize * 0.18, -1, -1);
+            drawCorner(halfW - cornerSize * 0.18, -halfH + cornerSize * 0.18, 1, -1);
+        } catch (e) {
+            cc.warn("_tickLoginTechAnimations failed:", e && e.message);
+        }
+    },
+
+    _destroyLoginTechAnimations() {
+        try {
+            if (this._techAnim && this._techAnim.node && cc.isValid(this._techAnim.node)) {
+                this._techAnim.node.destroy();
+            }
+        } catch (e) {}
+        this._techAnim = null;
+    },
 
     register() {
         target.on(event.HALL_LOGIN_SUCCESS, this._onLoginSuccess, this);

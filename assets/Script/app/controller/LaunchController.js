@@ -453,76 +453,127 @@ cc.Class({
             let halfH = H * 0.5;
 
             g.rect(-halfW, -halfH, W, H);
-            g.fillColor = cc.color(10, 15, 44, 255);
+            g.fillColor = cc.color(8, 16, 42, 255);
             g.fill();
 
-            let stripW = 260;
-            let cols = Math.ceil((W + H) / stripW) + 2;
-            for (let c = -cols; c < cols; c++) {
-                g.moveTo(-halfW + c * stripW, -halfH);
-                g.lineTo(-halfW + c * stripW + H, halfH);
-                g.lineTo(-halfW + c * stripW + H + stripW * 0.45, halfH);
-                g.lineTo(-halfW + c * stripW + stripW * 0.45, -halfH);
-                g.close();
-                g.fillColor = (c % 2 === 0) ? cc.color(28, 22, 85, 85) : cc.color(55, 28, 120, 65);
+            let bgGradSteps = 18;
+            for (let si = 0; si < bgGradSteps; si++) {
+                let t = si / bgGradSteps;
+                let r = Math.floor(8 + t * (28 - 8));
+                let gg = Math.floor(16 + t * (50 - 16));
+                let b = Math.floor(42 + t * (100 - 42));
+                let layerH = H / bgGradSteps;
+                g.rect(-halfW, halfH - (si + 1) * layerH, W, layerH + 1);
+                g.fillColor = cc.color(r, gg, b, 255);
                 g.fill();
             }
 
-            g.circle(-halfW * 0.38, halfH * 0.48, Math.min(W, H) * 0.4);
-            g.fillColor = cc.color(115, 65, 190, 115);
-            g.fill();
-            g.circle(halfW * 0.38, -halfH * 0.48, Math.min(W, H) * 0.38);
-            g.fillColor = cc.color(55, 95, 210, 105);
-            g.fill();
+            let vignetteSteps = 12;
+            let vgMaxR = Math.sqrt(halfW * halfW + halfH * halfH);
+            for (let vi = vignetteSteps; vi >= 1; vi--) {
+                let vr = vgMaxR * (vi / vignetteSteps);
+                let alpha = Math.floor(6 + (vignetteSteps - vi) * 3);
+                g.circle(0, 0, vr);
+                g.fillColor = cc.color(2, 6, 20, alpha);
+                g.fill();
+            }
 
-            let starCount = 100;
-            for (let i = 0; i < starCount; i++) {
-                let sx = (Math.random() * 2 - 1) * halfW * 0.95;
-                let sy = (Math.random() * 2 - 1) * halfH * 0.95;
-                let r = 0.9 + Math.random() * 2.8;
+            let haloCx = -halfW * 0.45;
+            let haloCy = halfH * 0.55;
+            let haloR = Math.min(W, H) * 0.52;
+            let haloSteps = 10;
+            for (let hi = haloSteps; hi >= 1; hi--) {
+                let hr = haloR * (hi / haloSteps);
+                let alpha = Math.floor(4 + (haloSteps - hi) * 4);
+                g.circle(haloCx, haloCy, hr);
+                g.fillColor = cc.color(70, 100, 175, alpha);
+                g.fill();
+            }
+
+            let halo2Cx = halfW * 0.5;
+            let halo2Cy = -halfH * 0.5;
+            let halo2R = Math.min(W, H) * 0.45;
+            for (let hi = haloSteps; hi >= 1; hi--) {
+                let hr = halo2R * (hi / haloSteps);
+                let alpha = Math.floor(3 + (haloSteps - hi) * 3);
+                g.circle(halo2Cx, halo2Cy, hr);
+                g.fillColor = cc.color(50, 80, 150, alpha);
+                g.fill();
+            }
+
+            let cornerSize = Math.min(W, H) * 0.12;
+            let cornerLineW = 2.2;
+            let cornerAlpha = 110;
+
+            let drawCorner = function (cx, cy, dirX, dirY) {
+                g.moveTo(cx, cy - dirY * cornerSize * 0.75);
+                g.lineTo(cx, cy);
+                g.lineTo(cx - dirX * cornerSize * 0.75, cy);
+                g.strokeColor = cc.color(205, 170, 100, cornerAlpha);
+                g.lineWidth = cornerLineW;
+                g.stroke();
+
+                let inS = cornerSize * 0.55;
+                let off = cornerSize * 0.08;
+                g.moveTo(cx - dirX * off, cy - dirY * (inS + off));
+                g.lineTo(cx - dirX * off, cy - dirY * off);
+                g.lineTo(cx - dirX * (inS + off), cy - dirY * off);
+                g.strokeColor = cc.color(205, 170, 100, Math.floor(cornerAlpha * 0.55));
+                g.lineWidth = 1.2;
+                g.stroke();
+            };
+            drawCorner(-halfW + cornerSize * 0.18, halfH - cornerSize * 0.18, -1, 1);
+            drawCorner(halfW - cornerSize * 0.18, halfH - cornerSize * 0.18, 1, 1);
+            drawCorner(-halfW + cornerSize * 0.18, -halfH + cornerSize * 0.18, -1, -1);
+            drawCorner(halfW - cornerSize * 0.18, -halfH + cornerSize * 0.18, 1, -1);
+
+            let gridStep = Math.min(W, H) * 0.095;
+            g.lineWidth = 0.45;
+            g.strokeColor = cc.color(120, 155, 210, 10);
+            for (let gx = -halfW; gx <= halfW + gridStep; gx += gridStep) {
+                g.moveTo(gx, -halfH);
+                g.lineTo(gx, halfH);
+            }
+            for (let gy = -halfH; gy <= halfH + gridStep; gy += gridStep) {
+                g.moveTo(-halfW, gy);
+                g.lineTo(halfW, gy);
+            }
+            g.stroke();
+
+            let dotCount = 80;
+            for (let i = 0; i < dotCount; i++) {
+                let dx = (Math.random() * 2 - 1) * halfW * 0.96;
+                let dy = (Math.random() * 2 - 1) * halfH * 0.96;
+                let r = 0.6 + Math.random() * 1.4;
                 let shade = Math.random();
                 let col;
-                if (shade < 0.5) col = cc.color(255, 255, 255, 195 + Math.floor(Math.random() * 60));
-                else if (shade < 0.85) col = cc.color(195, 215, 255, 175 + Math.floor(Math.random() * 70));
-                else col = cc.color(255, 228, 155, 195 + Math.floor(Math.random() * 60));
-                g.circle(sx, sy, r);
+                if (shade < 0.72) {
+                    col = cc.color(200, 220, 255, 55 + Math.floor(Math.random() * 35));
+                } else {
+                    col = cc.color(235, 205, 145, 60 + Math.floor(Math.random() * 35));
+                }
+                g.circle(dx, dy, r);
                 g.fillColor = col;
                 g.fill();
             }
 
-            let cubes = [
-                { x: -halfW * 0.7, y: halfH * 0.7, s: 46, col: cc.color(95, 135, 250, 115) },
-                { x: halfW * 0.7, y: halfH * 0.45, s: 60, col: cc.color(255, 195, 125, 105) },
-                { x: -halfW * 0.58, y: -halfH * 0.6, s: 68, col: cc.color(95, 135, 250, 115) },
-                { x: halfW * 0.7, y: -halfH * 0.68, s: 56, col: cc.color(255, 215, 165, 110) },
-                { x: halfW * 0.1, y: halfH * 0.82, s: 36, col: cc.color(155, 185, 255, 90) },
-                { x: -halfW * 0.18, y: -halfH * 0.85, s: 42, col: cc.color(255, 230, 175, 85) },
-                { x: -halfW * 0.84, y: -halfH * 0.1, s: 34, col: cc.color(85, 125, 235, 105) },
-                { x: halfW * 0.88, y: -halfH * 0.08, s: 30, col: cc.color(255, 220, 165, 95) }
-            ];
-            for (let k = 0; k < cubes.length; k++) {
-                let cu = cubes[k];
-                let cx = cu.x, cy = cu.y, s = cu.s, hs = s * 0.5;
-                g.rect(cx - hs, cy - hs, s, s);
-                g.fillColor = cu.col;
+            let accentDotCount = 6;
+            for (let i = 0; i < accentDotCount; i++) {
+                let dx = (Math.random() * 2 - 1) * halfW * 0.82;
+                let dy = (Math.random() * 2 - 1) * halfH * 0.82;
+                let rings = 3;
+                for (let ri = rings; ri >= 1; ri--) {
+                    let rr = (2.2 + ri * 3.2);
+                    let a = 10 + (rings - ri) * 14;
+                    g.circle(dx, dy, rr);
+                    g.strokeColor = cc.color(205, 170, 100, a);
+                    g.lineWidth = 0.9;
+                    g.stroke();
+                }
+                g.circle(dx, dy, 1.6);
+                g.fillColor = cc.color(230, 195, 135, 150);
                 g.fill();
-                g.moveTo(cx - hs, cy); g.lineTo(cx + hs, cy);
-                g.moveTo(cx, cy - hs); g.lineTo(cx, cy + hs);
-                g.strokeColor = cc.color(255, 255, 255, 125);
-                g.lineWidth = 1.1;
-                g.stroke();
-                g.rect(cx - hs, cy - hs, s, s);
-                g.strokeColor = cc.color(255, 255, 255, 155);
-                g.lineWidth = 1.5;
-                g.stroke();
             }
-
-            g.circle(-halfW * 0.9, halfH * 0.88, 8);
-            g.fillColor = cc.color(255, 218, 128, 215);
-            g.fill();
-            g.circle(halfW * 0.88, -halfH * 0.9, 9);
-            g.fillColor = cc.color(255, 218, 128, 215);
-            g.fill();
 
             this._drawHPBadgeOnNode(canvas, W, H);
 
@@ -545,71 +596,66 @@ cc.Class({
             badge.setAnchorPoint(0.5, 0.5);
             let badgeY = Math.floor(H * 0.04);
             badge.setPosition(0, badgeY);
-            badge.width = 460;
+            badge.width = 560;
             badge.height = 460;
             parentNode.addChild(badge, 99);
 
-            let g = badge.addComponent(cc.Graphics);
-            let R = 210;
-
-            g.circle(0, 0, R + 24);
-            g.fillColor = cc.color(255, 225, 140, 30);
-            g.fill();
-
-            g.circle(0, 0, R);
-            g.fillColor = cc.color(232, 199, 106, 255);
-            g.fill();
-
-            g.circle(0, 0, R - 5);
-            g.strokeColor = cc.color(180, 140, 50, 200);
-            g.lineWidth = 3;
-            g.stroke();
-
-            g.circle(0, 0, R - 18);
-            g.fillColor = cc.color(12, 18, 56, 255);
-            g.fill();
-
-            for (let i = 0; i < 12; i++) {
-                let ang = (Math.PI * 2 / 12) * i;
-                let rx = Math.cos(ang) * (R - 30);
-                let ry = Math.sin(ang) * (R - 30);
-                g.circle(rx, ry, 4.5);
-                g.fillColor = cc.color(255, 220, 130, 245);
-                g.fill();
-            }
-
             let hp = new cc.Node('_hp_text_');
+            hp.width = 500;
+            hp.height = 240;
             let lbl = hp.addComponent(cc.Label);
-            lbl.string = "HP";
-            lbl.fontSize = 180;
-            lbl.lineHeight = 180;
+            lbl.string = "哈希德州";
+            lbl.fontSize = 170;
+            lbl.lineHeight = 170;
             lbl.fontFamily = "Arial Black, Arial, Helvetica, sans-serif";
             lbl.horizontalAlign = cc.Label.HorizontalAlign.CENTER;
             lbl.verticalAlign = cc.Label.VerticalAlign.CENTER;
+            lbl.enableBold = true;
             lbl.color = cc.color(245, 215, 125, 255);
             hp.color = cc.color(245, 215, 125, 255);
             hp.setAnchorPoint(0.5, 0.5);
-            hp.setPosition(0, 18);
+            hp.setPosition(0, 28);
             let hpO = hp.addComponent(cc.LabelOutline);
             hpO.color = cc.color(140, 95, 25, 200);
-            hpO.width = 5;
+            hpO.width = 5.2;
             badge.addChild(hp, 10);
 
             let suits = new cc.Node('_suits_');
             suits.setAnchorPoint(0.5, 0.5);
-            suits.setPosition(0, -120);
-            let sLbl = suits.addComponent(cc.Label);
-            sLbl.string = '\u2660       \u2665       \u25C6';
-            sLbl.fontSize = 52;
-            sLbl.lineHeight = 52;
-            sLbl.fontFamily = "Arial, sans-serif";
-            sLbl.horizontalAlign = cc.Label.HorizontalAlign.CENTER;
-            sLbl.verticalAlign = cc.Label.VerticalAlign.CENTER;
-            sLbl.color = cc.color(235, 205, 115, 255);
-            suits.color = cc.color(235, 205, 115, 255);
-            let sO = suits.addComponent(cc.LabelOutline);
-            sO.color = cc.color(100, 65, 15, 220);
-            sO.width = 2.5;
+            suits.setPosition(0, -118);
+            suits.width = 360;
+            suits.height = 72;
+
+            let s1 = new cc.Node("s1");
+            let l1 = s1.addComponent(cc.Label);
+            l1.string = "\u2660";
+            l1.fontSize = 58;
+            l1.lineHeight = 58;
+            l1.enableWrapText = false;
+            s1.color = cc.color(25, 25, 35, 255);
+            s1.setPosition(-44, 0);
+            suits.addChild(s1);
+
+            let s2 = new cc.Node("s2");
+            let l2 = s2.addComponent(cc.Label);
+            l2.string = "\u2665";
+            l2.fontSize = 58;
+            l2.lineHeight = 58;
+            l2.enableWrapText = false;
+            s2.color = cc.color(205, 55, 75, 255);
+            s2.setPosition(44, 0);
+            suits.addChild(s2);
+
+            let s3 = new cc.Node("s3");
+            let l3 = s3.addComponent(cc.Label);
+            l3.string = "\u25C6";
+            l3.fontSize = 36;
+            l3.lineHeight = 36;
+            l3.enableWrapText = false;
+            s3.color = cc.color(232, 199, 106, 255);
+            s3.setPosition(0, 2);
+            suits.addChild(s3);
+
             badge.addChild(suits, 10);
 
             let titleName = "_hash_poker_title_";
