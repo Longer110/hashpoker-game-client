@@ -446,7 +446,7 @@ cc.Class({
                 //设置头像
                 let headNode = frame.getChildByName('head').getChildByName('img')
                 cc.log('test 测试数据  ： ', this._data.message, this._data.message.split('&avatar='))
-                let avatar = this._data.message.split('&avatar=')[1]
+                let avatar = this._data.avatar ? this._data.avatar : this._data.message.split('&avatar=')[1]
                 this.setHeadImage(headNode.getComponent(cc.Sprite), avatar ? avatar : '2')
 
                 let message_text = frame.getChildByName("message_text")
@@ -475,7 +475,7 @@ cc.Class({
                 //设置头像
                 let headNode = frame.getChildByName('head').getChildByName('img')
                 cc.log('test 测试数据  ： ', this._data.message, this._data.message.split('&avatar='))
-                let avatar = this._data.message.split('&avatar=')[1]
+                let avatar = this._data.avatar ? this._data.avatar : this._data.message.split('&avatar=')[1]
                 this.setHeadImage(headNode.getComponent(cc.Sprite), avatar ? avatar : '2')
 
                 let message_text = frame.getChildByName("message_text")

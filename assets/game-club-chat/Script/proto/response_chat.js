@@ -34,8 +34,12 @@ Response.set(CMD.CHAT.value, MapGame);
 
     //语言聊天token
     Handle("ChatVedioLogonRsp_CMD", protobufPack.ChatVedioLogonRsp);
-    
-    
+
+    //同桌聊天广播（服务端主动推）
+    Handle("ChatNotify_CMD", protobufPack.ChatNotify);
+
+    //历史消息返回
+    Handle("ChatHistoryRsp_CMD", protobufPack.ChatHistoryRsp);
 }();
 
 

@@ -30,6 +30,8 @@ $root.Chat_Proto = (function() {
      * @property {number} ClubChatAppKeyRsp_CMD Chat_Proto ClubChatAppKeyRsp_CMD
      * @property {number} ChatVedioLogonReq_CMD Chat_Proto ChatVedioLogonReq_CMD
      * @property {number} ChatVedioLogonRsp_CMD Chat_Proto ChatVedioLogonRsp_CMD
+     * @property {number} ChatHistoryReq_CMD Chat_Proto ChatHistoryReq_CMD
+     * @property {number} ChatHistoryRsp_CMD Chat_Proto ChatHistoryRsp_CMD
      */
 
     /**
@@ -168,6 +170,22 @@ $root.Chat_Proto = (function() {
     Chat_Proto.prototype.ChatVedioLogonRsp_CMD = 15;
 
     /**
+     * Chat_Proto ChatHistoryReq_CMD.
+     * @member {number} ChatHistoryReq_CMD
+     * @memberof Chat_Proto
+     * @instance
+     */
+    Chat_Proto.prototype.ChatHistoryReq_CMD = 16;
+
+    /**
+     * Chat_Proto ChatHistoryRsp_CMD.
+     * @member {number} ChatHistoryRsp_CMD
+     * @memberof Chat_Proto
+     * @instance
+     */
+    Chat_Proto.prototype.ChatHistoryRsp_CMD = 17;
+
+    /**
      * Creates a new Chat_Proto instance using the specified properties.
      * @function create
      * @memberof Chat_Proto
@@ -206,6 +224,8 @@ $root.Chat_Proto = (function() {
         writer.uint32(/* id 13, wireType 0 =*/104).int32(message.ClubChatAppKeyRsp_CMD);
         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.ChatVedioLogonReq_CMD);
         writer.uint32(/* id 15, wireType 0 =*/120).int32(message.ChatVedioLogonRsp_CMD);
+        writer.uint32(/* id 16, wireType 0 =*/128).int32(message.ChatHistoryReq_CMD);
+        writer.uint32(/* id 17, wireType 0 =*/136).int32(message.ChatHistoryRsp_CMD);
         return writer;
     };
 
@@ -302,6 +322,14 @@ $root.Chat_Proto = (function() {
                     message.ChatVedioLogonRsp_CMD = reader.int32();
                     break;
                 }
+            case 16: {
+                    message.ChatHistoryReq_CMD = reader.int32();
+                    break;
+                }
+            case 17: {
+                    message.ChatHistoryRsp_CMD = reader.int32();
+                    break;
+                }
             default:
                 reader.skipType(tag & 7);
                 break;
@@ -337,6 +365,10 @@ $root.Chat_Proto = (function() {
             throw $util.ProtocolError("missing required 'ChatVedioLogonReq_CMD'", { instance: message });
         if (!message.hasOwnProperty("ChatVedioLogonRsp_CMD"))
             throw $util.ProtocolError("missing required 'ChatVedioLogonRsp_CMD'", { instance: message });
+        if (!message.hasOwnProperty("ChatHistoryReq_CMD"))
+            throw $util.ProtocolError("missing required 'ChatHistoryReq_CMD'", { instance: message });
+        if (!message.hasOwnProperty("ChatHistoryRsp_CMD"))
+            throw $util.ProtocolError("missing required 'ChatHistoryRsp_CMD'", { instance: message });
         return message;
     };
 
@@ -397,6 +429,10 @@ $root.Chat_Proto = (function() {
             return "ChatVedioLogonReq_CMD: integer expected";
         if (!$util.isInteger(message.ChatVedioLogonRsp_CMD))
             return "ChatVedioLogonRsp_CMD: integer expected";
+        if (!$util.isInteger(message.ChatHistoryReq_CMD))
+            return "ChatHistoryReq_CMD: integer expected";
+        if (!$util.isInteger(message.ChatHistoryRsp_CMD))
+            return "ChatHistoryRsp_CMD: integer expected";
         return null;
     };
 
@@ -442,6 +478,10 @@ $root.Chat_Proto = (function() {
             message.ChatVedioLogonReq_CMD = object.ChatVedioLogonReq_CMD | 0;
         if (object.ChatVedioLogonRsp_CMD != null)
             message.ChatVedioLogonRsp_CMD = object.ChatVedioLogonRsp_CMD | 0;
+        if (object.ChatHistoryReq_CMD != null)
+            message.ChatHistoryReq_CMD = object.ChatHistoryReq_CMD | 0;
+        if (object.ChatHistoryRsp_CMD != null)
+            message.ChatHistoryRsp_CMD = object.ChatHistoryRsp_CMD | 0;
         return message;
     };
 
@@ -474,6 +514,8 @@ $root.Chat_Proto = (function() {
             object.ClubChatAppKeyRsp_CMD = 13;
             object.ChatVedioLogonReq_CMD = 14;
             object.ChatVedioLogonRsp_CMD = 15;
+            object.ChatHistoryReq_CMD = 16;
+            object.ChatHistoryRsp_CMD = 17;
         }
         if (message.Main_CMD != null && message.hasOwnProperty("Main_CMD"))
             object.Main_CMD = message.Main_CMD;
@@ -505,6 +547,10 @@ $root.Chat_Proto = (function() {
             object.ChatVedioLogonReq_CMD = message.ChatVedioLogonReq_CMD;
         if (message.ChatVedioLogonRsp_CMD != null && message.hasOwnProperty("ChatVedioLogonRsp_CMD"))
             object.ChatVedioLogonRsp_CMD = message.ChatVedioLogonRsp_CMD;
+        if (message.ChatHistoryReq_CMD != null && message.hasOwnProperty("ChatHistoryReq_CMD"))
+            object.ChatHistoryReq_CMD = message.ChatHistoryReq_CMD;
+        if (message.ChatHistoryRsp_CMD != null && message.hasOwnProperty("ChatHistoryRsp_CMD"))
+            object.ChatHistoryRsp_CMD = message.ChatHistoryRsp_CMD;
         return object;
     };
 
@@ -4199,6 +4245,462 @@ $root.ChatVedioLogonRsp = (function() {
     };
 
     return ChatVedioLogonRsp;
+})();
+
+$root.ChatHistoryReq = (function() {
+
+    /**
+     * Properties of a ChatHistoryReq.
+     * @exports IChatHistoryReq
+     * @interface IChatHistoryReq
+     * @property {number|null} [nCount] ChatHistoryReq nCount
+     */
+
+    /**
+     * Constructs a new ChatHistoryReq.
+     * @exports ChatHistoryReq
+     * @classdesc Represents a ChatHistoryReq.
+     * @implements IChatHistoryReq
+     * @constructor
+     * @param {IChatHistoryReq=} [properties] Properties to set
+     */
+    function ChatHistoryReq(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * ChatHistoryReq nCount.
+     * @member {number} nCount
+     * @memberof ChatHistoryReq
+     * @instance
+     */
+    ChatHistoryReq.prototype.nCount = 0;
+
+    /**
+     * Creates a new ChatHistoryReq instance using the specified properties.
+     * @function create
+     * @memberof ChatHistoryReq
+     * @static
+     * @param {IChatHistoryReq=} [properties] Properties to set
+     * @returns {ChatHistoryReq} ChatHistoryReq instance
+     */
+    ChatHistoryReq.create = function create(properties) {
+        return new ChatHistoryReq(properties);
+    };
+
+    /**
+     * Encodes the specified ChatHistoryReq message. Does not implicitly {@link ChatHistoryReq.verify|verifymessages}.
+     * @function encode
+     * @memberof ChatHistoryReq
+     * @static
+     * @param {IChatHistoryReq} message ChatHistoryReq message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    ChatHistoryReq.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.nCount != null && Object.hasOwnProperty.call(message, "nCount"))
+            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.nCount);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified ChatHistoryReq message, length delimited. Does not implicitly {@link ChatHistoryReq.verify|verifyverifyverifyverify verifyverifyverifymessage.Verifies a ChatHistoryReq message.
+     * @function encodeDelimited
+     * @memberof ChatHistoryReq
+     * @static
+     * @param {IChatHistoryReq} message ChatHistoryReq message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    ChatHistoryReq.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a ChatHistoryReq message from the specified reader or buffer.
+     * @function decode
+     * @memberof ChatHistoryReq
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {ChatHistoryReq} ChatHistoryReq
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    ChatHistoryReq.decode = function decode(reader, length, error) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ChatHistoryReq();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            if (tag === error)
+                break;
+            switch (tag >>> 3) {
+            case 1: {
+                    message.nCount = reader.int32();
+                    break;
+                }
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a ChatHistoryReq message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof ChatHistoryReq
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {ChatHistoryReq} ChatHistoryReq
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    ChatHistoryReq.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a ChatHistoryReq message.
+     * @function verify
+     * @memberof ChatHistoryReq
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    ChatHistoryReq.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.nCount != null && message.hasOwnProperty("nCount"))
+            if (!$util.isInteger(message.nCount))
+                return "nCount: integer expected";
+        return null;
+    };
+
+    /**
+     * Creates a ChatHistoryReq message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof ChatHistoryReq
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {ChatHistoryReq} ChatHistoryReq
+     */
+    ChatHistoryReq.fromObject = function fromObject(object) {
+        if (object instanceof $root.ChatHistoryReq)
+            return object;
+        var message = new $root.ChatHistoryReq();
+        if (object.nCount != null)
+            message.nCount = object.nCount | 0;
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a ChatHistoryReq message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof ChatHistoryReq
+     * @static
+     * @param {ChatHistoryReq} message ChatHistoryReq
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    ChatHistoryReq.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            object.nCount = 0;
+        if (message.nCount != null && message.hasOwnProperty("nCount"))
+            object.nCount = message.nCount;
+        return object;
+    };
+
+    /**
+     * Converts this ChatHistoryReq to JSON.
+     * @function toJSON
+     * @memberof ChatHistoryReq
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    ChatHistoryReq.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    /**
+     * Gets the default type url for ChatHistoryReq
+     * @function getTypeUrl
+     * @memberof ChatHistoryReq
+     * @static
+     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+     * @returns {string} The default type url
+     */
+    ChatHistoryReq.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        if (typeUrlPrefix === undefined) {
+            typeUrlPrefix = "type.googleapis.com";
+        }
+        return typeUrlPrefix + "/ChatHistoryReq";
+    };
+
+    return ChatHistoryReq;
+})();
+
+$root.ChatHistoryRsp = (function() {
+
+    /**
+     * Properties of a ChatHistoryRsp.
+     * @exports IChatHistoryRsp
+     * @interface IChatHistoryRsp
+     * @property {number} nRlt ChatHistoryRsp nRlt
+     * @property {Array.<IChatMatter>|null} [arrChatRecord] ChatHistoryRsp arrChatRecord
+     */
+
+    /**
+     * Constructs a new ChatHistoryRsp.
+     * @exports ChatHistoryRsp
+     * @classdesc Represents a ChatHistoryRsp.
+     * @implements IChatHistoryRsp
+     * @constructor
+     * @param {IChatHistoryRsp=} [properties] Properties to set
+     */
+    function ChatHistoryRsp(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * ChatHistoryRsp nRlt.
+     * @member {number} nRlt
+     * @memberof ChatHistoryRsp
+     * @instance
+     */
+    ChatHistoryRsp.prototype.nRlt = 0;
+
+    /**
+     * ChatHistoryRsp arrChatRecord.
+     * @member {Array.<IChatMatter>} arrChatRecord
+     * @memberof ChatHistoryRsp
+     * @instance
+     */
+    ChatHistoryRsp.prototype.arrChatRecord = $util.emptyArray;
+
+    /**
+     * Creates a new ChatHistoryRsp instance using the specified properties.
+     * @function create
+     * @memberof ChatHistoryRsp
+     * @static
+     * @param {IChatHistoryRsp=} [properties] Properties to set
+     * @returns {ChatHistoryRsp} ChatHistoryRsp instance
+     */
+    ChatHistoryRsp.create = function create(properties) {
+        return new ChatHistoryRsp(properties);
+    };
+
+    /**
+     * Encodes the specified ChatHistoryRsp message. Does not implicitly {@link ChatHistoryRsp.verifyverifyverifyverifyverifyverifyverifyverifymessage.ChatHistoryRsp message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    ChatHistoryRsp.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.nRlt);
+        if (message.arrChatRecord != null && message.arrChatRecord.length) {
+            for (var i = 0; i < message.arrChatRecord.length; ++i)
+                $root.ChatMatter.encode(message.arrChatRecord[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+        }
+        return writer;
+    };
+
+    /**
+     * Encodes the specified ChatHistoryRsp message, length delimited. Does not implicitly {@link ChatHistoryRsp.verifyverifyverifyverifyverifyverifyverifyverifymessage
+     * @function encodeDelimited
+     * @memberof ChatHistoryRsp
+     * @static
+     * @param {IChatHistoryRsp} message ChatHistoryRsp message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    ChatHistoryRsp.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a ChatHistoryRsp message from the specified reader or buffer.
+     * @function decode
+     * @memberof ChatHistoryRsp
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {ChatHistoryRsp} ChatHistoryRsp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    ChatHistoryRsp.decode = function decode(reader, length, error) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ChatHistoryRsp();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            if (tag === error)
+                break;
+            switch (tag >>> 3) {
+            case 1: {
+                    message.nRlt = reader.int32();
+                    break;
+                }
+            case 2: {
+                    if (!(message.arrChatRecord && message.arrChatRecord.length))
+                        message.arrChatRecord = [];
+                    message.arrChatRecord.push($root.ChatMatter.decode(reader, reader.uint32()));
+                    break;
+                }
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        if (!message.hasOwnProperty("nRlt"))
+            throw $util.ProtocolError("missing required 'nRlt'", { instance: message });
+        return message;
+    };
+
+    /**
+     * Decodes a ChatHistoryRsp message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof ChatHistoryRsp
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {ChatHistoryRsp} ChatHistoryRsp
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    ChatHistoryRsp.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a ChatHistoryRsp message.
+     * @function verify
+     * @memberof ChatHistoryRsp
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    ChatHistoryRsp.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (!$util.isInteger(message.nRlt))
+            return "nRlt: integer expected";
+        if (message.arrChatRecord != null && message.hasOwnProperty("arrChatRecord")) {
+            if (!Array.isArray(message.arrChatRecord))
+                return "arrChatRecord: array expected";
+            for (var i = 0; i < message.arrChatRecord.length; ++i) {
+                var error = $root.ChatMatter.verify(message.arrChatRecord[i]);
+                if (error)
+                    return "arrChatRecord." + error;
+            }
+        }
+        return null;
+    };
+
+    /**
+     * Creates a ChatHistoryRsp message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof ChatHistoryRsp
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {ChatHistoryRsp} ChatHistoryRsp
+     */
+    ChatHistoryRsp.fromObject = function fromObject(object) {
+        if (object instanceof $root.ChatHistoryRsp)
+            return object;
+        var message = new $root.ChatHistoryRsp();
+        if (object.nRlt != null)
+            message.nRlt = object.nRlt | 0;
+        if (object.arrChatRecord != null) {
+            if (!Array.isArray(object.arrChatRecord))
+                throw TypeError(".ChatHistoryRsp.arrChatRecord: array expected");
+            message.arrChatRecord = [];
+            for (var i = 0; i < object.arrChatRecord.length; ++i) {
+                if (typeof object.arrChatRecord[i] !== "object")
+                    throw TypeError(".ChatHistoryRsp.arrChatRecord: object expected");
+                message.arrChatRecord[i] = $root.ChatMatter.fromObject(object.arrChatRecord[i]);
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a ChatHistoryRsp message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof ChatHistoryRsp
+     * @static
+     * @param {ChatHistoryRsp} message ChatHistoryRsp
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    ChatHistoryRsp.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults) {
+            object.nRlt = 0;
+            if (options.arrays || options.defaults)
+                object.arrChatRecord = [];
+        }
+        if (message.nRlt != null && message.hasOwnProperty("nRlt"))
+            object.nRlt = message.nRlt;
+        if (message.arrChatRecord != null && message.arrChatRecord.length) {
+            object.arrChatRecord = [];
+            for (var j = 0; j < message.arrChatRecord.length; ++j) {
+                if (options.json)
+                    object.arrChatRecord[j] = $root.ChatMatter.toObject(message.arrChatRecord[j], options);
+                else
+                    object.arrChatRecord[j] = $root.ChatMatter.toObject(message.arrChatRecord[j], options);
+            }
+        }
+        return object;
+    };
+
+    /**
+     * Converts this ChatHistoryRsp to JSON.
+     * @function toJSON
+     * @memberof ChatHistoryRsp
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    ChatHistoryRsp.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    /**
+     * Gets the default type url for ChatHistoryRsp
+     * @function getTypeUrl
+     * @memberof ChatHistoryRsp
+     * @static
+     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+     * @returns {string} The default type url
+     */
+    ChatHistoryRsp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        if (typeUrlPrefix === undefined) {
+            typeUrlPrefix = "type.googleapis.com";
+        }
+        return typeUrlPrefix + "/ChatHistoryRsp";
+    };
+
+    return ChatHistoryRsp;
 })();
 
 module.exports = $root;

@@ -919,7 +919,7 @@ cc.Class({
         //保存登录数据，用于掉线重连
         this._loginData = data;
 
-        
+
 
         if (this._blockIndex) {
             UIFrame.hideBlock(this._blockIndex);
@@ -933,50 +933,12 @@ cc.Class({
         app.net.send(CMD.MDM_GP_LOGON.value, CMD.MDM_GP_LOGON.SUB_REQ_LOGON, data);
         this._requestTableInfo();
 
-        //为避免加载界面闪一下，2秒后无返回再显示内容框
-        // let timeout = 2;
-        // this._blockIndex = UIFrame.showLoading("", false, function (params) {
-        //     this._blockIndex = UIFrame.showLoading(i18n.t("LOGIN.REQUESTDATA"), true, function (params) {
-        //         this._isLogining = false;
-
-        //         //获取当前场景
-        //         let curScene = cc.director.getScene();
-        //         //当前场景名
-        //         let curSceneName = curScene?.name;
-        //         //当前场景是否有显示账号登录面板
-        //         let hasLoginPanel = false;
-        //         if(curScene && curSceneName=="login"){
-        //             hasLoginPanel = curScene.getChildByName("Canvas").getComponent("LaunchController").panelWeb.active;
-        //         }                
-
-        //         if (hasLoginPanel) {
-        //             UIFrame.showTips(i18n.t("LOGIN.REQUESTTIMEOUT"));
-        //             this._blockIndex = 0;
-        //         }
-        //         else {
-        //             //请求3次后弹窗
-        //             if (this._count >= 2) {
-        //                 this._count = 0;
-        //                 this._blockIndex = 0;
-
-        //                 let text = i18n.t("LOGIN.LOGINFAIL");
-        //                 this._showDialog(text, function (isOK) {
-        //                     if(!app.net.isConnect()){
-        //                         this._connect();
-        //                     }
-
-        //                     // if (isOK) {
-        //                         this._requestServer(this._loginData);
-        //                     // }
-        //                 }.bind(this));
-        //                 return;
-        //             }
-        //             this._count++;
-        //             this._requestServer(this._loginData);
-        //         }
-
-        //     }.bind(this));
-        // }.bind(this), timeout);
+        if (!this._blockIndex) {
+            this._blockIndex = UIFrame.showLoading(i18n.t("COMMON.JIA_ZAI_ZHONG"), true, function (params) {
+                this._blockIndex = 0;
+            }.bind(this), -1);
+        }
+        this._setLoginTimeout();
 
     },
     _clearTimeout() {
@@ -989,11 +951,22 @@ cc.Class({
         this._clearTimeout();
         this._timeoutid = setTimeout(function () {
             this._isLogining = false;
-            //重试两次
             if (this._count >= 2) {
                 this._count = 0;
+                if (this._blockIndex) {
+                    UIFrame.hideBlock(this._blockIndex);
+                    this._blockIndex = 0;
+                }
                 let text = i18n.t("LOGIN.LOGINFAIL");
-                UIFrame.showBlockText(text);
+                this._showDialog(text + "\n请检查网络后重试", (isOK) => {
+                    if (isOK) {
+                        if (!app.net.isConnect()) {
+                            this._connect();
+                        }
+                        this._count = 0;
+                        this._requestServer(this._loginData);
+                    }
+                });
                 this._clearTimeout();
                 return;
             }

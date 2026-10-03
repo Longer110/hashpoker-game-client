@@ -30,8 +30,8 @@ Request.set(CMD.CHAT.value, MapGame);
     // 俱乐部语音聊天聊天 APPkey 请求
     Handle("ChatVedioLogonReq_CMD", protobufPack.ChatVedioLogonReq);
 
-    
-}();
+    // 历史消息请求
+    Handle("ChatHistoryReq_CMD", protobufPack.ChatHistoryReq);}();
 
 module.exports = {
     map: Request,

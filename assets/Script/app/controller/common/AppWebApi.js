@@ -713,12 +713,14 @@ let AppWebApi = {
         let path = "/api/activityDefine/getActivityDefinePublic";
         let self = this;
         let onDone = function(err, resp){
+            let TAG = "AppWebApi.getAllActivityData";
             if (err) {
-                try { QYLogs.error("AppWebApi", "[getAllActivityData] err:" + (err && err.errorMessage ? err.errorMessage : err.status)); } catch (e) {}
+                try { QYLogs.error(TAG, "err:" + (err && err.errorMessage ? err.errorMessage : err.status)); } catch (e) {}
                 callback(err, { actTypeList: [], actList: [] });
                 return;
             }
             if (!resp) {
+                try { QYLogs.warn(TAG, "resp 为空，返回空数据集"); } catch (e) {}
                 callback(null, { actTypeList: [], actList: [] });
                 return;
             }
@@ -726,6 +728,12 @@ let AppWebApi = {
             try {
                 if (resp.code === 0 && resp.data) {
                     let d = resp.data;
+                    if (typeof d.info === "string" && d.actTypeList === undefined && d.actList === undefined && d.ActTypeList === undefined && d.ActList === undefined) {
+                        try { QYLogs.error(TAG, "★★★ 后端返回模板占位符！data.info=" + JSON.stringify(d.info) + "。说明：服务端 GetActivityDefinePublic 尚未用最新代码重新编译部署。请重新构建 web_server 二进制并重启服务。否则前端拿不到真实活动数据。"); } catch (e) {}
+                        try { if (typeof UIFrame !== "undefined" && UIFrame && UIFrame.showTips) UIFrame.showTips("活动服务配置异常，请稍后再试"); } catch (eUI) {}
+                        callback(null, out);
+                        return;
+                    }
                     if (d.actTypeList || d.ActTypeList) out.actTypeList = d.actTypeList || d.ActTypeList || [];
                     if (d.actList     || d.ActList)     out.actList     = d.actList     || d.ActList     || [];
                     if (Array.isArray(d)) {
@@ -750,7 +758,9 @@ let AppWebApi = {
                                 if (allType.length > 0) out.actTypeList = allType;
                                 if (allAct.length > 0)  out.actList = allAct;
                             }
-                        } catch (eShape) {}
+                        } catch (eShape) {
+                            try { QYLogs.error(TAG, "d是数组但形状解析异常: " + eShape.message); } catch (e2) {}
+                        }
                     }
                 } else if (Array.isArray(resp.actTypeList) || Array.isArray(resp.actList)) {
                     out.actTypeList = resp.actTypeList || resp.ActTypeList || [];
@@ -760,8 +770,16 @@ let AppWebApi = {
                     out.actTypeList = first.actTypeList || first.ActTypeList || [];
                     out.actList     = first.actList     || first.ActList     || [];
                 }
+                try {
+                    let tLen = Array.isArray(out.actTypeList) ? out.actTypeList.length : 0;
+                    let aLen = Array.isArray(out.actList) ? out.actList.length : 0;
+                    QYLogs.log(TAG, "解析结果 actTypeList=" + tLen + " 条, actList=" + aLen + " 条");
+                    if (tLen === 0 && aLen === 0) {
+                        QYLogs.warn(TAG, "活动数据为空，请检查后端数据库中 ActivityType / ActivityDefine 表是否有 state=1 的记录，或确认服务是否已部署最新代码。原始 resp 前 500 字符: " + (typeof resp === "object" ? JSON.stringify(resp).substring(0,500) : String(resp).substring(0,500)));
+                    }
+                } catch (eLog) {}
             } catch (e) {
-                try { QYLogs.error("AppWebApi", "[getAllActivityData] parse exc:" + e.message); } catch (e1) {}
+                try { QYLogs.error(TAG, "parse exc:" + e.message + "，原始resp前300字: " + (typeof resp === "object" ? JSON.stringify(resp).substring(0,300) : String(resp).substring(0,300))); } catch (e1) {}
             }
             callback(null, out);
         };

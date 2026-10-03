@@ -192,13 +192,28 @@ cc.Class({
     },
 
     initToggle(_allData){
+        let TAG = "HallActivityMain.initToggle";
         let cloneToggleItem = this.node.getChildByName("content").getChildByName("toggleScollView").getChildByName("view").getChildByName("toggleItem")
         let cloneToggleParent = this.node.getChildByName("content").getChildByName("toggleScollView").getChildByName("view").getChildByName("content")
-        // cloneToggleParent.destroyAllChildren(false);
+        let activityContent = this.node.getChildByName("content").getChildByName("activityScollView").getChildByName("view").getChildByName("content")
+        let emptyNode = this.node.getChildByName("content").getChildByName("emptyTip")
         cloneToggleItem.active = false
         this.toggleList = []
         let children = cloneToggleParent.children;
         let length = Math.max(children.length, _allData.length);
+
+        if (!_allData || _allData.length === 0 ||
+            (_allData.length === 1 && _allData[0].name === "全部活动" && (!_allData[0].actList || _allData[0].actList.length === 0))) {
+            try { QYLogs.warn(TAG, "★★活动数据为空★★ 显示「暂无活动」提示。请检查：1)后端是否已重新编译部署最新代码；2)数据库 ActivityType/ActivityDefine 表是否有 state=1 且时间范围内有效 的记录。"); } catch (e) {}
+            for (let i = 0; i < children.length; i++) {
+                children[i].active = false;
+            }
+            if (activityContent) activityContent.destroyAllChildren(false);
+            if (emptyNode) emptyNode.active = true;
+            return;
+        }
+        if (emptyNode) emptyNode.active = false;
+
         for (let index = 0; index < length; index++) {
             let cloneToggle = children[index];
             if(!cloneToggle) {
@@ -349,7 +364,12 @@ cc.Class({
     //======================= new ==============================
 
     onClickToggle(event,index){
+        if (!this._allData || this._allData.length === 0) return;
+        if (index < 0 || index >= this._allData.length) {
+            index = 0;
+        }
         for (let i = 0; i < this.toggleList.length; i++) {
+            if (!this.toggleList[i]) continue;
             this.toggleList[i].getChildByName("seleted").active = i == index
             this.toggleList[i].getChildByName("label").active = i != index
             
@@ -360,28 +380,45 @@ cc.Class({
     },
 
     createContentItem(){
+        let TAG = "HallActivityMain.createContentItem";
         let cloneActivityItem = this.node.getChildByName("content").getChildByName("item")
         let clonActivityParent = this.node.getChildByName("content").getChildByName("activityScollView").getChildByName("view").getChildByName("content")
+        if (!cloneActivityItem || !clonActivityParent) {
+            try { QYLogs.error(TAG, "createContentItem 节点缺失：item 或 activityScollView/content 不存在"); } catch (e) {}
+            return;
+        }
         clonActivityParent.destroyAllChildren(false);
         cloneActivityItem.active = false
-        let actList = this._allData[this.selectToggleIdx].actList
+
+        let emptyNode = this.node.getChildByName("content").getChildByName("emptyTip")
+        let category = this._allData ? this._allData[this.selectToggleIdx] : null;
+        if (!category || !category.actList || category.actList.length === 0) {
+            try { QYLogs.warn(TAG, "当前页签「" + (category ? category.name : "N/A") + "」下没有活动（selectToggleIdx=" + this.selectToggleIdx + "）"); } catch (e) {}
+            if (emptyNode) emptyNode.active = true;
+            return;
+        }
+        if (emptyNode) emptyNode.active = false;
+
+        let actList = category.actList
+        try { QYLogs.log(TAG, "页签「" + category.name + "」下渲染 " + actList.length + " 个活动项"); } catch (e) {}
         for (let index = 0; index < actList.length; index++) {
             let cloneItem = cc.instantiate(cloneActivityItem);
             clonActivityParent.addChild(cloneItem);
             cloneItem.active = true
             cloneItem.x = 0;
-            // cloneToggle.getChildByName("label").getComponent(cc.Label).string = data[index].name
             if(actList[index].image){
-                // actList[index].image = "http://192.168.31.173:8060/activityDir/tu_0002.png"
-                cc.loader.load({ url: actList[index].image, type: 'png' }, (err, tex) => {
-                    if (!err && tex) {
-                        cloneItem.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(tex)
-                    }
-                });
+                (function(item, imgUrl){
+                    cc.loader.load({ url: imgUrl, type: 'png' }, (err, tex) => {
+                        if (!err && tex && item && item.isValid) {
+                            let sprite = item.getComponent(cc.Sprite);
+                            if (sprite) sprite.spriteFrame = new cc.SpriteFrame(tex);
+                        }
+                    });
+                })(cloneItem, actList[index].image);
             }
             
             cloneItem.on(cc.Node.EventType.TOUCH_END, (event) => {
-                const now = Date.now(); // 当前时间戳
+                const now = Date.now();
                 if(now >= actList[index].startTime && now <= actList[index].endTime){
                     this.onClickActivityItem(actList[index]);
                 }else{
